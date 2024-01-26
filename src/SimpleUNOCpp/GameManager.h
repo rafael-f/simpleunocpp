@@ -24,4 +24,6 @@ private:
 	std::unique_ptr<StateManager> _stateManager;
 
 	std::unique_ptr<PlayerManager> _playerManager;
+
+	bool _loaded = false;
 };

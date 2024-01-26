@@ -1,7 +1,8 @@
 #include <iostream>
+#include "GameManager.h"
 
 int main()
 {
-	std::cout << "UNO" << std::endl;
-	std::cin.get();
+	GameManager gameManager;
+	gameManager.start();
 }

@@ -5,6 +5,9 @@
 
 class GameState : public State
 {
+public:
+	void draw(Window& window) override;
+
 private:
 	std::unique_ptr<TurnManager> _turnManager;
 };
