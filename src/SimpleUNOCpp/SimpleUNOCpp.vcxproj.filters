@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameDataLoader.cpp">
+      <Filter>GameLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesLoader.cpp">
+      <Filter>GameLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="CardsLoader.cpp">
+      <Filter>GameLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalCardBehavior.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="SkipTurnCardBehavior.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawMoreCardBehavior.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="ReverseTurnCardBehavior.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapHandCardBehavior.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawDiscardedCardBehavior.cpp">
+      <Filter>Cards</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Window">
+      <UniqueIdentifier>{2a5fc0e2-eb11-43d5-9df9-4e2031fa7f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputManager">
+      <UniqueIdentifier>{822dde86-6fa8-4b64-aa0a-2f03105c9ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLoader">
+      <UniqueIdentifier>{d558dd43-17cd-4b1a-93ab-5a8ba8c0d652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{b8802aa3-da49-4ac1-9cab-23dda029c384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{9a5326bb-8bb4-4067-97cd-1175d043a9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{3ea8795d-344c-4591-b129-92d68a75c392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{3b6c2721-c621-4d00-8dfe-713d198abf3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{439d837a-5a39-41a1-bbd9-e4e998dd4e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards">
+      <UniqueIdentifier>{280944e7-1a82-4045-a01b-06e7ccd47603}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDataLoader.h">
+      <Filter>GameLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesLoader.h">
+      <Filter>GameLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="CardsLoader.h">
+      <Filter>GameLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="CardBehavior.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalCardBehavior.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipTurnCardBehavior.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawMoreCardBehavior.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="ReverseTurnCardBehavior.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapHandCardBehavior.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawDiscardedCardBehavior.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
