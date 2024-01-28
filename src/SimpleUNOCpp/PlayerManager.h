@@ -2,6 +2,7 @@
 #include <vector>
 #include "Player.h"
 
+// Keeps track of all players.
 class PlayerManager
 {
 private:

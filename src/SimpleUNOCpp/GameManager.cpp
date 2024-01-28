@@ -30,8 +30,6 @@ void GameManager::run()
 		_stateManager->Draw();
 
 		_stateManager->handleInput();
-
-		break;
 	}
 }
 

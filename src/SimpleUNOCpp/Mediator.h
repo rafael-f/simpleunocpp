@@ -4,6 +4,7 @@
 #include <functional>
 #include "Event.h"
 
+// Mediator to allow objects to communicate without direct dependency of each other.
 class Mediator
 {
 public:

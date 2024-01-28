@@ -10,7 +10,7 @@ StateManager::StateManager()
 
 	_inputManager = std::make_unique<InputManager>();
 
-	Mediator::registerListener<ChangeStateEvent>([this](const ChangeStateEvent & eventData)
+	Mediator::registerListener<GoToNextStateEvent>([this](const GoToNextStateEvent& eventData)
 	{
 		handleChangeStateEvent(eventData);
 	});
@@ -40,6 +40,14 @@ void StateManager::handleInput()
 }
 
 // Example usage
-void StateManager::handleChangeStateEvent(const ChangeStateEvent& event) {
-	setState(event.nextState);
+void StateManager::handleChangeStateEvent(const GoToNextStateEvent&)
+{
+	int nextState = _currentState + 1;
+
+	if (nextState >= _states.size())
+	{
+		nextState = 0;
+	}
+
+	setState(nextState);
 }

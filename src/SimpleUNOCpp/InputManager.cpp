@@ -3,5 +3,6 @@
 
 std::string InputManager::handleInput()
 {
-	return ""; // TODO std::cin.get
+	int input = std::cin.get(); // TODO
+	return "";
 }

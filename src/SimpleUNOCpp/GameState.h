@@ -3,6 +3,7 @@
 #include <memory>
 #include "TurnManager.h"
 
+// State the game is when in playing mode.
 class GameState : public State
 {
 public:

@@ -3,8 +3,9 @@
 #include <memory>
 #include "State.h"
 #include "InputManager.h"
-#include "ChangeStateEvent.h"
+#include "GoToNextStateEvent.h"
 
+// Manages states, forwards draw and input to the current state.
 class StateManager
 {
 public:
@@ -25,5 +26,5 @@ private:
 
 	int _currentState;
 
-	void handleChangeStateEvent(const ChangeStateEvent& changeStateEvent);
+	void handleChangeStateEvent(const GoToNextStateEvent& changeStateEvent);
 };

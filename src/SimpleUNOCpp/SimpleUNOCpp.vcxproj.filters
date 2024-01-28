@@ -177,11 +177,14 @@
     <ClInclude Include="Mediator.h">
       <Filter>Mediator</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeStateEvent.h">
+    <ClInclude Include="GoToNextStateEvent.h">
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Mediator</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitGameEvent.h">
+      <Filter>Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

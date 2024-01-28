@@ -4,6 +4,7 @@
 #include <memory>
 #include "CardBehavior.h"
 
+// A card contains many card behaviors that can all alter something in gameplay.
 class Card : public GameObject
 {
 private:

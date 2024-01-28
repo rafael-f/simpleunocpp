@@ -4,6 +4,7 @@
 #include "StateManager.h"
 #include "PlayerManager.h"
 
+// The GameManager is responsible for initial loading and running the game loop.
 class GameManager
 {
 public:

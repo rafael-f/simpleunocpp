@@ -2,6 +2,7 @@
 #include "Window.h"
 #include <string>
 
+// Interface for game states.
 class State
 {
 public:
