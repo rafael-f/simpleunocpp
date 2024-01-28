@@ -10,9 +10,9 @@ public:
 
 	void draw(const int& row, const int& column);
 
-	//void drawOnScreen(const short& row, const short& column, const std::vector<std::string> values);
-
 	void setSelected(const bool& selected);
+
+	int getLength() const;
 
 private:
 	int _value;
@@ -21,5 +21,5 @@ private:
 
 	int _length;
 
-	void setCursorPosition(const int& row, const int& column);
+	void setCursorPosition(const int& row, const int& column) const;
 };

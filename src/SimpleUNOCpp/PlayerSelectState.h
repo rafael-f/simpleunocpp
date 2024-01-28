@@ -22,4 +22,10 @@ private:
 	static const int MAX_AMOUNT = 10;
 
 	std::vector<std::unique_ptr<PlayersOption>> _options;
+
+	int _selectedIndex = 0;
+
+	void selectPreviousOption();
+
+	void selectNextOption();
 };

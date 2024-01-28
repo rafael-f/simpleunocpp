@@ -32,9 +32,6 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverState.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -71,6 +68,12 @@
     <ClCompile Include="PlayersOption.cpp">
       <Filter>PlayerSelect</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNamesState.cpp">
+      <Filter>PlayerNamesState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -106,6 +109,12 @@
     <Filter Include="PlayerSelect">
       <UniqueIdentifier>{a801a350-a99c-4487-bdca-831137aee0f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameOver">
+      <UniqueIdentifier>{2c9d4606-ea9c-4699-9e37-8d8bf4787d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayerNamesState">
+      <UniqueIdentifier>{2edfe733-c717-451b-828c-75c10d10eac9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -139,9 +148,6 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverState.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -191,6 +197,12 @@
     </ClInclude>
     <ClInclude Include="PlayersOption.h">
       <Filter>PlayerSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNamesState.h">
+      <Filter>PlayerNamesState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

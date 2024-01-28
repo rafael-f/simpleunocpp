@@ -142,6 +142,7 @@
     <ClCompile Include="NormalCardBehavior.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="PlayerNamesState.cpp" />
     <ClCompile Include="PlayerSelectState.cpp" />
     <ClCompile Include="PlayersOption.cpp" />
     <ClCompile Include="ReverseTurnCardBehavior.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="NormalCardBehavior.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="PlayerNamesState.h" />
     <ClInclude Include="PlayerSelectState.h" />
     <ClInclude Include="PlayersOption.h" />
     <ClInclude Include="QuitGameEvent.h" />

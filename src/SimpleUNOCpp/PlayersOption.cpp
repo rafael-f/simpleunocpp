@@ -1,11 +1,12 @@
 #include "PlayersOption.h"
-#include <windows.h>
+#include <Windows.h>
 #include <iostream>
+#include <string>
 
 PlayersOption::PlayersOption(const int& value) :
 	_value(value)
 {
-
+    _length = std::to_string(value).length();
 }
 
 int PlayersOption::getValue()
@@ -26,11 +27,23 @@ void PlayersOption::draw(const int& row, const int& column)
 
     if (_isSelected)
     {
-        std::cout << topLeft << horizontalLine << topRight;
+        std::cout << topLeft;
+        for (int i = 0; i < _length; ++i)
+        {
+            std::cout << horizontalLine;
+        }
+        std::cout << topRight;
+
         setCursorPosition(row + 1, column);
         std::cout << verticalLine << _value << verticalLine;
         setCursorPosition(row + 2, column);
-        std::cout << bottomLeft << horizontalLine << bottomRight;
+
+        std::cout << bottomLeft;
+        for (int i = 0; i < _length; ++i)
+        {
+            std::cout << horizontalLine;
+        }
+        std::cout << bottomRight;
     }
     else
     {
@@ -44,7 +57,7 @@ void PlayersOption::setSelected(const bool& selected)
 	_isSelected = selected;
 }
 
-void PlayersOption::setCursorPosition(const int& row, const int& column)
+void PlayersOption::setCursorPosition(const int& row, const int& column) const
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -53,4 +66,9 @@ void PlayersOption::setCursorPosition(const int& row, const int& column)
     cursorPos.Y = row;
 
     SetConsoleCursorPosition(hConsole, cursorPos);
+}
+
+int PlayersOption::getLength() const
+{
+    return _length;
 }

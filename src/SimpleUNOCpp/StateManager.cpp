@@ -4,6 +4,7 @@
 #include "GameOverState.h"
 #include "Mediator.h"
 #include "PlayerSelectState.h"
+#include "PlayerNamesState.h"
 
 StateManager::StateManager()
 {
@@ -24,6 +25,7 @@ void StateManager::initializeStates()
 {
 	_states.push_back(std::make_unique<MenuState>());
 	_states.push_back(std::make_unique<PlayerSelectState>());
+	_states.push_back(std::make_unique<PlayerNamesState>());
 	_states.push_back(std::make_unique<GameState>());
 	_states.push_back(std::make_unique<GameOverState>());
 }
