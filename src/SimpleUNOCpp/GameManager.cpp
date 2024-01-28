@@ -4,8 +4,6 @@ GameManager::GameManager()
 {
 	_window = std::make_unique<Window>();
 
-	_inputManager = std::make_unique<InputManager>();
-
 	_stateManager = std::make_unique<StateManager>();
 
 	_playerManager = std::make_unique<PlayerManager>();
@@ -19,17 +17,20 @@ void GameManager::start()
 	}
 
 	_stateManager->setState(0);
+
+	run();
 }
 
 void GameManager::run()
 {
 	while (_window->isOpen())
 	{
-		_stateManager->Draw(*_window);
+		_window->clear();
 
-		_inputManager->handleInput();
-		
-		// TODO update
+		_stateManager->Draw();
+
+		_stateManager->handleInput();
+
 		break;
 	}
 }

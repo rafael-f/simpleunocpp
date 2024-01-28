@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include "Window.h"
-#include "InputManager.h"
 #include "StateManager.h"
 #include "PlayerManager.h"
 
@@ -18,8 +17,6 @@ private:
 	void load();
 
 	std::unique_ptr<Window> _window;
-
-	std::unique_ptr<InputManager> _inputManager;
 
 	std::unique_ptr<StateManager> _stateManager;
 

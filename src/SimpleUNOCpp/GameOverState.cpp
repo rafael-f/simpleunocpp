@@ -1,6 +1,11 @@
 #include "GameOverState.h"
 
-void GameOverState::draw(Window& window)
+void GameOverState::draw()
+{
+
+}
+
+void GameOverState::handleInput(const std::string& input)
 {
 
 }

@@ -9,8 +9,3 @@ void Window::clear() const
 {
 
 }
-
-void Window::display() const
-{
-
-}

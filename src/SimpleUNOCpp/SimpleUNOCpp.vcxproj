@@ -138,9 +138,9 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mediator.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="NormalCardBehavior.cpp" />
-    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="ReverseTurnCardBehavior.cpp" />
@@ -155,17 +155,19 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardBehavior.h" />
     <ClInclude Include="CardsLoader.h" />
+    <ClInclude Include="ChangeStateEvent.h" />
     <ClInclude Include="DrawDiscardedCardBehavior.h" />
     <ClInclude Include="DrawMoreCardBehavior.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="GameDataLoader.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Mediator.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="NormalCardBehavior.h" />
-    <ClInclude Include="Panel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="ReverseTurnCardBehavior.h" />
@@ -176,6 +178,9 @@
     <ClInclude Include="SwapHandCardBehavior.h" />
     <ClInclude Include="TurnManager.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\unotitle.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

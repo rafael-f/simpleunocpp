@@ -1,6 +1,11 @@
 #include "GameState.h"
 
-void GameState::draw(Window& window)
+void GameState::draw()
+{
+
+}
+
+void GameState::handleInput(const std::string& input)
 {
 
 }

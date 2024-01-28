@@ -1,6 +1,7 @@
 #include "InputManager.h"
+#include <iostream>
 
-void InputManager::handleInput()
+std::string InputManager::handleInput()
 {
-
+	return ""; // TODO std::cin.get
 }

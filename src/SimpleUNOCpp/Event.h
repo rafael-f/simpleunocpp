@@ -1,6 +1,6 @@
 #pragma once
 
-class Panel
+struct Event
 {
 
 };

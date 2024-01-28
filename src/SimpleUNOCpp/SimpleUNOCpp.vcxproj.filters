@@ -38,9 +38,6 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Panel.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="DrawDiscardedCardBehavior.cpp">
       <Filter>Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Mediator.cpp">
+      <Filter>Mediator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +96,12 @@
     </Filter>
     <Filter Include="Cards">
       <UniqueIdentifier>{280944e7-1a82-4045-a01b-06e7ccd47603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{f2bdc219-1bdb-4b03-ac85-868bf1c84084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mediator">
+      <UniqueIdentifier>{2bb01f44-41e1-40f6-abf1-1254a7bc6eff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +144,6 @@
     <ClInclude Include="GameOverState.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Panel.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -171,5 +174,19 @@
     <ClInclude Include="DrawDiscardedCardBehavior.h">
       <Filter>Cards</Filter>
     </ClInclude>
+    <ClInclude Include="Mediator.h">
+      <Filter>Mediator</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeStateEvent.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Mediator</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\unotitle.txt">
+      <Filter>Assets</Filter>
+    </Text>
   </ItemGroup>
 </Project>

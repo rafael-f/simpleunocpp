@@ -1,7 +1,8 @@
 #pragma once
+#include <string>
 
 class InputManager
 {
 public:
-	void handleInput();
+	std::string handleInput();
 };
