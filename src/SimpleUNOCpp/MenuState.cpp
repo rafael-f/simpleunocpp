@@ -3,6 +3,7 @@
 #include "GoToNextStateEvent.h"
 #include <fstream>
 #include <iostream>
+#include <conio.h>
 
 const std::string MenuState::TITLE_FILE_PATH = "assets/unotitle.txt";
 
@@ -19,11 +20,15 @@ void MenuState::draw()
 	}
 }
 
-void MenuState::handleInput(const std::string&)
+void MenuState::handleInput()
 {
-	GoToNextStateEvent changeStateEvent;
+	int input = _getch();
 
-	Mediator::fireEvent(changeStateEvent);
+	if (input == 13)
+	{
+		GoToNextStateEvent changeStateEvent;
+		Mediator::fireEvent(changeStateEvent);
+	}
 }
 
 void MenuState::loadTitleLines()

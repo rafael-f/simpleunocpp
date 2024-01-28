@@ -2,7 +2,6 @@
 #include <vector>
 #include <memory>
 #include "State.h"
-#include "InputManager.h"
 #include "GoToNextStateEvent.h"
 
 // Manages states, forwards draw and input to the current state.
@@ -19,8 +18,6 @@ public:
 
 private:
 	std::vector<std::unique_ptr<State>> _states;
-
-	std::unique_ptr<InputManager> _inputManager;
 
 	void initializeStates();
 

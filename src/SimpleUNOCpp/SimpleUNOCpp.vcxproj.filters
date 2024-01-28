@@ -8,9 +8,6 @@
     <ClCompile Include="Window.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>InputManager</Filter>
-    </ClCompile>
     <ClCompile Include="StateManager.cpp">
       <Filter>State</Filter>
     </ClCompile>
@@ -68,13 +65,16 @@
     <ClCompile Include="Mediator.cpp">
       <Filter>Mediator</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerSelectState.cpp">
+      <Filter>PlayerSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayersOption.cpp">
+      <Filter>PlayerSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
       <UniqueIdentifier>{2a5fc0e2-eb11-43d5-9df9-4e2031fa7f6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="InputManager">
-      <UniqueIdentifier>{822dde86-6fa8-4b64-aa0a-2f03105c9ca7}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameLoader">
       <UniqueIdentifier>{d558dd43-17cd-4b1a-93ab-5a8ba8c0d652}</UniqueIdentifier>
@@ -103,6 +103,9 @@
     <Filter Include="Mediator">
       <UniqueIdentifier>{2bb01f44-41e1-40f6-abf1-1254a7bc6eff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayerSelect">
+      <UniqueIdentifier>{a801a350-a99c-4487-bdca-831137aee0f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -110,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Window</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>InputManager</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
       <Filter>State</Filter>
@@ -185,6 +185,12 @@
     </ClInclude>
     <ClInclude Include="QuitGameEvent.h">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSelectState.h">
+      <Filter>PlayerSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayersOption.h">
+      <Filter>PlayerSelect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

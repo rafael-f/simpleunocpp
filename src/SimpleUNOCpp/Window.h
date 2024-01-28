@@ -15,4 +15,6 @@ private:
 	void handleQuitGameEvent(const QuitGameEvent& quitGameEvent);
 
 	bool _isOpen = true;
+
+	void hidePrompt() const;
 };

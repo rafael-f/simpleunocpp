@@ -3,12 +3,11 @@
 #include "GameState.h"
 #include "GameOverState.h"
 #include "Mediator.h"
+#include "PlayerSelectState.h"
 
 StateManager::StateManager()
 {
 	initializeStates();
-
-	_inputManager = std::make_unique<InputManager>();
 
 	Mediator::registerListener<GoToNextStateEvent>([this](const GoToNextStateEvent& eventData)
 	{
@@ -24,6 +23,7 @@ void StateManager::setState(const int& stateIndex)
 void StateManager::initializeStates()
 {
 	_states.push_back(std::make_unique<MenuState>());
+	_states.push_back(std::make_unique<PlayerSelectState>());
 	_states.push_back(std::make_unique<GameState>());
 	_states.push_back(std::make_unique<GameOverState>());
 }
@@ -35,8 +35,7 @@ void StateManager::Draw()
 
 void StateManager::handleInput()
 {
-	std::string inputString = _inputManager->handleInput();
-	_states[_currentState]->handleInput(inputString);
+	_states[_currentState]->handleInput();
 }
 
 // Example usage

@@ -8,6 +8,8 @@ Window::Window()
 		{
 			handleQuitGameEvent(eventData);
 		});
+
+	hidePrompt();
 }
 
 bool Window::isOpen() const
@@ -33,4 +35,15 @@ void Window::clear() const
 void Window::handleQuitGameEvent(const QuitGameEvent&)
 {
 	_isOpen = false;
+}
+
+void Window::hidePrompt() const
+{
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	CONSOLE_CURSOR_INFO cursorInfo;
+	GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+
+	cursorInfo.bVisible = false;
+	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }

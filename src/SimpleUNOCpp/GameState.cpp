@@ -8,7 +8,7 @@ void GameState::draw()
 	std::cout << "in game screen" << std::endl;
 }
 
-void GameState::handleInput(const std::string& input)
+void GameState::handleInput()
 {
 	// TODO
 	QuitGameEvent quitGameEvent;

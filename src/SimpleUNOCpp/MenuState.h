@@ -11,7 +11,7 @@ public:
 
 	void draw() override;
 
-	void handleInput(const std::string& input) override;
+	void handleInput() override;
 
 private:
 	std::vector<std::string> _titleLines;

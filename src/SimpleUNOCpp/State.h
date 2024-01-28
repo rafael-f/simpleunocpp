@@ -8,7 +8,7 @@ class State
 public:
 	virtual void draw() = 0;
 
-	virtual ~State() = default;
+	virtual void handleInput() = 0;
 
-	virtual void handleInput(const std::string& input) = 0;
+	virtual ~State() = default;
 };

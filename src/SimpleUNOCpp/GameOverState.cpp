@@ -5,7 +5,7 @@ void GameOverState::draw()
 
 }
 
-void GameOverState::handleInput(const std::string& input)
+void GameOverState::handleInput()
 {
 
 }
