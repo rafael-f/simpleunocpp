@@ -18,4 +18,12 @@ public:
 
 	static const char HORIZONTAL_LINE = static_cast<char>(196);
 	static const char VERTICAL_LINE = static_cast<char>(179);
+
+	static const char LEFT_DOUBLE_ARROW = static_cast<char>(174);
+	static const char RIGHT_DOUBLE_ARROW = static_cast<char>(175);
+
+	static const char SKIP_TURN = static_cast<char>(232);
+
+	static const char SWAP_LEFT = static_cast<char>(220);
+	static const char SWAP_RIGHT = static_cast<char>(223);
 };

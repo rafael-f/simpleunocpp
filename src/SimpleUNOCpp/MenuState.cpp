@@ -1,9 +1,9 @@
+#include <conio.h>
+#include <fstream>
+#include <iostream>
 #include "MenuState.h"
 #include "Mediator.h"
 #include "GoToNextStateEvent.h"
-#include <fstream>
-#include <iostream>
-#include <conio.h>
 #include "KeyCodes.h"
 
 const std::string MenuState::TITLE_FILE_PATH = "assets/unotitle.txt";

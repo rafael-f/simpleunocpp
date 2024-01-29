@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "QuitGameEvent.h"
 #include "ShowPromptEvent.h"
 #include "Colors.h"
@@ -18,6 +19,10 @@ public:
 	void showPrompt(const bool& show);
 
 	void setConsoleColor(Colors color) const;
+
+	static std::string fillWithSpaces(const std::string& input, std::size_t minWidth);
+
+	int getConsoleLineLength() const;
 
 private:
 	void handleQuitGameEvent(const QuitGameEvent& quitGameEvent);

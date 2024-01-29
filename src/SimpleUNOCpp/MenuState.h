@@ -1,7 +1,7 @@
 #pragma once
-#include "State.h"
-#include <vector>
 #include <string>
+#include <vector>
+#include "State.h"
 
 // Main Menu, draws game logo and moves to next state.
 class MenuState : public State

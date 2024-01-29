@@ -1,12 +1,12 @@
 #include "CardsLoader.h"
-#include "NormalCardBehavior.h"
+#include "DrawDiscardedCardBehavior.h"
 #include "DrawMoreCardBehavior.h"
+#include "NormalCardBehavior.h"
 #include "ReverseTurnCardBehavior.h"
 #include "SkipTurnCardBehavior.h"
-#include "DrawDiscardedCardBehavior.h"
-#include "WildDrawCardBehavior.h"
 #include "SwapHandCardBehavior.h"
 #include "VectorHelper.h"
+#include "WildDrawCardBehavior.h"
 
 // TODO this should be using factory(s)...
 void CardsLoader::createCards(std::vector<std::shared_ptr<Card>>& _cardsHolder)
@@ -76,5 +76,5 @@ void CardsLoader::createCards(std::vector<std::shared_ptr<Card>>& _cardsHolder)
 		_cardsHolder.push_back(card);
 	}
 
-	VectorHelper::shuffleCardsVector(_cardsHolder);
+	VectorHelper::shuffleVector(_cardsHolder);
 }

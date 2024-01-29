@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
+#include <string>
 #include "CardBehavior.h"
 #include "Colors.h"
 #include "Window.h"
-#include <string>
 
 // A card contains many card behaviors that can all alter something in gameplay.
 class Card

@@ -7,6 +7,12 @@ class NormalCardBehavior : public CardBehavior
 public:
 	NormalCardBehavior(int value);
 
+	void execute() override;
+
+	std::string& getStringToDraw() override;
+
 private:
 	int _value;
+
+	std::string _stringToDraw;
 };

@@ -13,6 +13,7 @@ public:
 
 	void setSelected(const bool& selected);
 
+	// TODO make draw return this integer
 	int getLength() const;
 
 private:

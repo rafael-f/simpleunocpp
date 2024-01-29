@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "Window.h"
 #include "StateManager.h"
+#include "Window.h"
 
 // The GameManager is responsible for initial loading and running the game loop.
 class GameManager

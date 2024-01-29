@@ -7,6 +7,12 @@ class DrawMoreCardBehavior : public CardBehavior
 public:
 	explicit DrawMoreCardBehavior(const int& drawMoreAmount);
 
+	void execute() override;
+
+	std::string& getStringToDraw() override;
+
 private:
 	int _drawMoreAmount;
+
+	std::string _stringToDraw;
 };

@@ -1,10 +1,17 @@
 #pragma once
-#include <vector>
+#include <algorithm>
 #include <memory>
-#include "Card.h"
+#include <vector>
+#include <random>
 
 class VectorHelper
 {
 public:
-	static void shuffleCardsVector(std::vector<std::shared_ptr<Card>>& vector);
+	template <typename T>
+	static void shuffleVector(std::vector<std::shared_ptr<T>>& vector)
+	{
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::shuffle(vector.begin(), vector.end(), g);
+	}
 };

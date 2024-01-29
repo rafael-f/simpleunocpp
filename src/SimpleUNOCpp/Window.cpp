@@ -1,6 +1,9 @@
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <Windows.h>
 #include "Window.h"
 #include "Mediator.h"
-#include <Windows.h>
 
 Window::Window()
 {
@@ -97,4 +100,24 @@ void Window::setConsoleColor(Colors color) const
 	}
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), static_cast<WORD>(colorValue));
+}
+
+std::string Window::fillWithSpaces(const std::string& input, std::size_t minWidth)
+{
+	std::ostringstream oss;
+	std::size_t padding = (minWidth - input.size()) / 2;
+	oss << std::setw(padding + input.size()) << std::right << input;
+	while (oss.str().size() < minWidth)
+	{
+		oss << " ";
+	}
+
+	return oss.str();
+}
+
+int Window::getConsoleLineLength() const
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	return csbi.srWindow.Right - csbi.srWindow.Left + 1;
 }

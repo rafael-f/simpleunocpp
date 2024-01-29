@@ -71,8 +71,8 @@
     <ClCompile Include="WildDrawCardBehavior.cpp">
       <Filter>Cards\BehaviorImplementations</Filter>
     </ClCompile>
-    <ClCompile Include="VectorHelper.cpp">
-      <Filter>DataLoaders</Filter>
+    <ClCompile Include="DrawDiscardedAction.cpp">
+      <Filter>Game\TurnAction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +114,9 @@
     </Filter>
     <Filter Include="Cards\BehaviorImplementations">
       <UniqueIdentifier>{e0c1fc15-67f5-498a-b385-92e1857e1a99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\TurnAction">
+      <UniqueIdentifier>{67aa8d3b-57ca-421a-b813-5884447c6b1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="VectorHelper.h">
       <Filter>DataLoaders</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnAction.h">
+      <Filter>Game\TurnAction</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawDiscardedAction.h">
+      <Filter>Game\TurnAction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

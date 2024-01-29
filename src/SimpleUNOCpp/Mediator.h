@@ -1,7 +1,7 @@
 #pragma once
-#include <unordered_map>
-#include <string>
 #include <functional>
+#include <string>
+#include <unordered_map>
 #include "Event.h"
 
 // Mediator to allow objects to communicate without direct dependency of each other.

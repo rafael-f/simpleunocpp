@@ -5,8 +5,14 @@
 class DrawDiscardedCardBehavior : public CardBehavior
 {
 public:
-	DrawDiscardedCardBehavior(const int& amount);
+	explicit DrawDiscardedCardBehavior(const int& amount);
+
+	void execute() override;
+
+	std::string& getStringToDraw() override;
 
 private:
 	int _amount;
+
+	std::string _stringToDraw;
 };

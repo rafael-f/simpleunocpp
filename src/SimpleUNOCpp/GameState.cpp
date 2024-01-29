@@ -1,20 +1,19 @@
-#include "GameState.h"
+#include <conio.h>
 #include <iostream>
-#include "QuitGameEvent.h"
+#include "GameState.h"
+#include "CardsLoader.h"
+#include "KeyCodes.h"
 #include "Mediator.h"
 #include "PlayerManagerTransitionData.h"
-#include <conio.h>
-#include "KeyCodes.h"
-#include "CardsLoader.h"
+#include "QuitGameEvent.h"
 
 void GameState::draw(Window& window)
 {
 	window.showPrompt(false);
 
-	for (auto const& player : _playerManager->getplayers())
-	{
-		std::cout << player->getName() << std::endl;
-	}
+	int nextRow = _playerManager->drawPlayersHeader(window, _turnDirection);
+
+	drawDiscardedPile(window, nextRow);
 }
 
 void GameState::handleInput()
@@ -32,6 +31,26 @@ void GameState::setData(std::shared_ptr<TransitionData> transitionData)
 	std::shared_ptr<PlayerManagerTransitionData> data = std::dynamic_pointer_cast<PlayerManagerTransitionData>(transitionData);
 	_playerManager = data->playerManager;
 
+	startGame();
+}
+
+void GameState::startGame()
+{
+	_playerManager->shufflePlayers();
+
+	_playerManager->selectPlayer(0);
+
+	clearPiles();
+
+	CardsLoader::createCards(_drawPile);
+
+	initializePlayersHands();
+
+	discardFirstCard();
+}
+
+void GameState::clearPiles()
+{
 	if (!_drawPile.empty())
 	{
 		_drawPile.clear();
@@ -41,6 +60,39 @@ void GameState::setData(std::shared_ptr<TransitionData> transitionData)
 	{
 		_discardPile.clear();
 	}
+}
 
-	CardsLoader::createCards(_drawPile);
+void GameState::initializePlayersHands()
+{
+	for (std::shared_ptr<Player> player : _playerManager->getPlayers())
+	{
+		for (int i = 0; i < NUMBER_OF_START_CARDS_PER_PLAYER; ++i)
+		{
+			player->addCard(_drawPile.back());
+			_drawPile.pop_back();
+		}
+	}
+}
+
+void GameState::discardFirstCard()
+{
+	addCardToDiscardPile(_drawPile.back());
+	_drawPile.pop_back();
+}
+
+// TODO, is it better to make cards unique_ptrs instead and move them between the vectors?
+void GameState::addCardToDiscardPile(std::shared_ptr<Card> card)
+{
+	_discardPile.push_back(card);
+}
+
+void GameState::drawDiscardedPile(Window& window, const int& nextRow)
+{
+	window.setCursorPosition(nextRow + 2, 0);
+
+	std::string cardsDiscarded = "CARDS DISCARDED : " + std::to_string(_discardPile.size());
+	std::cout << cardsDiscarded;
+
+	_discardPile.back()->draw(nextRow, static_cast<int>(cardsDiscarded.length()) + 1, window);
+
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "Card.h"
 #include <vector>
+#include "Card.h"
 
 // Keeps player name and cards.
 class Player
@@ -13,8 +13,18 @@ public:
 
 	void updateCardStates(const Card& cardOnTop);
 
+	void addCard(std::shared_ptr<Card> card);
+
+	int draw(Window& window, const int& row, const int& column) const;
+
+	void setSelected(const bool& selected);
+
 private:
 	std::string _name;
 
 	std::vector<std::shared_ptr<Card>> _cardsOnHand;
+
+	int _nameLength;
+
+	bool _isSelected = false;
 };
