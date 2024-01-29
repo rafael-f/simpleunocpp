@@ -72,3 +72,29 @@ void Window::setCursorPosition(const int& row, const int& column) const
 
 	SetConsoleCursorPosition(hConsole, cursorPos);
 }
+
+void Window::setConsoleColor(Colors color) const
+{
+	int colorValue;
+
+	switch (color)
+	{
+	case Colors::RED:
+		colorValue = FOREGROUND_RED;
+		break;
+	case Colors::BLUE:
+		colorValue = FOREGROUND_BLUE;
+		break;
+	case Colors::YELLOW:
+		colorValue = FOREGROUND_RED | FOREGROUND_GREEN;
+		break;
+	case Colors::GREEN:
+		colorValue = FOREGROUND_GREEN;
+		break;
+	default:
+		colorValue = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+		break;
+	}
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), static_cast<WORD>(colorValue));
+}

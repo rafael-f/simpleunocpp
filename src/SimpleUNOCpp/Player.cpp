@@ -9,3 +9,8 @@ std::string Player::getName() const
 {
 	return _name;
 }
+
+void Player::updateCardStates(const Card& cardOnTop)
+{
+
+}

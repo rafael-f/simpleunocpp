@@ -4,5 +4,9 @@
 // A normal card, doesn't have any special effects.
 class NormalCardBehavior : public CardBehavior
 {
+public:
+	NormalCardBehavior(int value);
 
+private:
+	int _value;
 };

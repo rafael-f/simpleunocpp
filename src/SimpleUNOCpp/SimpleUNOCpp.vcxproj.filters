@@ -29,28 +29,7 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalCardBehavior.cpp">
-      <Filter>Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="SkipTurnCardBehavior.cpp">
-      <Filter>Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawMoreCardBehavior.cpp">
-      <Filter>Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="ReverseTurnCardBehavior.cpp">
-      <Filter>Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="SwapHandCardBehavior.cpp">
-      <Filter>Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawDiscardedCardBehavior.cpp">
       <Filter>Cards</Filter>
     </ClCompile>
     <ClCompile Include="Mediator.cpp">
@@ -71,6 +50,30 @@
     <ClCompile Include="PlayerSelectedAmountTransitionData.h">
       <Filter>PlayerSelect</Filter>
     </ClCompile>
+    <ClCompile Include="DrawDiscardedCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawMoreCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="ReverseTurnCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="SkipTurnCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapHandCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="WildDrawCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorHelper.cpp">
+      <Filter>DataLoaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -87,9 +90,6 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{3b6c2721-c621-4d00-8dfe-713d198abf3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{439d837a-5a39-41a1-bbd9-e4e998dd4e7b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Cards">
       <UniqueIdentifier>{280944e7-1a82-4045-a01b-06e7ccd47603}</UniqueIdentifier>
@@ -111,6 +111,9 @@
     </Filter>
     <Filter Include="DataLoaders">
       <UniqueIdentifier>{d558dd43-17cd-4b1a-93ab-5a8ba8c0d652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\BehaviorImplementations">
+      <UniqueIdentifier>{e0c1fc15-67f5-498a-b385-92e1857e1a99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,31 +147,10 @@
     <ClInclude Include="GameState.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>Cards</Filter>
     </ClInclude>
     <ClInclude Include="CardBehavior.h">
-      <Filter>Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalCardBehavior.h">
-      <Filter>Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="SkipTurnCardBehavior.h">
-      <Filter>Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawMoreCardBehavior.h">
-      <Filter>Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="ReverseTurnCardBehavior.h">
-      <Filter>Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="SwapHandCardBehavior.h">
-      <Filter>Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawDiscardedCardBehavior.h">
       <Filter>Cards</Filter>
     </ClInclude>
     <ClInclude Include="Mediator.h">
@@ -206,6 +188,33 @@
     </ClInclude>
     <ClInclude Include="PlayerManagerTransitionData.h">
       <Filter>PlayerNamesState</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawDiscardedCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawMoreCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="ReverseTurnCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipTurnCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapHandCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="WildDrawCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorHelper.h">
+      <Filter>DataLoaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
