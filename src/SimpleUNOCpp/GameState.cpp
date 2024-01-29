@@ -8,7 +8,9 @@
 
 void GameState::draw(Window& window)
 {
-	for (auto player : _playerManager->getplayers())
+	window.showPrompt(false);
+
+	for (auto const& player : _playerManager->getplayers())
 	{
 		std::cout << player->getName() << std::endl;
 	}

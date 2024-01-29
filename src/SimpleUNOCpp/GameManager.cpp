@@ -5,8 +5,6 @@ GameManager::GameManager()
 	_window = std::make_unique<Window>();
 
 	_stateManager = std::make_unique<StateManager>();
-
-	_playerManager = std::make_unique<PlayerManager>();
 }
 
 void GameManager::start()
@@ -36,6 +34,5 @@ void GameManager::run()
 void GameManager::load()
 {
 	// TODO load game rules
-	// TODO load cards
 	_loaded = true;
 }

@@ -131,7 +131,6 @@
     <ClCompile Include="CardsLoader.cpp" />
     <ClCompile Include="DrawDiscardedCardBehavior.cpp" />
     <ClCompile Include="DrawMoreCardBehavior.cpp" />
-    <ClCompile Include="GameDataLoader.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverState.cpp" />
@@ -151,7 +150,6 @@
     <ClCompile Include="SkipTurnCardBehavior.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="SwapHandCardBehavior.cpp" />
-    <ClCompile Include="TurnManager.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +160,6 @@
     <ClInclude Include="DrawDiscardedCardBehavior.h" />
     <ClInclude Include="DrawMoreCardBehavior.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="GameDataLoader.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />
@@ -186,7 +183,6 @@
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="SwapHandCardBehavior.h" />
     <ClInclude Include="TransitionData.h" />
-    <ClInclude Include="TurnManager.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

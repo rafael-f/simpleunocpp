@@ -11,14 +11,11 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="GameDataLoader.cpp">
-      <Filter>GameLoader</Filter>
-    </ClCompile>
     <ClCompile Include="RulesLoader.cpp">
-      <Filter>GameLoader</Filter>
+      <Filter>DataLoaders</Filter>
     </ClCompile>
     <ClCompile Include="CardsLoader.cpp">
-      <Filter>GameLoader</Filter>
+      <Filter>DataLoaders</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
       <Filter>Player</Filter>
@@ -34,9 +31,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TurnManager.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Cards</Filter>
@@ -82,9 +76,6 @@
     <Filter Include="Window">
       <UniqueIdentifier>{2a5fc0e2-eb11-43d5-9df9-4e2031fa7f6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLoader">
-      <UniqueIdentifier>{d558dd43-17cd-4b1a-93ab-5a8ba8c0d652}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Player">
       <UniqueIdentifier>{b8802aa3-da49-4ac1-9cab-23dda029c384}</UniqueIdentifier>
     </Filter>
@@ -118,6 +109,9 @@
     <Filter Include="PlayerNamesState">
       <UniqueIdentifier>{2edfe733-c717-451b-828c-75c10d10eac9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DataLoaders">
+      <UniqueIdentifier>{d558dd43-17cd-4b1a-93ab-5a8ba8c0d652}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -129,14 +123,11 @@
     <ClInclude Include="StateManager.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="GameDataLoader.h">
-      <Filter>GameLoader</Filter>
-    </ClInclude>
     <ClInclude Include="RulesLoader.h">
-      <Filter>GameLoader</Filter>
+      <Filter>DataLoaders</Filter>
     </ClInclude>
     <ClInclude Include="CardsLoader.h">
-      <Filter>GameLoader</Filter>
+      <Filter>DataLoaders</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>Player</Filter>
@@ -155,9 +146,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TurnManager.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>Cards</Filter>

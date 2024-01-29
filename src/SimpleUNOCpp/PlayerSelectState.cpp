@@ -100,4 +100,5 @@ void PlayerSelectState::selectNextOption()
 
 void PlayerSelectState::setData(std::shared_ptr<TransitionData>)
 {
+	// Doesn't need data.
 }

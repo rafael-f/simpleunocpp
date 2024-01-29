@@ -44,7 +44,7 @@ void MenuState::loadTitleLines()
 	}
 }
 
-void MenuState::setData(std::shared_ptr<TransitionData> transitionData)
+void MenuState::setData(std::shared_ptr<TransitionData>)
 {
-
+	// Doesn't need data
 }

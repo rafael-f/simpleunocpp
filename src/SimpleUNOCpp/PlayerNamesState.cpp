@@ -12,7 +12,7 @@ void PlayerNamesState::draw(Window& window)
 {
 	window.showPrompt(true);
 
-	std::cout << "Type the names of every player (names must be between 1 and 10 characters): " << std::endl << std::endl;
+	std::cout << "Type the names of every player (names must be unique and between 1 and 10 characters): " << std::endl << std::endl;
 
 	int editingLineLength;
 
@@ -72,6 +72,14 @@ void PlayerNamesState::handleEnterKey()
 {
 	if (_currentEditingName.length() > 0)
 	{
+		for (auto player : _playerManager->getplayers())
+		{
+			if (player->getName() == _currentEditingName)
+			{
+				return;
+			}
+		}
+
 		std::shared_ptr<Player> player = std::make_shared<Player>();
 		player->setName(_currentEditingName);
 		_playerManager->addPlayer(player);
