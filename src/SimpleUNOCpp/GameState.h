@@ -31,7 +31,7 @@ private:
 
 	void addCardToDiscardPile(std::shared_ptr<Card> card);
 
-	void drawDiscardedPile(Window& window, const int& nextRow);
+	void drawDiscardedPile(Window& window, int& nextRow);
 
 	int _currentPlayerIndex;
 

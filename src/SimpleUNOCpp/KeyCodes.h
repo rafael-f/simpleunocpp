@@ -16,8 +16,16 @@ public:
 	static const char BOTTOM_LEFT_CORNER = static_cast<char>(192);
 	static const char BOTTOM_RIGHT_CORNER = static_cast<char>(217);
 
+	static const char TOP_LEFT_CORNER_DOUBLE = static_cast<char>(201);
+	static const char TOP_RIGHT_CORNER_DOUBLE = static_cast<char>(187);
+	static const char BOTTOM_LEFT_CORNER_DOUBLE = static_cast<char>(200);
+	static const char BOTTOM_RIGHT_CORNER_DOUBLE = static_cast<char>(188);
+
 	static const char HORIZONTAL_LINE = static_cast<char>(196);
 	static const char VERTICAL_LINE = static_cast<char>(179);
+
+	static const char HORIZONTAL_LINE_DOUBLE = static_cast<char>(205);
+	static const char VERTICAL_LINE_DOUBLE = static_cast<char>(186);
 
 	static const char LEFT_DOUBLE_ARROW = static_cast<char>(174);
 	static const char RIGHT_DOUBLE_ARROW = static_cast<char>(175);

@@ -17,8 +17,6 @@ public:
 
 	void setSelected(bool selected);
 
-	int getDrawLength();
-
 private:
 	std::shared_ptr<CardBehavior> _behavior;
 
@@ -31,4 +29,6 @@ private:
 	int _drawLength;
 
 	std::string symbol;
+
+	static const int CARD_LENGTH = 8;
 };

@@ -14,6 +14,8 @@ void GameState::draw(Window& window)
 	int nextRow = _playerManager->drawPlayersHeader(window, _turnDirection);
 
 	drawDiscardedPile(window, nextRow);
+
+	_playerManager->drawPlayerCards(window, nextRow);
 }
 
 void GameState::handleInput()
@@ -86,13 +88,13 @@ void GameState::addCardToDiscardPile(std::shared_ptr<Card> card)
 	_discardPile.push_back(card);
 }
 
-void GameState::drawDiscardedPile(Window& window, const int& nextRow)
+void GameState::drawDiscardedPile(Window& window, int& nextRow)
 {
-	window.setCursorPosition(nextRow + 2, 0);
-
+	window.setCursorPosition(nextRow + 3, 0);
 	std::string cardsDiscarded = "CARDS DISCARDED : " + std::to_string(_discardPile.size());
 	std::cout << cardsDiscarded;
 
 	_discardPile.back()->draw(nextRow, static_cast<int>(cardsDiscarded.length()) + 1, window);
 
+	nextRow += 6;
 }

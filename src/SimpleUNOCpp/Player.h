@@ -19,6 +19,8 @@ public:
 
 	void setSelected(const bool& selected);
 
+	void drawCards(Window& window, const int& row) const;
+
 private:
 	std::string _name;
 

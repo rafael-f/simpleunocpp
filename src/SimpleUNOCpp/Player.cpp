@@ -90,3 +90,15 @@ void Player::setSelected(const bool& selected)
 {
 	_isSelected = selected;
 }
+
+void Player::drawCards(Window& window, const int& row) const
+{
+	_cardsOnHand[0]->setSelected(true);
+
+	int column = 0;
+	for (auto card : _cardsOnHand)
+	{
+		card->draw(row, column, window);
+		column += 11;
+	}
+}

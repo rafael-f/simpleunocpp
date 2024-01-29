@@ -76,9 +76,19 @@ int PlayerManager::drawPlayersHeader(Window& window, const int& turnDirection)
 	return row + 4;
 }
 
-void PlayerManager::drawArrow(Window& window, const char& arrow, const int& row, int& column)
+void PlayerManager::drawArrow(Window& window, const char& arrow, const int& row, int& column) const
 {
 	window.setCursorPosition(row + 1, column);
 	std::cout << " " << arrow;
 	column += 3;
+}
+
+std::shared_ptr<Player> PlayerManager::getSelectedPlayer() const
+{
+	return getPlayer(_selectedPlayerIndex);
+}
+
+void PlayerManager::drawPlayerCards(Window& window, int& row) const
+{
+	getSelectedPlayer()->drawCards(window, row);
 }

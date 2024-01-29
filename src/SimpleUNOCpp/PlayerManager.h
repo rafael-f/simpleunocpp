@@ -23,7 +23,9 @@ public:
 
 	int drawPlayersHeader(Window& window, const int& turnDirection);
 
-	void drawArrow(Window& window, const char& arrow, const int& row, int& column);
+	void drawArrow(Window& window, const char& arrow, const int& row, int& column) const;
+
+	void drawPlayerCards(Window& window, int& row) const;
 
 private:
 	std::vector<std::shared_ptr<Player>> _players;
