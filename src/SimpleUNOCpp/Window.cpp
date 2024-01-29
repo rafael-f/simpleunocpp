@@ -57,3 +57,14 @@ void Window::handleShowPromptEvent(const ShowPromptEvent& showPromptEvent) const
 {
 	showPrompt(showPromptEvent.showPrompt);
 }
+
+void Window::setCursorPosition(const int& row, const int& column) const
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	COORD cursorPos;
+	cursorPos.X = static_cast<short>(column);
+	cursorPos.Y = static_cast<short>(row);
+
+	SetConsoleCursorPosition(hConsole, cursorPos);
+}

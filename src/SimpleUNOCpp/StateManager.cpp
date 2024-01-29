@@ -30,9 +30,9 @@ void StateManager::initializeStates()
 	_states.push_back(std::make_unique<GameOverState>());
 }
 
-void StateManager::Draw()
+void StateManager::Draw(const Window& window)
 {
-	_states[_currentState]->draw();
+	_states[_currentState]->draw(window);
 }
 
 void StateManager::handleInput()

@@ -5,7 +5,7 @@
 class GameOverState : public State
 {
 public:
-	void draw() override;
+	void draw(const Window& window) override;
 
 	void handleInput() override;
 };

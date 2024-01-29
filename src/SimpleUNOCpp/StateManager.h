@@ -10,7 +10,7 @@ class StateManager
 public:
 	StateManager();
 
-	void Draw();
+	void Draw(const Window& window);
 
 	void setState(const int& stateIndex);
 

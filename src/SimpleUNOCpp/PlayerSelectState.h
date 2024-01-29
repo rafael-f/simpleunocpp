@@ -11,7 +11,7 @@ class PlayerSelectState : public State
 public:
 	PlayerSelectState();
 
-	void draw() override;
+	void draw(const Window& window) override;
 
 	void handleInput() override;
 

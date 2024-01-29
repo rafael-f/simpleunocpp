@@ -3,7 +3,7 @@
 #include "QuitGameEvent.h" // TODO remove?
 #include "Mediator.h" // TODO remove?
 
-void GameState::draw()
+void GameState::draw(const Window& window)
 {
 	std::cout << "in game screen" << std::endl;
 }

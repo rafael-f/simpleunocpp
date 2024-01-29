@@ -27,7 +27,7 @@ void GameManager::run()
 	{
 		_window->clear();
 
-		_stateManager->Draw();
+		_stateManager->Draw(*_window);
 
 		_stateManager->handleInput();
 	}

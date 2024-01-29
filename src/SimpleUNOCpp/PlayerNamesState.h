@@ -4,7 +4,7 @@
 // State used to retrieve player names.
 class PlayerNamesState : public State
 {
-	void draw() override;
+	void draw(const Window& window) override;
 
 	void handleInput() override;
 };

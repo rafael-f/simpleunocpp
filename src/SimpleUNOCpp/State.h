@@ -6,7 +6,7 @@
 class State
 {
 public:
-	virtual void draw() = 0;
+	virtual void draw(const Window& window) = 0;
 
 	virtual void handleInput() = 0;
 

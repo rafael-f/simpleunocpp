@@ -12,6 +12,8 @@ public:
 
 	void clear() const;
 
+	void setCursorPosition(const int& row, const int& column) const;
+
 private:
 	void handleQuitGameEvent(const QuitGameEvent& quitGameEvent);
 

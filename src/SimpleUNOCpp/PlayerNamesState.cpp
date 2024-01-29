@@ -4,7 +4,7 @@
 #include "QuitGameEvent.h"
 #include <iostream>
 
-void PlayerNamesState::draw()
+void PlayerNamesState::draw(const Window& window)
 {
 	std::cout << "Press ESC to quit" << std::endl;
 }

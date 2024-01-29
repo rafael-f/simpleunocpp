@@ -18,7 +18,7 @@ PlayerSelectState::PlayerSelectState()
 	_options[0]->setSelected(true);
 }
 
-void PlayerSelectState::draw()
+void PlayerSelectState::draw(const Window& window)
 {
 	std::cout << AMOUNT_OF_PLAYERS_QUESTION << std::endl;
 
@@ -27,7 +27,7 @@ void PlayerSelectState::draw()
 
 	for (int i = 0; i < _options.size(); ++i)
 	{
-		_options[i]->draw(startRow, startColumn);
+		_options[i]->draw(window, startRow, startColumn);
 		startColumn += _options[i]->getLength() + 2;
 	}
 }

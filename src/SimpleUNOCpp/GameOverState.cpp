@@ -1,6 +1,6 @@
 #include "GameOverState.h"
 
-void GameOverState::draw()
+void GameOverState::draw(const Window& window)
 {
 
 }

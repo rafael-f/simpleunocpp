@@ -13,7 +13,7 @@ MenuState::MenuState()
 	loadTitleLines();
 }
 
-void MenuState::draw()
+void MenuState::draw(const Window& window)
 {
 	for (std::string line : _titleLines)
 	{

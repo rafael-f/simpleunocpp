@@ -1,5 +1,4 @@
 #include "PlayersOption.h"
-#include <Windows.h>
 #include <iostream>
 #include <string>
 #include "KeyCodes.h"
@@ -15,9 +14,9 @@ int PlayersOption::getValue() const
 	return _value;
 }
 
-void PlayersOption::draw(const int& row, const int& column) const
+void PlayersOption::draw(const Window& window, const int& row, const int& column) const
 {
-    setCursorPosition(row, column);
+    window.setCursorPosition(row, column);
 
     if (_isSelected)
     {
@@ -28,9 +27,9 @@ void PlayersOption::draw(const int& row, const int& column) const
         }
         std::cout << KeyCodes::TOP_RIGHT_CORNER;
 
-        setCursorPosition(row + 1, column);
+        window.setCursorPosition(row + 1, column);
         std::cout << KeyCodes::VERTICAL_LINE << _value << KeyCodes::VERTICAL_LINE;
-        setCursorPosition(row + 2, column);
+        window.setCursorPosition(row + 2, column);
 
         std::cout << KeyCodes::BOTTOM_LEFT_CORNER;
         for (int i = 0; i < _length; ++i)
@@ -41,7 +40,7 @@ void PlayersOption::draw(const int& row, const int& column) const
     }
     else
     {
-        setCursorPosition(row + 1, column);
+        window.setCursorPosition(row + 1, column);
         std::cout << " " << _value << " ";
     }
 }
@@ -49,17 +48,6 @@ void PlayersOption::draw(const int& row, const int& column) const
 void PlayersOption::setSelected(const bool& selected)
 {
 	_isSelected = selected;
-}
-
-void PlayersOption::setCursorPosition(const int& row, const int& column) const
-{
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    COORD cursorPos;
-    cursorPos.X = static_cast<short>(column);
-    cursorPos.Y = static_cast<short>(row);
-
-    SetConsoleCursorPosition(hConsole, cursorPos);
 }
 
 int PlayersOption::getLength() const
