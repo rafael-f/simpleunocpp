@@ -42,18 +42,22 @@ void Window::handleQuitGameEvent(const QuitGameEvent&)
 	_isOpen = false;
 }
 
-void Window::showPrompt(const bool& show) const
+void Window::showPrompt(const bool& show)
 {
-	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (_showingPrompt != show)
+	{
+		_showingPrompt = show;
+		HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	CONSOLE_CURSOR_INFO cursorInfo;
-	GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+		CONSOLE_CURSOR_INFO cursorInfo;
+		GetConsoleCursorInfo(consoleHandle, &cursorInfo);
 
-	cursorInfo.bVisible = show;
-	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+		cursorInfo.bVisible = show;
+		SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+	}
 }
 
-void Window::handleShowPromptEvent(const ShowPromptEvent& showPromptEvent) const
+void Window::handleShowPromptEvent(const ShowPromptEvent& showPromptEvent)
 {
 	showPrompt(showPromptEvent.showPrompt);
 }

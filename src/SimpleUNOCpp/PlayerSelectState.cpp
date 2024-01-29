@@ -19,7 +19,7 @@ PlayerSelectState::PlayerSelectState()
 	_options[0]->setSelected(true);
 }
 
-void PlayerSelectState::draw(const Window& window)
+void PlayerSelectState::draw(Window& window)
 {
 	std::cout << AMOUNT_OF_PLAYERS_QUESTION << std::endl;
 
@@ -100,5 +100,4 @@ void PlayerSelectState::selectNextOption()
 
 void PlayerSelectState::setData(std::shared_ptr<TransitionData>)
 {
-
 }

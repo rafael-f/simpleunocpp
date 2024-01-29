@@ -9,7 +9,7 @@ class MenuState : public State
 public:
 	MenuState();
 
-	void draw(const Window& window) override;
+	void draw(Window& window) override;
 
 	void handleInput() override;
 

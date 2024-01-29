@@ -9,6 +9,7 @@ public:
 	static const int ARROW_2 = 224;
 	static const int LEFT_ARROW = 75;
 	static const int RIGHT_ARROW = 77;
+	static const int BACKSPACE = 8;
 
 	static const char TOP_LEFT_CORNER = static_cast<char>(218);
 	static const char TOP_RIGHT_CORNER = static_cast<char>(191);

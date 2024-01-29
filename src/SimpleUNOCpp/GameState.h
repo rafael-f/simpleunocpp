@@ -2,12 +2,13 @@
 #include "State.h"
 #include <memory>
 #include "TurnManager.h"
+#include "PlayerManager.h"
 
 // State the game is when in playing mode.
 class GameState : public State
 {
 public:
-	void draw(const Window& window) override;
+	void draw(Window& window) override;
 
 	void handleInput() override;
 
@@ -15,4 +16,6 @@ public:
 
 private:
 	std::unique_ptr<TurnManager> _turnManager;
+
+	std::shared_ptr<PlayerManager> _playerManager;
 };

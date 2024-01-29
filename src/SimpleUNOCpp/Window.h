@@ -14,12 +14,14 @@ public:
 
 	void setCursorPosition(const int& row, const int& column) const;
 
+	void showPrompt(const bool& show);
+
 private:
 	void handleQuitGameEvent(const QuitGameEvent& quitGameEvent);
 
 	bool _isOpen = true;
 
-	void showPrompt(const bool& show) const;
+	void handleShowPromptEvent(const ShowPromptEvent& showPromptEvent);
 
-	void handleShowPromptEvent(const ShowPromptEvent& showPromptEvent) const;
+	bool _showingPrompt = true;
 };

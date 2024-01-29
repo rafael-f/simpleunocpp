@@ -10,7 +10,7 @@ class StateManager
 public:
 	StateManager();
 
-	void Draw(const Window& window);
+	void Draw(Window& window);
 
 	void setState(const int& stateIndex, const std::shared_ptr<TransitionData> transitionData);
 

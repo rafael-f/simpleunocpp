@@ -216,6 +216,9 @@
     <ClInclude Include="TransitionData.h">
       <Filter>State</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerManagerTransitionData.h">
+      <Filter>PlayerNamesState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\unotitle.txt">

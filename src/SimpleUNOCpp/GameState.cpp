@@ -1,21 +1,31 @@
 #include "GameState.h"
 #include <iostream>
-#include "QuitGameEvent.h" // TODO remove?
-#include "Mediator.h" // TODO remove?
+#include "QuitGameEvent.h"
+#include "Mediator.h"
+#include "PlayerManagerTransitionData.h"
+#include <conio.h>
+#include "KeyCodes.h"
 
-void GameState::draw(const Window& window)
+void GameState::draw(Window& window)
 {
-	std::cout << "in game screen" << std::endl;
+	for (auto player : _playerManager->getplayers())
+	{
+		std::cout << player->getName() << std::endl;
+	}
 }
 
 void GameState::handleInput()
 {
-	// TODO
-	QuitGameEvent quitGameEvent; // TODO remove?
-	Mediator::fireEvent(quitGameEvent); // TODO remove?
+	int input = _getch();
+	if (input == KeyCodes::ESCAPE_KEY)
+	{
+		QuitGameEvent quitGameEvent;
+		Mediator::fireEvent(quitGameEvent);
+	}
 }
 
 void GameState::setData(std::shared_ptr<TransitionData> transitionData)
 {
-
+	std::shared_ptr<PlayerManagerTransitionData> data = std::dynamic_pointer_cast<PlayerManagerTransitionData>(transitionData);
+	_playerManager = data->playerManager;
 }

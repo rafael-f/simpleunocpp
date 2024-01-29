@@ -11,7 +11,7 @@ class PlayerSelectState : public State
 public:
 	PlayerSelectState();
 
-	void draw(const Window& window) override;
+	void draw(Window& window) override;
 
 	void handleInput() override;
 
@@ -20,7 +20,7 @@ public:
 private:
 	static const std::string AMOUNT_OF_PLAYERS_QUESTION;
 
-	static const int MIN_AMOUNT = 2;
+	static const int MIN_AMOUNT = 2; // TODO load from txt?
 	static const int MAX_AMOUNT = 10;
 
 	std::vector<std::unique_ptr<PlayersOption>> _options;

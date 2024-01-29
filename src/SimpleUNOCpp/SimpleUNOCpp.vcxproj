@@ -173,6 +173,7 @@
     <ClInclude Include="NormalCardBehavior.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="PlayerManagerTransitionData.h" />
     <ClInclude Include="PlayerNamesState.h" />
     <ClInclude Include="PlayerSelectState.h" />
     <ClInclude Include="PlayersOption.h" />

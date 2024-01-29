@@ -35,7 +35,7 @@ void StateManager::initializeStates()
 	_states.push_back(std::make_unique<GameOverState>());
 }
 
-void StateManager::Draw(const Window& window)
+void StateManager::Draw(Window& window)
 {
 	_states[_currentState]->draw(window);
 }
