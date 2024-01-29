@@ -23,5 +23,5 @@ private:
 
 	int _currentState;
 
-	void handleChangeStateEvent(const GoToNextStateEvent& changeStateEvent);
+	void handleGoToNextStateEvent(const GoToNextStateEvent& goToNextStateEvent);
 };

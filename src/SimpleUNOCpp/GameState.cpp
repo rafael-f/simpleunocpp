@@ -1,7 +1,7 @@
 #include "GameState.h"
 #include <iostream>
-#include "QuitGameEvent.h"
-#include "Mediator.h"
+#include "QuitGameEvent.h" // TODO remove?
+#include "Mediator.h" // TODO remove?
 
 void GameState::draw()
 {
@@ -11,6 +11,6 @@ void GameState::draw()
 void GameState::handleInput()
 {
 	// TODO
-	QuitGameEvent quitGameEvent;
-	Mediator::fireEvent(quitGameEvent);
+	QuitGameEvent quitGameEvent; // TODO remove?
+	Mediator::fireEvent(quitGameEvent); // TODO remove?
 }

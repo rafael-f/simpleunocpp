@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <conio.h>
+#include "KeyCodes.h"
 
 const std::string MenuState::TITLE_FILE_PATH = "assets/unotitle.txt";
 
@@ -24,7 +25,7 @@ void MenuState::handleInput()
 {
 	int input = _getch();
 
-	if (input == 13)
+	if (input == KeyCodes::ENTER_KEY)
 	{
 		GoToNextStateEvent changeStateEvent;
 		Mediator::fireEvent(changeStateEvent);

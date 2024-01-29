@@ -6,9 +6,9 @@ class PlayersOption
 public:
 	explicit PlayersOption(const int& value);
 
-	int getValue();
+	int getValue() const;
 
-	void draw(const int& row, const int& column);
+	void draw(const int& row, const int& column) const;
 
 	void setSelected(const bool& selected);
 

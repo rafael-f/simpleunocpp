@@ -1,5 +1,6 @@
 #pragma once
 #include "QuitGameEvent.h"
+#include "ShowPromptEvent.h"
 
 // Represents the app window.
 class Window
@@ -16,5 +17,7 @@ private:
 
 	bool _isOpen = true;
 
-	void hidePrompt() const;
+	void showPrompt(const bool& show) const;
+
+	void handleShowPromptEvent(const ShowPromptEvent& showPromptEvent) const;
 };

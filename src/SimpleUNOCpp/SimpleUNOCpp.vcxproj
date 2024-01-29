@@ -166,6 +166,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="Mediator.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="NormalCardBehavior.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="QuitGameEvent.h" />
     <ClInclude Include="ReverseTurnCardBehavior.h" />
     <ClInclude Include="RulesLoader.h" />
+    <ClInclude Include="ShowPromptEvent.h" />
     <ClInclude Include="SkipTurnCardBehavior.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />

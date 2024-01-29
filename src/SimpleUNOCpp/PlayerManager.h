@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Player.h"
+#include <memory>
 
 // Keeps track of all players.
 class PlayerManager

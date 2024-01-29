@@ -9,7 +9,12 @@ Window::Window()
 			handleQuitGameEvent(eventData);
 		});
 
-	hidePrompt();
+	Mediator::registerListener<ShowPromptEvent>([this](const ShowPromptEvent& eventData)
+		{
+			handleShowPromptEvent(eventData);
+		});
+
+	showPrompt(false);
 }
 
 bool Window::isOpen() const
@@ -37,13 +42,18 @@ void Window::handleQuitGameEvent(const QuitGameEvent&)
 	_isOpen = false;
 }
 
-void Window::hidePrompt() const
+void Window::showPrompt(const bool& show) const
 {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	CONSOLE_CURSOR_INFO cursorInfo;
 	GetConsoleCursorInfo(consoleHandle, &cursorInfo);
 
-	cursorInfo.bVisible = false;
+	cursorInfo.bVisible = show;
 	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+}
+
+void Window::handleShowPromptEvent(const ShowPromptEvent& showPromptEvent) const
+{
+	showPrompt(showPromptEvent.showPrompt);
 }

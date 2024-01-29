@@ -2,48 +2,42 @@
 #include <Windows.h>
 #include <iostream>
 #include <string>
+#include "KeyCodes.h"
 
 PlayersOption::PlayersOption(const int& value) :
 	_value(value)
 {
-    _length = std::to_string(value).length();
+    _length = static_cast<int>(std::to_string(value).length());
 }
 
-int PlayersOption::getValue()
+int PlayersOption::getValue() const
 {
 	return _value;
 }
 
-void PlayersOption::draw(const int& row, const int& column)
+void PlayersOption::draw(const int& row, const int& column) const
 {
     setCursorPosition(row, column);
 
-    char topLeft = 218;
-    char horizontalLine = 196;
-    char topRight = 191;
-    char verticalLine = 179;
-    char bottomLeft = 192;
-    char bottomRight = 217;
-
     if (_isSelected)
     {
-        std::cout << topLeft;
+        std::cout << KeyCodes::TOP_LEFT_CORNER;
         for (int i = 0; i < _length; ++i)
         {
-            std::cout << horizontalLine;
+            std::cout << KeyCodes::HORIZONTAL_LINE;
         }
-        std::cout << topRight;
+        std::cout << KeyCodes::TOP_RIGHT_CORNER;
 
         setCursorPosition(row + 1, column);
-        std::cout << verticalLine << _value << verticalLine;
+        std::cout << KeyCodes::VERTICAL_LINE << _value << KeyCodes::VERTICAL_LINE;
         setCursorPosition(row + 2, column);
 
-        std::cout << bottomLeft;
+        std::cout << KeyCodes::BOTTOM_LEFT_CORNER;
         for (int i = 0; i < _length; ++i)
         {
-            std::cout << horizontalLine;
+            std::cout << KeyCodes::HORIZONTAL_LINE;
         }
-        std::cout << bottomRight;
+        std::cout << KeyCodes::BOTTOM_RIGHT_CORNER;
     }
     else
     {
@@ -62,8 +56,8 @@ void PlayersOption::setCursorPosition(const int& row, const int& column) const
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     COORD cursorPos;
-    cursorPos.X = column;
-    cursorPos.Y = row;
+    cursorPos.X = static_cast<short>(column);
+    cursorPos.Y = static_cast<short>(row);
 
     SetConsoleCursorPosition(hConsole, cursorPos);
 }

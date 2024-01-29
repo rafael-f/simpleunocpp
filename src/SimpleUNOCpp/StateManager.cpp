@@ -12,7 +12,7 @@ StateManager::StateManager()
 
 	Mediator::registerListener<GoToNextStateEvent>([this](const GoToNextStateEvent& eventData)
 	{
-		handleChangeStateEvent(eventData);
+		handleGoToNextStateEvent(eventData);
 	});
 }
 
@@ -40,8 +40,7 @@ void StateManager::handleInput()
 	_states[_currentState]->handleInput();
 }
 
-// Example usage
-void StateManager::handleChangeStateEvent(const GoToNextStateEvent&)
+void StateManager::handleGoToNextStateEvent(const GoToNextStateEvent&)
 {
 	int nextState = _currentState + 1;
 

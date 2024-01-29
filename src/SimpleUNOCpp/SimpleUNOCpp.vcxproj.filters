@@ -204,6 +204,12 @@
     <ClInclude Include="PlayerNamesState.h">
       <Filter>PlayerNamesState</Filter>
     </ClInclude>
+    <ClInclude Include="ShowPromptEvent.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyCodes.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\unotitle.txt">
