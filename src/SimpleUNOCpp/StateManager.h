@@ -12,7 +12,7 @@ public:
 
 	void Draw(const Window& window);
 
-	void setState(const int& stateIndex);
+	void setState(const int& stateIndex, const std::shared_ptr<TransitionData> transitionData);
 
 	void handleInput();
 

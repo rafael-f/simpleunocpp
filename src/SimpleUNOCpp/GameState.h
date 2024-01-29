@@ -11,6 +11,8 @@ public:
 
 	void handleInput() override;
 
+	void setData(std::shared_ptr<TransitionData> transitionData) override;
+
 private:
 	std::unique_ptr<TurnManager> _turnManager;
 };

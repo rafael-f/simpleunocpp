@@ -5,6 +5,7 @@
 #include "Mediator.h"
 #include "PlayerSelectState.h"
 #include "PlayerNamesState.h"
+#include "TransitionData.h"
 
 StateManager::StateManager()
 {
@@ -16,9 +17,13 @@ StateManager::StateManager()
 	});
 }
 
-void StateManager::setState(const int& stateIndex)
+void StateManager::setState(const int& stateIndex, const std::shared_ptr<TransitionData> transitionData)
 {
-	_currentState = stateIndex;
+	if (stateIndex > -1 && stateIndex < _states.size())
+	{
+		_currentState = stateIndex;
+		_states[_currentState]->setData(transitionData);
+	}
 }
 
 void StateManager::initializeStates()
@@ -40,7 +45,7 @@ void StateManager::handleInput()
 	_states[_currentState]->handleInput();
 }
 
-void StateManager::handleGoToNextStateEvent(const GoToNextStateEvent&)
+void StateManager::handleGoToNextStateEvent(const GoToNextStateEvent& goToNextStateEvent)
 {
 	int nextState = _currentState + 1;
 
@@ -49,5 +54,5 @@ void StateManager::handleGoToNextStateEvent(const GoToNextStateEvent&)
 		nextState = 0;
 	}
 
-	setState(nextState);
+	setState(nextState, goToNextStateEvent.transitionData);
 }

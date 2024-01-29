@@ -5,6 +5,7 @@
 #include <conio.h>
 #include "GoToNextStateEvent.h"
 #include "KeyCodes.h"
+#include "PlayerSelectedAmountTransitionData.h"
 
 const std::string PlayerSelectState::AMOUNT_OF_PLAYERS_QUESTION = "How many players will participate?";
 
@@ -43,7 +44,10 @@ void PlayerSelectState::handleInput()
 	}
 	else if (input == KeyCodes::ENTER_KEY)
 	{
+		int playersAmount = _options[_selectedIndex]->getValue();
+
 		GoToNextStateEvent goToNextState;
+		goToNextState.transitionData = std::make_unique<PlayerSelectedAmountTransitionData>(playersAmount);
 		Mediator::fireEvent(goToNextState);
 	}
 	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
@@ -92,4 +96,9 @@ void PlayerSelectState::selectNextOption()
 	}
 
 	_options[_selectedIndex]->setSelected(true);
+}
+
+void PlayerSelectState::setData(std::shared_ptr<TransitionData>)
+{
+
 }

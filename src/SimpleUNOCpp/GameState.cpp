@@ -14,3 +14,8 @@ void GameState::handleInput()
 	QuitGameEvent quitGameEvent; // TODO remove?
 	Mediator::fireEvent(quitGameEvent); // TODO remove?
 }
+
+void GameState::setData(std::shared_ptr<TransitionData> transitionData)
+{
+
+}

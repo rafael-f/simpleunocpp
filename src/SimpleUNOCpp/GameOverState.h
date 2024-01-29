@@ -8,4 +8,6 @@ public:
 	void draw(const Window& window) override;
 
 	void handleInput() override;
+
+	void setData(std::shared_ptr<TransitionData> transitionData) override;
 };

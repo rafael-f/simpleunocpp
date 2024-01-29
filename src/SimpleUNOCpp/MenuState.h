@@ -13,6 +13,8 @@ public:
 
 	void handleInput() override;
 
+	void setData(std::shared_ptr<TransitionData> transitionData) override;
+
 private:
 	std::vector<std::string> _titleLines;
 

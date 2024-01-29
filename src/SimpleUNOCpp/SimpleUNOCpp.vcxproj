@@ -143,6 +143,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PlayerNamesState.cpp" />
+    <ClCompile Include="PlayerSelectedAmountTransitionData.h" />
     <ClCompile Include="PlayerSelectState.cpp" />
     <ClCompile Include="PlayersOption.cpp" />
     <ClCompile Include="ReverseTurnCardBehavior.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="SwapHandCardBehavior.h" />
+    <ClInclude Include="TransitionData.h" />
     <ClInclude Include="TurnManager.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

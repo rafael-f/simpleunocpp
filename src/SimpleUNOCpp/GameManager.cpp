@@ -16,7 +16,7 @@ void GameManager::start()
 		load();
 	}
 
-	_stateManager->setState(0);
+	_stateManager->setState(0, nullptr);
 
 	run();
 }

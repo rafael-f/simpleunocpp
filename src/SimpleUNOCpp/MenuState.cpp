@@ -43,3 +43,8 @@ void MenuState::loadTitleLines()
 		_titleLines.push_back(lineFromFile);
 	}
 }
+
+void MenuState::setData(std::shared_ptr<TransitionData> transitionData)
+{
+
+}

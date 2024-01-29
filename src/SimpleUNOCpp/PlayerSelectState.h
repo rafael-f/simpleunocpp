@@ -15,6 +15,8 @@ public:
 
 	void handleInput() override;
 
+	void setData(std::shared_ptr<TransitionData> transitionData) override;
+
 private:
 	static const std::string AMOUNT_OF_PLAYERS_QUESTION;
 

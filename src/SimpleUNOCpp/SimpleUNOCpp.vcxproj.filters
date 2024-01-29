@@ -74,6 +74,9 @@
     <ClCompile Include="PlayerNamesState.cpp">
       <Filter>PlayerNamesState</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerSelectedAmountTransitionData.h">
+      <Filter>PlayerSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="KeyCodes.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionData.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
