@@ -3,7 +3,7 @@
 
 ReverseTurnCardBehavior::ReverseTurnCardBehavior()
 {
-	_stringToDraw = KeyCodes::RIGHT_DOUBLE_ARROW + " " + KeyCodes::LEFT_DOUBLE_ARROW;
+	_stringToDraw = std::string(1, KeyCodes::RIGHT_DOUBLE_ARROW) + " " + std::string(1, KeyCodes::LEFT_DOUBLE_ARROW);
 }
 
 void ReverseTurnCardBehavior::execute()

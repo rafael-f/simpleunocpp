@@ -3,7 +3,7 @@
 
 SwapHandCardBehavior::SwapHandCardBehavior()
 {
-	_stringToDraw = KeyCodes::SWAP_LEFT + " " + KeyCodes::SWAP_RIGHT;
+	_stringToDraw = std::string(1, KeyCodes::SWAP_LEFT) + " " + std::string(1, KeyCodes::SWAP_RIGHT);
 }
 
 void SwapHandCardBehavior::execute()

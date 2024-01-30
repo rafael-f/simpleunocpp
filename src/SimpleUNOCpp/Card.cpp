@@ -20,7 +20,7 @@ void Card::draw(const int& row, const int& column, const Window& window)
 	
 	Colors borderColor;
 
-	if (!_canBePlayed)
+	if (_canBePlayed)
 	{
 		borderColor = Colors::GREEN;
 	}
@@ -85,6 +85,8 @@ void Card::draw(const int& row, const int& column, const Window& window)
 	{
 		std::cout << " ";
 	}
+
+	std::string x = _behavior->getStringToDraw();
 
 	// Draw both card borders and card text
 	std::cout << KeyCodes::VERTICAL_LINE_DOUBLE << _behavior->getStringToDraw();
