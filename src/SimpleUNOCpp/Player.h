@@ -21,7 +21,7 @@ public:
 
 	void setSelected(const bool& selected);
 
-	void drawCards(Window& window, const int& row) const;
+	void drawCards(Window& window, int& row) const;
 
 	void setSelectedCard(const int& index);
 

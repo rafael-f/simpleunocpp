@@ -111,13 +111,18 @@ void Player::setSelected(const bool& selected)
 	_isSelected = selected;
 }
 
-void Player::drawCards(Window& window, const int& row) const
+void Player::drawCards(Window& window, int& row) const
 {
 	int column = 0;
 	for (auto card : _cardsOnHand)
 	{
 		card->draw(row, column, window);
 		column += 11;
+		if (column + 11 >= window.getConsoleLineLength())
+		{
+			row += 6;
+			column = 0;
+		}
 	}
 }
 
