@@ -26,6 +26,20 @@ void GameState::handleInput()
 		QuitGameEvent quitGameEvent;
 		Mediator::fireEvent(quitGameEvent);
 	}
+	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
+	{
+		input = _getch();
+
+		switch (input)
+		{
+		case KeyCodes::LEFT_ARROW:
+			_playerManager->getSelectedPlayer()->selectCard(-1);
+			break;
+		case KeyCodes::RIGHT_ARROW:
+			_playerManager->getSelectedPlayer()->selectCard(1);
+			break;
+		}
+	}
 }
 
 void GameState::setData(std::shared_ptr<TransitionData> transitionData)

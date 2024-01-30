@@ -39,6 +39,7 @@ void PlayerManager::updatePlayerState(const int& playerIndex, std::shared_ptr<Ca
 	_selectedPlayerIndex = playerIndex;
 	_players[_selectedPlayerIndex]->setSelected(true);
 	_players[_selectedPlayerIndex]->updateCardStates(cardOnTop);
+	_players[_selectedPlayerIndex]->setSelectedCard(0);
 }
 
 int PlayerManager::drawPlayersHeader(Window& window, const int& turnDirection) const

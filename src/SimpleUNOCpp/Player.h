@@ -23,6 +23,10 @@ public:
 
 	void drawCards(Window& window, const int& row) const;
 
+	void setSelectedCard(const int& index);
+
+	void selectCard(const int& offset);
+
 private:
 	std::string _name;
 
@@ -31,4 +35,6 @@ private:
 	int _nameLength;
 
 	bool _isSelected = false;
+
+	int _selectedCardIndex = 0;
 };

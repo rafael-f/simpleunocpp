@@ -113,12 +113,32 @@ void Player::setSelected(const bool& selected)
 
 void Player::drawCards(Window& window, const int& row) const
 {
-	_cardsOnHand[0]->setSelected(true);
-
 	int column = 0;
 	for (auto card : _cardsOnHand)
 	{
 		card->draw(row, column, window);
 		column += 11;
 	}
+}
+
+void Player::setSelectedCard(const int& index)
+{
+	_cardsOnHand[_selectedCardIndex]->setSelected(false);
+	_selectedCardIndex = index;
+	_cardsOnHand[_selectedCardIndex]->setSelected(true);
+}
+
+void Player::selectCard(const int& offset)
+{
+	int nextIndex = _selectedCardIndex + offset;
+	if (nextIndex < 0)
+	{
+		nextIndex = static_cast<int>(_cardsOnHand.size()) - 1;
+	}
+	else if (nextIndex >= _cardsOnHand.size())
+	{
+		nextIndex = 0;
+	}
+
+	setSelectedCard(nextIndex);
 }
