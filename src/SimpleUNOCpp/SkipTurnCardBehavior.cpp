@@ -15,3 +15,13 @@ std::string& SkipTurnCardBehavior::getStringToDraw()
 {
 	return _stringToDraw;
 }
+
+bool SkipTurnCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
+{
+	if (std::shared_ptr<SkipTurnCardBehavior> otherCard = std::dynamic_pointer_cast<SkipTurnCardBehavior>(otherBehavior))
+	{
+		return true;
+	}
+
+	return false;
+}

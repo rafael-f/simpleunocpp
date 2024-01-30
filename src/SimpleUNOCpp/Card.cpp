@@ -8,9 +8,9 @@ Card::Card(const Colors& color, std::shared_ptr<CardBehavior> behavior) :
 	_drawLength = 5; // TODO
 }
 
-void Card::setCanBePlayed(const Card& cardOnGame)
+void Card::setCanBePlayed(const bool& canBePlayed)
 {
-	_canBePlayed = true; // TODO
+	_canBePlayed = canBePlayed;
 }
 
 // TODO how to improve this salad? probably easier to make a template in a txt file?
@@ -203,4 +203,19 @@ void Card::draw(const int& row, const int& column, const Window& window)
 void Card::setSelected(bool selected)
 {
 	_isSelected = selected;
+}
+
+Colors Card::getColor() const
+{
+	return _color;
+}
+
+std::shared_ptr<CardBehavior> Card::getBehavior()
+{
+	return _behavior;
+}
+
+bool Card::checkCanBePlayed(const std::shared_ptr<Card> otherCard)
+{
+	return _behavior->checkCanBePlayed(otherCard->getBehavior());
 }

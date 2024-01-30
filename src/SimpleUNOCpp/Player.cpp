@@ -13,9 +13,29 @@ std::string Player::getName() const
 	return _name;
 }
 
-void Player::updateCardStates(const Card& cardOnTop)
+void Player::updateCardStates(std::shared_ptr<Card> cardOnTop) const
 {
+	Colors topColor = cardOnTop->getColor();
+	for (std::shared_ptr<Card> card : _cardsOnHand)
+	{
+		Colors cardColor = card->getColor();
+		bool canBePlayed = cardColor == topColor || cardColor == Colors::WHITE;
+		if (!canBePlayed)
+		{
+			canBePlayed = card->checkCanBePlayed(cardOnTop);
+		}
 
+		card->setCanBePlayed(canBePlayed);
+	}
+}
+
+void Player::updateCardStates(const Colors& color) const
+{
+	for (std::shared_ptr<Card> card : _cardsOnHand)
+	{
+		Colors cardColor = card->getColor();
+		card->setCanBePlayed(cardColor == color || cardColor == Colors::WHITE);
+	}
 }
 
 void Player::addCard(std::shared_ptr<Card> card)

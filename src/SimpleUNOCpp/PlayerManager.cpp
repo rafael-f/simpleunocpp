@@ -33,14 +33,15 @@ void PlayerManager::shufflePlayers()
 	VectorHelper::shuffleVector(_players);
 }
 
-void PlayerManager::selectPlayer(const int& playerIndex)
+void PlayerManager::updatePlayerState(const int& playerIndex, std::shared_ptr<Card> cardOnTop)
 {
 	_players[_selectedPlayerIndex]->setSelected(false);
 	_selectedPlayerIndex = playerIndex;
 	_players[_selectedPlayerIndex]->setSelected(true);
+	_players[_selectedPlayerIndex]->updateCardStates(cardOnTop);
 }
 
-int PlayerManager::drawPlayersHeader(Window& window, const int& turnDirection)
+int PlayerManager::drawPlayersHeader(Window& window, const int& turnDirection) const
 {
 	std::cout << "PLAYERS:" << std::endl;
 

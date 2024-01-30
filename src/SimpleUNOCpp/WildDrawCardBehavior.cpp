@@ -14,3 +14,8 @@ std::string& WildDrawCardBehavior::getStringToDraw()
 {
 	return _stringToDraw;
 }
+
+bool WildDrawCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
+{
+	return true;
+}

@@ -11,11 +11,17 @@ class Card
 public:
 	Card(const Colors& color, std::shared_ptr<CardBehavior> behavior);
 
-	void setCanBePlayed(const Card& cardOnGame);
+	void setCanBePlayed(const bool& canBePlayed);
 
 	void draw(const int& row, const int& column, const Window& window);
 
 	void setSelected(bool selected);
+
+	Colors getColor() const;
+
+	bool checkCanBePlayed(const std::shared_ptr<Card> otherCard);
+
+	std::shared_ptr<CardBehavior> getBehavior();
 
 private:
 	std::shared_ptr<CardBehavior> _behavior;

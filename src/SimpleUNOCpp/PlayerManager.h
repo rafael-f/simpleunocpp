@@ -17,11 +17,11 @@ public:
 
 	void shufflePlayers();
 
-	void selectPlayer(const int& playerIndex);
+	void updatePlayerState(const int& playerIndex, std::shared_ptr<Card> cardOnTop);
 
 	std::shared_ptr<Player> getSelectedPlayer() const;
 
-	int drawPlayersHeader(Window& window, const int& turnDirection);
+	int drawPlayersHeader(Window& window, const int& turnDirection) const;
 
 	void drawArrow(Window& window, const char& arrow, const int& row, int& column) const;
 

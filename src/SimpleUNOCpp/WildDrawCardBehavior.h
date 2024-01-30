@@ -10,6 +10,8 @@ public:
 
 	std::string& getStringToDraw() override;
 
+	bool checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior) override;
+
 private:
 	int _drawAmount;
 

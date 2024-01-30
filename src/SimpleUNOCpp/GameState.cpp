@@ -40,8 +40,6 @@ void GameState::startGame()
 {
 	_playerManager->shufflePlayers();
 
-	_playerManager->selectPlayer(0);
-
 	clearPiles();
 
 	CardsLoader::createCards(_drawPile);
@@ -49,6 +47,8 @@ void GameState::startGame()
 	initializePlayersHands();
 
 	discardFirstCard();
+
+	_playerManager->updatePlayerState(0, _discardPile.back());
 }
 
 void GameState::clearPiles()
@@ -96,5 +96,5 @@ void GameState::drawDiscardedPile(Window& window, int& nextRow)
 
 	_discardPile.back()->draw(nextRow, static_cast<int>(cardsDiscarded.length()) + 1, window);
 
-	nextRow += 6;
+	nextRow += 6; // TODO height of a card
 }

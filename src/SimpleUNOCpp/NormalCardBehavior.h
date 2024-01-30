@@ -5,11 +5,15 @@
 class NormalCardBehavior : public CardBehavior
 {
 public:
-	NormalCardBehavior(int value);
+	explicit NormalCardBehavior(int value);
 
 	void execute() override;
 
 	std::string& getStringToDraw() override;
+
+	bool checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior) override;
+
+	int getValue() const;
 
 private:
 	int _value;

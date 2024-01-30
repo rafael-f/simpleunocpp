@@ -11,7 +11,9 @@ public:
 
 	std::string getName() const;
 
-	void updateCardStates(const Card& cardOnTop);
+	void updateCardStates(std::shared_ptr<Card> cardOnTop) const;
+
+	void updateCardStates(const Colors& color) const;
 
 	void addCard(std::shared_ptr<Card> card);
 

@@ -15,3 +15,8 @@ std::string& SwapHandCardBehavior::getStringToDraw()
 {
 	return _stringToDraw;
 }
+
+bool SwapHandCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
+{
+	return true; // Can always be played (color check happens on card level).
+}
