@@ -13,6 +13,8 @@ public:
 
 	void setCanBePlayed(const bool& canBePlayed);
 
+	bool getCanBePlayed();
+
 	void draw(const int& row, const int& column, const Window& window);
 
 	void setSelected(bool selected);

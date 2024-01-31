@@ -7,6 +7,16 @@
 #include "PlayerManagerTransitionData.h"
 #include "QuitGameEvent.h"
 #include "DrawDisplayCardBehavior.h"
+#include "VectorHelper.h"
+#include "ReverseTurnCardEvent.h"
+
+GameState::GameState()
+{
+	Mediator::registerListener<ReverseTurnCardEvent>([this](const ReverseTurnCardEvent&)
+		{
+			handleReverseTurnEvent();
+		});
+}
 
 void GameState::draw(Window& window)
 {
@@ -54,6 +64,7 @@ void GameState::setData(std::shared_ptr<TransitionData> transitionData)
 	_playerManager = data->playerManager;
 
 	_drawCard = std::make_unique<Card>(Colors::WHITE, std::make_shared<DrawDisplayCardBehavior>());
+	_drawCard->setCanBePlayed(true);
 
 	startGame();
 }
@@ -73,6 +84,8 @@ void GameState::startGame()
 	_playerManager->updatePlayerState(0, _discardPile.back());
 
 	_currentState = GameStates::NORMAL;
+
+	_currentMessage = "";
 }
 
 void GameState::clearPiles()
@@ -134,6 +147,19 @@ void GameState::drawNormalState(Window& window)
 {
 	int nextRow = _playerManager->drawPlayersHeader(window, _turnDirection);
 
+	++nextRow;
+	window.setCursorPosition(nextRow, 0);
+	std::cout << "CURRENT PLAYER : " << _playerManager->getSelectedPlayer()->getName() << " : PICK A CARD OR DRAW ANOTHER CARD.";
+	if (_currentMessage.length() > 0)
+	{
+		window.setConsoleColor(Colors::RED);
+		std::cout << _currentMessage;
+		window.setConsoleColor(Colors::WHITE);
+		_currentMessage = "";
+	}
+
+	++nextRow;
+
 	drawDiscardedPile(window, nextRow);
 
 	drawDrawPile(window, nextRow);
@@ -182,6 +208,39 @@ void GameState::handleInputNormalState()
 				_drawCard->setSelected(false);
 			}
 			break;
+		}
+	}
+	else if (input == KeyCodes::ENTER_KEY)
+	{
+		if (_drawCard->getSelected())
+		{
+			// TODO this might not be needed after all...
+			//_drawCard->getBehavior()->execute();
+			std::shared_ptr<Card> drawedCard = _drawPile.back();
+			_drawPile.pop_back();
+			_playerManager->getSelectedPlayer()->addCard(drawedCard);
+			if (_drawPile.size() <= 0)
+			{
+				_drawPile = std::move(_discardPile);
+				VectorHelper::shuffleVector(_drawPile);
+			}
+		}
+		else
+		{
+			std::shared_ptr<Card> selectedCard = _playerManager->getSelectedPlayer()->getSelectedCard();
+			if (selectedCard->getCanBePlayed())
+			{
+				selectedCard->getBehavior()->execute();
+				_playerManager->getSelectedPlayer()->removeSelectedCard();
+				// if player has 0 cards on hand and said UNO he won
+				_discardPile.push_back(selectedCard);
+
+				_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+			}
+			else
+			{
+				_currentMessage = " SELECTED CARD CAN'T BE PLAYED!";
+			}
 		}
 	}
 }
@@ -234,4 +293,9 @@ void GameState::drawSelectColorState(Window& window)
 void GameState::handleInputSelectColorState()
 {
 
+}
+
+void GameState::handleReverseTurnEvent()
+{
+	_turnDirection = -_turnDirection;
 }

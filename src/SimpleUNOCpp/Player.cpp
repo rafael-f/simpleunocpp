@@ -19,7 +19,7 @@ void Player::updateCardStates(std::shared_ptr<Card> cardOnTop) const
 	for (std::shared_ptr<Card> card : _cardsOnHand)
 	{
 		Colors cardColor = card->getColor();
-		bool canBePlayed = cardColor == topColor || cardColor == Colors::WHITE;
+		bool canBePlayed = cardColor == topColor || cardColor == Colors::WHITE || topColor == Colors::WHITE; // TODO if top discard is white can others be used on top of it?
 		if (!canBePlayed)
 		{
 			canBePlayed = card->checkCanBePlayed(cardOnTop);
@@ -41,6 +41,17 @@ void Player::updateCardStates(const Colors& color) const
 void Player::addCard(std::shared_ptr<Card> card)
 {
 	_cardsOnHand.push_back(card);
+}
+
+void Player::removeSelectedCard()
+{
+	_cardsOnHand[_selectedCardIndex]->setSelected(false);
+	_cardsOnHand.erase(_cardsOnHand.begin() + _selectedCardIndex);
+	_selectedCardIndex = 0;
+	if (_cardsOnHand.size() > 0)
+	{
+		_cardsOnHand[_selectedCardIndex]->setSelected(true);
+	}
 }
 
 int Player::draw(Window& window, const int& row, const int& column) const
@@ -140,6 +151,11 @@ void Player::setSelectedCard(const int& index)
 	}
 }
 
+std::shared_ptr<Card> Player::getSelectedCard()
+{
+	return _cardsOnHand[_selectedCardIndex];
+}
+
 void Player::selectCard(const int& offset)
 {
 	int nextIndex = _selectedCardIndex + offset;
@@ -153,4 +169,9 @@ void Player::selectCard(const int& offset)
 	}
 
 	setSelectedCard(nextIndex);
+}
+
+void Player::setSaidUNO(const bool& saidUNO)
+{
+	_saidUNO = saidUNO;
 }

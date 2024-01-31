@@ -27,6 +27,8 @@ public:
 
 	void drawPlayerCards(Window& window, int& row) const;
 
+	void selectNextPlayer(const int& offset, std::shared_ptr<Card> cardOnTop);
+
 private:
 	std::vector<std::shared_ptr<Player>> _players;
 

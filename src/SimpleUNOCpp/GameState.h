@@ -9,6 +9,8 @@
 class GameState : public State
 {
 public:
+	GameState();
+
 	void draw(Window& window) override;
 
 	void handleInput() override;
@@ -35,8 +37,6 @@ private:
 	void drawDiscardedPile(Window& window, int& nextRow);
 
 	void drawDrawPile(Window& window, int& nextRow);
-
-	int _currentPlayerIndex;
 
 	void clearPiles();
 
@@ -66,4 +66,8 @@ private:
 	void handleInputSelectColorState();
 
 	std::unique_ptr<Card> _drawCard;
+
+	std::string _currentMessage;
+
+	void handleReverseTurnEvent();
 };

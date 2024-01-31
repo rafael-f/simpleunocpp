@@ -17,6 +17,8 @@ public:
 
 	void addCard(std::shared_ptr<Card> card);
 
+	void removeSelectedCard();
+
 	int draw(Window& window, const int& row, const int& column) const;
 
 	void setSelected(const bool& selected);
@@ -25,7 +27,11 @@ public:
 
 	void setSelectedCard(const int& index);
 
+	std::shared_ptr<Card> getSelectedCard();
+
 	void selectCard(const int& offset);
+
+	void setSaidUNO(const bool& saidUNO);
 
 private:
 	std::string _name;
@@ -37,4 +43,6 @@ private:
 	bool _isSelected = false;
 
 	int _selectedCardIndex = 0;
+
+	bool _saidUNO = false;
 };

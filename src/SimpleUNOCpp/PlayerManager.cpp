@@ -94,3 +94,23 @@ void PlayerManager::drawPlayerCards(Window& window, int& row) const
 {
 	getSelectedPlayer()->drawCards(window, row);
 }
+
+void PlayerManager::selectNextPlayer(const int& offset, std::shared_ptr<Card> cardOnTop)
+{
+	_players[_selectedPlayerIndex]->setSelected(false);
+
+	_selectedPlayerIndex += offset;
+
+	if (_selectedPlayerIndex < 0)
+	{
+		_selectedPlayerIndex = static_cast<int>(_players.size()) - 1;
+	}
+	else if (_selectedPlayerIndex >= _players.size())
+	{
+		_selectedPlayerIndex = 0;
+	}
+
+	_players[_selectedPlayerIndex]->setSelected(true);
+
+	updatePlayerState(_selectedPlayerIndex, cardOnTop);
+}

@@ -13,6 +13,11 @@ void Card::setCanBePlayed(const bool& canBePlayed)
 	_canBePlayed = canBePlayed;
 }
 
+bool Card::getCanBePlayed()
+{
+	return _canBePlayed;
+}
+
 // TODO how to improve this salad? probably easier to make a template in a txt file?
 void Card::draw(const int& row, const int& column, const Window& window)
 {
