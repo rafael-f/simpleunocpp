@@ -17,6 +17,8 @@ public:
 
 	std::string getNameToDraw() override;
 
+	int getAmount() const;
+
 private:
 	static const std::string DRAW_NAME;
 

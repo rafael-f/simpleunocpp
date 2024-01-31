@@ -3,7 +3,7 @@
 DrawDisplayCardEvent::DrawDisplayCardEvent(const int& amount) : _amount(amount)
 {}
 
-int& DrawDisplayCardEvent::getAmount()
+int DrawDisplayCardEvent::getAmount() const
 {
 	return _amount;
 }

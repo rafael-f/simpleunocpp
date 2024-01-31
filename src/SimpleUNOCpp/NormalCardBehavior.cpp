@@ -8,7 +8,7 @@ NormalCardBehavior::NormalCardBehavior(int value) : _value(value)
 
 void NormalCardBehavior::execute()
 {
-    Mediator::fireEvent(NormalCardEvent());
+    Mediator::fireEvent(NormalCardEvent()); // TODO remove?
 }
 
 std::string& NormalCardBehavior::getSymbolToDraw()

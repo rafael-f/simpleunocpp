@@ -6,7 +6,7 @@ class DrawDisplayCardEvent : public Event
 public:
 	explicit DrawDisplayCardEvent(const int& amount);
 	
-	int& getAmount();
+	int getAmount() const;
 
 private:
 	int _amount;

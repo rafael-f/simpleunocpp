@@ -16,6 +16,16 @@ GameState::GameState()
 		{
 			handleReverseTurnEvent();
 		});
+
+	Mediator::registerListener<DrawDisplayCardEvent>([this](const DrawDisplayCardEvent& eventData)
+		{
+			handleDrawCardEvent(eventData);
+		});
+
+	Mediator::registerListener<DrawDiscardedCardEvent>([this](const DrawDiscardedCardEvent& eventData)
+		{
+			handleDrawDiscardedCardEvent(eventData);
+		});
 }
 
 void GameState::draw(Window& window)
@@ -23,11 +33,14 @@ void GameState::draw(Window& window)
 	switch (_currentState)
 	{
 	case GameStates::NORMAL:
-		drawNormalState(window);
 		break;
 	case GameStates::DISPLAY_NEW_CARDS:
 		break;
-	case GameStates::FORCED_DRAW:
+	case GameStates::FORCED_DRAW_DISCARD:
+		_currentMessage = "PRESS ENTER TO DRAW 2 CARDS FROM DISCARD PILE";
+		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
+		_drawCard->setSelected(true);
+		//drawForcedDrawDiscardedState(window);
 		break;
 	case GameStates::FORCED_SKIP:
 		break;
@@ -36,6 +49,8 @@ void GameState::draw(Window& window)
 	case GameStates::SELECT_COLOR:
 		break;
 	}
+	
+	drawNormalState(window);
 }
 
 void GameState::handleInput()
@@ -47,7 +62,8 @@ void GameState::handleInput()
 		break;
 	case GameStates::DISPLAY_NEW_CARDS:
 		break;
-	case GameStates::FORCED_DRAW:
+	case GameStates::FORCED_DRAW_DISCARD:
+		handleInputForcedDrawDiscardedState();
 		break;
 	case GameStates::FORCED_SKIP:
 		break;
@@ -101,6 +117,8 @@ void GameState::clearPiles()
 	}
 }
 
+#include "DrawDiscardedCardBehavior.h"
+
 void GameState::initializePlayersHands()
 {
 	for (std::shared_ptr<Player> player : _playerManager->getPlayers())
@@ -109,6 +127,16 @@ void GameState::initializePlayersHands()
 		{
 			player->addCard(_drawPile.back());
 			_drawPile.pop_back();
+		}
+	}
+
+	// TODO remove
+	for (int i = 0; i < _drawPile.size(); ++i)
+	{
+		if (std::shared_ptr<DrawDiscardedCardBehavior> behavior = std::dynamic_pointer_cast<DrawDiscardedCardBehavior>(_drawPile[i]->getBehavior()))
+		{
+			_playerManager->getPlayers()[0]->addCard(_drawPile[i]);
+			_drawPile.erase(_drawPile.begin() + i);
 		}
 	}
 }
@@ -122,7 +150,7 @@ void GameState::discardFirstCard()
 // TODO, is it better to make cards unique_ptrs instead and move them between the vectors?
 void GameState::addCardToDiscardPile(std::shared_ptr<Card> card)
 {
-	_discardPile.push_back(card);
+	_discardPile.push_back(card); // TODO ?????
 }
 
 void GameState::drawDiscardedPile(Window& window, int& nextRow)
@@ -149,13 +177,25 @@ void GameState::drawNormalState(Window& window)
 
 	++nextRow;
 	window.setCursorPosition(nextRow, 0);
-	std::cout << "CURRENT PLAYER : " << _playerManager->getSelectedPlayer()->getName() << " : PICK A CARD OR DRAW ANOTHER CARD.";
-	if (_currentMessage.length() > 0)
+
+	std::cout << "CURRENT PLAYER : " << _playerManager->getSelectedPlayer()->getName();
+
+	if (endTurn)
+	{
+		window.setConsoleColor(Colors::GREEN);
+		std::cout << " PRESS ENTER TO END TURN";
+		window.setConsoleColor(Colors::WHITE);
+	}
+	else if (_currentMessage.length() > 0)
 	{
 		window.setConsoleColor(Colors::RED);
 		std::cout << _currentMessage;
 		window.setConsoleColor(Colors::WHITE);
 		_currentMessage = "";
+	}
+	else
+	{
+		std::cout << " USE A CARD OR DRAW ANOTHER CARD.";
 	}
 
 	++nextRow;
@@ -169,78 +209,81 @@ void GameState::drawNormalState(Window& window)
 	_playerManager->drawPlayerCards(window, nextRow);
 }
 
+// TODO improve this
 void GameState::handleInputNormalState()
 {
 	int input = _getch();
-	if (input == KeyCodes::ESCAPE_KEY)
-	{
-		Mediator::fireEvent(QuitGameEvent());
-	}
-	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
-	{
-		input = _getch();
 
-		switch (input)
+	if(endTurn)
+	{
+		if (input == KeyCodes::ENTER_KEY)
 		{
-		case KeyCodes::LEFT_ARROW:
-			if (!_drawCard->getSelected())
+			_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+			_drawCard->setSelected(false);
+			endTurn = false;
+		}
+	}
+	else
+	{
+		if (input == KeyCodes::ESCAPE_KEY)
+		{
+			Mediator::fireEvent(QuitGameEvent());
+		}
+		else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
+		{
+			input = _getch();
+
+			switch (input)
 			{
-				_playerManager->getSelectedPlayer()->selectCard(-1);
+			case KeyCodes::LEFT_ARROW:
+				if (!_drawCard->getSelected())
+				{
+					_playerManager->getSelectedPlayer()->selectCard(-1);
+				}
+				break;
+			case KeyCodes::RIGHT_ARROW:
+				if (!_drawCard->getSelected())
+				{
+					_playerManager->getSelectedPlayer()->selectCard(1);
+				}
+				break;
+			case KeyCodes::UP_ARROW:
+				if (!_drawCard->getSelected())
+				{
+					_playerManager->getSelectedPlayer()->setSelectedCard(-1);
+					_drawCard->setSelected(true);
+				}
+				break;
+			case KeyCodes::DOWN_ARROW:
+				if (_drawCard->getSelected())
+				{
+					_playerManager->getSelectedPlayer()->setSelectedCard(0);
+					_drawCard->setSelected(false);
+				}
+				break;
 			}
-			break;
-		case KeyCodes::RIGHT_ARROW:
-			if (!_drawCard->getSelected())
-			{
-				_playerManager->getSelectedPlayer()->selectCard(1);
-			}
-			break;
-		case KeyCodes::UP_ARROW:
-			if (!_drawCard->getSelected())
-			{
-				_playerManager->getSelectedPlayer()->setSelectedCard(-1);
-				_drawCard->setSelected(true);
-			}
-			break;
-		case KeyCodes::DOWN_ARROW:
+		}
+		else if (input == KeyCodes::ENTER_KEY)
+		{
 			if (_drawCard->getSelected())
 			{
-				_playerManager->getSelectedPlayer()->setSelectedCard(0);
-				_drawCard->setSelected(false);
-			}
-			break;
-		}
-	}
-	else if (input == KeyCodes::ENTER_KEY)
-	{
-		if (_drawCard->getSelected())
-		{
-			// TODO this might not be needed after all...
-			//_drawCard->getBehavior()->execute();
-			std::shared_ptr<Card> drawedCard = _drawPile.back();
-			_drawPile.pop_back();
-			_playerManager->getSelectedPlayer()->addCard(drawedCard);
-			if (_drawPile.size() <= 0)
-			{
-				_drawPile = std::move(_discardPile);
-				VectorHelper::shuffleVector(_drawPile);
-				discardFirstCard();
-			}
-		}
-		else
-		{
-			std::shared_ptr<Card> selectedCard = _playerManager->getSelectedPlayer()->getSelectedCard();
-			if (selectedCard->getCanBePlayed())
-			{
-				selectedCard->getBehavior()->execute();
-				_playerManager->getSelectedPlayer()->removeSelectedCard();
-				// if player has 0 cards on hand and said UNO he won
-				_discardPile.push_back(selectedCard);
-
-				_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+				_drawCard->getBehavior()->execute();
 			}
 			else
 			{
-				_currentMessage = " SELECTED CARD CAN'T BE PLAYED!";
+				std::shared_ptr<Card> selectedCard = _playerManager->getSelectedPlayer()->getSelectedCard();
+				if (selectedCard->getCanBePlayed())
+				{
+					selectedCard->getBehavior()->execute();
+					_playerManager->getSelectedPlayer()->removeSelectedCard();
+					// TODO if player has 0 cards on hand and said UNO he won
+					_discardPile.push_back(selectedCard);
+					_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+				}
+				else
+				{
+					_currentMessage = " SELECTED CARD CAN'T BE PLAYED!";
+				}
 			}
 		}
 	}
@@ -256,14 +299,36 @@ void GameState::handleInputDisplayNewCardsState()
 
 }
 
-void GameState::drawForcedDrawState(Window& window)
+void GameState::drawForcedDrawDiscardedState(Window& window)
 {
 
 }
 
-void GameState::handleInputForcedDrawState()
+void GameState::handleInputForcedDrawDiscardedState()
 {
+	int input = _getch();
 
+	if (input == KeyCodes::ENTER_KEY)
+	{
+		// TODO maybe save this behavior reference
+		std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+		for (int i = 0; i < drawCard->getAmount(); ++i)
+		{
+			std::shared_ptr<Card> drawedCard = VectorHelper::getAndRemoveRandomElement(_discardPile, 1); // TODO typo on drawed???
+			if (drawedCard == nullptr)
+			{
+				// TODO if draw pile also empty, handle it
+				drawedCard = _drawPile.back();
+				_drawPile.pop_back();
+			}
+	
+			_playerManager->getSelectedPlayer()->addCard(drawedCard);
+		}
+
+		endTurn = true;
+		_currentState = GameStates::NORMAL;
+		_currentMessage = "";
+	}
 }
 
 void GameState::drawForcedSkipState(Window& window)
@@ -299,4 +364,38 @@ void GameState::handleInputSelectColorState()
 void GameState::handleReverseTurnEvent()
 {
 	_turnDirection = -_turnDirection;
+}
+
+void GameState::handleDrawCardEvent(const DrawDisplayCardEvent& eventData)
+{
+	for (int i = 0; i < eventData.getAmount(); ++i)
+	{
+		std::shared_ptr<Card> drawedCard = _drawPile.back();
+		_drawPile.pop_back();
+		_playerManager->getSelectedPlayer()->addCard(drawedCard);
+
+		if (_drawPile.empty())
+		{
+			if (_discardPile.size() < 2)
+			{
+				// If there are zero cards in draw pile and only one card on discard pile we'll force a gameover
+				// TODO maybe only force a gameover if the player can't play any cards?
+			}
+			else
+			{
+				_drawPile = std::move(_discardPile);
+				VectorHelper::shuffleVector(_drawPile);
+				discardFirstCard();
+			}
+		}
+	}
+
+	endTurn = true;
+}
+
+void GameState::handleDrawDiscardedCardEvent(const DrawDiscardedCardEvent& eventData)
+{
+	_currentState = GameStates::FORCED_DRAW_DISCARD;
+	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+	drawCard->setAmount(eventData.getAmount());
 }

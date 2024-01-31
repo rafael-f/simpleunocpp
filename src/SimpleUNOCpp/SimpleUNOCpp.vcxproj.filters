@@ -83,6 +83,12 @@
     <ClCompile Include="WildDrawCardEvent.cpp">
       <Filter>Cards\BehaviorEvents</Filter>
     </ClCompile>
+    <ClCompile Include="DrawDisplayCardBehavior.cpp">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawDisplayCardEvent.cpp">
+      <Filter>Cards\BehaviorEvents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -245,6 +251,15 @@
     </ClInclude>
     <ClInclude Include="WildDrawCardEvent.h">
       <Filter>Cards\BehaviorEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawDisplayCardBehavior.h">
+      <Filter>Cards\BehaviorImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawDisplayCardEvent.h">
+      <Filter>Cards\BehaviorEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

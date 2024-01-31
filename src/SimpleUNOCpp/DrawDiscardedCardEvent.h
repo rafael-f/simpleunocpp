@@ -6,7 +6,7 @@ class DrawDiscardedCardEvent : public Event
 public:
 	explicit DrawDiscardedCardEvent(const int& amount);
 
-	int& getAmount();
+	int getAmount() const;
 
 private:
 	int _amount;

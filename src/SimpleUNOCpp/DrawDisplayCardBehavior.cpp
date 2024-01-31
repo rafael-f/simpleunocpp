@@ -11,6 +11,7 @@ DrawDisplayCardBehavior::DrawDisplayCardBehavior()
 void DrawDisplayCardBehavior::execute()
 {
     Mediator::fireEvent(DrawDisplayCardEvent(_amount));
+    setAmount(1);
 }
 
 std::string& DrawDisplayCardBehavior::getSymbolToDraw()
@@ -32,4 +33,9 @@ void DrawDisplayCardBehavior::setAmount(const int& amount)
 std::string DrawDisplayCardBehavior::getNameToDraw()
 {
     return DRAW_NAME;
+}
+
+int DrawDisplayCardBehavior::getAmount() const
+{
+    return _amount;
 }

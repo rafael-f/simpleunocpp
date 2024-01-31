@@ -4,6 +4,8 @@
 #include "PlayerManager.h"
 #include "State.h"
 #include "GameStates.h"
+#include "DrawDisplayCardEvent.h"
+#include "DrawDiscardedCardEvent.h"
 
 // State the game is when in playing mode.
 class GameState : public State
@@ -42,9 +44,7 @@ private:
 
 	int _turnDirection = 1;
 
-	void drawArrow(Window& window, const char& arrow, const int& row, int& column);
-
-	GameStates _currentState;
+	GameStates _currentState = GameStates::NORMAL;
 
 	// TODO separate all methods below in their own states
 	void drawNormalState(Window& window);
@@ -53,8 +53,8 @@ private:
 	void drawDisplayNewCardsState(Window& window);
 	void handleInputDisplayNewCardsState();
 
-	void drawForcedDrawState(Window& window);
-	void handleInputForcedDrawState();
+	void drawForcedDrawDiscardedState(Window& window);
+	void handleInputForcedDrawDiscardedState();
 
 	void drawForcedSkipState(Window& window);
 	void handleInputForcedSkipState();
@@ -70,4 +70,10 @@ private:
 	std::string _currentMessage;
 
 	void handleReverseTurnEvent();
+
+	void handleDrawCardEvent(const DrawDisplayCardEvent& eventData);
+
+	bool endTurn = false;
+
+	void handleDrawDiscardedCardEvent(const DrawDiscardedCardEvent& eventData);
 };
