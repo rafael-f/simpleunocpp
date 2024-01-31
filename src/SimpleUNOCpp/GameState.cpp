@@ -39,6 +39,12 @@ void GameState::handleInput()
 		case KeyCodes::RIGHT_ARROW:
 			_playerManager->getSelectedPlayer()->selectCard(1);
 			break;
+		case KeyCodes::UP_ARROW:
+			// TODO select draw pile
+			break;
+		case KeyCodes::DOWN_ARROW:
+			// TODO select player hand
+			break;
 		}
 	}
 }
