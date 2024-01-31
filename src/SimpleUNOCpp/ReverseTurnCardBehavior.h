@@ -9,10 +9,14 @@ public:
 
 	void execute() override;
 
-	std::string& getStringToDraw() override;
+	std::string& getSymbolToDraw() override;
 
 	bool checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior) override;
 
+	std::string getNameToDraw() override;
+
 private:
-	std::string _stringToDraw;
+	std::string _symbolToDraw;
+
+	static const std::string NAME_TO_DRAW;
 };

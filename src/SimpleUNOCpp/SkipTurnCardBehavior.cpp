@@ -2,9 +2,11 @@
 #include "KeyCodes.h"
 #include "SkipTurnCardEvent.h"
 
+const std::string SkipTurnCardBehavior::NAME_TO_DRAW = "SKIP";
+
 SkipTurnCardBehavior::SkipTurnCardBehavior()
 {
-	_stringToDraw = " " + std::string(1, KeyCodes::SKIP_TURN) + " "; // TODO is this bad?
+	_symbolToDraw = " " + std::string(1, KeyCodes::SKIP_TURN) + " "; // TODO is this bad?
 }
 
 void SkipTurnCardBehavior::execute()
@@ -13,9 +15,9 @@ void SkipTurnCardBehavior::execute()
 	Mediator::fireEvent(SkipTurnCardEvent());
 }
 
-std::string& SkipTurnCardBehavior::getStringToDraw()
+std::string& SkipTurnCardBehavior::getSymbolToDraw()
 {
-	return _stringToDraw;
+	return _symbolToDraw;
 }
 
 bool SkipTurnCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
@@ -26,4 +28,9 @@ bool SkipTurnCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherB
 	}
 
 	return false;
+}
+
+std::string SkipTurnCardBehavior::getNameToDraw()
+{
+	return NAME_TO_DRAW;
 }

@@ -3,7 +3,7 @@
 
 DrawMoreCardBehavior::DrawMoreCardBehavior(const int& drawMoreAmount) : _drawMoreAmount(drawMoreAmount)
 {
-	_stringToDraw = "+" + std::to_string(_drawMoreAmount) + " ";
+	_symbolToDraw = "+" + std::to_string(_drawMoreAmount) + " ";
 }
 
 void DrawMoreCardBehavior::execute()
@@ -12,9 +12,9 @@ void DrawMoreCardBehavior::execute()
     Mediator::fireEvent(DrawMoreCardEvent(_drawMoreAmount));
 }
 
-std::string& DrawMoreCardBehavior::getStringToDraw()
+std::string& DrawMoreCardBehavior::getSymbolToDraw()
 {
-	return _stringToDraw;
+	return _symbolToDraw;
 }
 
 bool DrawMoreCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
@@ -25,4 +25,9 @@ bool DrawMoreCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherB
     }
 
 	return false;
+}
+
+std::string DrawMoreCardBehavior::getNameToDraw()
+{
+    return "";
 }

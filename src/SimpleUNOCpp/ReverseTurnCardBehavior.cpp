@@ -2,9 +2,11 @@
 #include "KeyCodes.h"
 #include "ReverseTurnCardEvent.h"
 
+const std::string ReverseTurnCardBehavior::NAME_TO_DRAW = "REV.";
+
 ReverseTurnCardBehavior::ReverseTurnCardBehavior()
 {
-	_stringToDraw = std::string(1, KeyCodes::RIGHT_DOUBLE_ARROW) + " " + std::string(1, KeyCodes::LEFT_DOUBLE_ARROW);
+	_symbolToDraw = std::string(1, KeyCodes::RIGHT_DOUBLE_ARROW) + " " + std::string(1, KeyCodes::LEFT_DOUBLE_ARROW);
 }
 
 void ReverseTurnCardBehavior::execute()
@@ -13,9 +15,9 @@ void ReverseTurnCardBehavior::execute()
 	Mediator::fireEvent(ReverseTurnCardEvent());
 }
 
-std::string& ReverseTurnCardBehavior::getStringToDraw()
+std::string& ReverseTurnCardBehavior::getSymbolToDraw()
 {
-	return _stringToDraw;
+	return _symbolToDraw;
 }
 
 bool ReverseTurnCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
@@ -26,4 +28,9 @@ bool ReverseTurnCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> oth
 	}
 
 	return false;
+}
+
+std::string ReverseTurnCardBehavior::getNameToDraw()
+{
+	return NAME_TO_DRAW;
 }

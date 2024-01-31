@@ -11,7 +11,9 @@ public:
 
 	virtual ~CardBehavior() = default;
 
-	virtual std::string& getStringToDraw() = 0;
+	virtual std::string& getSymbolToDraw() = 0;
 
 	virtual bool checkCanBePlayed(std::shared_ptr<CardBehavior> other) = 0;
+
+	virtual std::string getNameToDraw() = 0;
 };

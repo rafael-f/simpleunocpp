@@ -3,7 +3,7 @@
 
 DrawDiscardedCardBehavior::DrawDiscardedCardBehavior(const int& amount) : _amount(amount)
 {
-	_stringToDraw = "+" + std::to_string(_amount) + "D";
+	_symbolToDraw = "+" + std::to_string(_amount) + "D";
 }
 
 void DrawDiscardedCardBehavior::execute()
@@ -14,9 +14,14 @@ void DrawDiscardedCardBehavior::execute()
 	Mediator::fireEvent(DrawDiscardedCardEvent(_amount));
 }
 
-std::string& DrawDiscardedCardBehavior::getStringToDraw()
+std::string& DrawDiscardedCardBehavior::getSymbolToDraw()
 {
-	return _stringToDraw; // TODO all behaviors return this string, maybe make CardBehavior abstract?
+	return _symbolToDraw; // TODO all behaviors return this string, maybe make CardBehavior abstract?
+}
+
+std::string DrawDiscardedCardBehavior::getNameToDraw()
+{
+	return "";
 }
 
 bool DrawDiscardedCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)

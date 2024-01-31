@@ -2,7 +2,7 @@
 
 WildDrawCardBehavior::WildDrawCardBehavior(const int& drawAmount) : _drawAmount(drawAmount)
 {
-	_stringToDraw = "+" + std::to_string(drawAmount) + " ";
+	_symbolToDraw = "+" + std::to_string(drawAmount) + " ";
 }
 
 void WildDrawCardBehavior::execute()
@@ -12,12 +12,17 @@ void WildDrawCardBehavior::execute()
 	// next player has to play a card of the color that was picked
 }
 
-std::string& WildDrawCardBehavior::getStringToDraw()
+std::string& WildDrawCardBehavior::getSymbolToDraw()
 {
-	return _stringToDraw;
+	return _symbolToDraw;
 }
 
 bool WildDrawCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
 {
 	return true;
+}
+
+std::string WildDrawCardBehavior::getNameToDraw()
+{
+	return "";
 }

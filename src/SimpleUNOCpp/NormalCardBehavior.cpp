@@ -3,7 +3,7 @@
 
 NormalCardBehavior::NormalCardBehavior(int value) : _value(value)
 {
-	_stringToDraw = " " + std::to_string(value) + " ";
+	_symbolToDraw = " " + std::to_string(value) + " ";
 }
 
 void NormalCardBehavior::execute()
@@ -11,9 +11,9 @@ void NormalCardBehavior::execute()
     Mediator::fireEvent(NormalCardEvent());
 }
 
-std::string& NormalCardBehavior::getStringToDraw()
+std::string& NormalCardBehavior::getSymbolToDraw()
 {
-	return _stringToDraw;
+	return _symbolToDraw;
 }
 
 bool NormalCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
@@ -29,4 +29,9 @@ bool NormalCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBeh
 int NormalCardBehavior::getValue() const
 {
     return _value;
+}
+
+std::string NormalCardBehavior::getNameToDraw()
+{
+    return "";
 }

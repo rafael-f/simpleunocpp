@@ -1,11 +1,11 @@
 #pragma once
 #include "CardBehavior.h"
 
-// A normal card, doesn't have any special effects.
-class NormalCardBehavior : public CardBehavior
+// Card used on top of the draw pile to allow the player to draw cards.
+class DrawDisplayCardBehavior : public CardBehavior
 {
 public:
-	explicit NormalCardBehavior(int value);
+	DrawDisplayCardBehavior();
 
 	void execute() override;
 
@@ -13,12 +13,14 @@ public:
 
 	bool checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior) override;
 
-	int getValue() const;
+	void setAmount(const int& amount);
 
 	std::string getNameToDraw() override;
 
 private:
-	int _value;
+	static const std::string DRAW_NAME;
+
+	int _amount;
 
 	std::string _symbolToDraw;
 };

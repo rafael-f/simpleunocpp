@@ -2,9 +2,11 @@
 #include "KeyCodes.h"
 #include "SwapHandCardEvent.h"
 
+const std::string SwapHandCardBehavior::NAME_TO_DRAW = "SWAP";
+
 SwapHandCardBehavior::SwapHandCardBehavior()
 {
-	_stringToDraw = std::string(1, KeyCodes::SWAP_LEFT) + " " + std::string(1, KeyCodes::SWAP_RIGHT);
+	_symbolToDraw = std::string(1, KeyCodes::SWAP_LEFT) + " " + std::string(1, KeyCodes::SWAP_RIGHT);
 }
 
 void SwapHandCardBehavior::execute()
@@ -13,12 +15,17 @@ void SwapHandCardBehavior::execute()
 	Mediator::fireEvent(SwapHandCardEvent());
 }
 
-std::string& SwapHandCardBehavior::getStringToDraw()
+std::string& SwapHandCardBehavior::getSymbolToDraw()
 {
-	return _stringToDraw;
+	return _symbolToDraw;
 }
 
 bool SwapHandCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
 {
 	return true; // Can always be played.
+}
+
+std::string SwapHandCardBehavior::getNameToDraw()
+{
+	return NAME_TO_DRAW;
 }

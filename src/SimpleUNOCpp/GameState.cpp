@@ -9,42 +9,41 @@
 
 void GameState::draw(Window& window)
 {
-
-	int nextRow = _playerManager->drawPlayersHeader(window, _turnDirection);
-
-	drawDiscardedPile(window, nextRow);
-
-	// draw state.. play normal? draw 2? etc...
-
-	_playerManager->drawPlayerCards(window, nextRow);
+	switch (_currentState)
+	{
+	case GameStates::NORMAL:
+		drawNormalState(window);
+		break;
+	case GameStates::DISPLAY_NEW_CARDS:
+		break;
+	case GameStates::FORCED_DRAW:
+		break;
+	case GameStates::FORCED_SKIP:
+		break;
+	case GameStates::SELECT_PLAYER:
+		break;
+	case GameStates::SELECT_COLOR:
+		break;
+	}
 }
 
 void GameState::handleInput()
 {
-	int input = _getch();
-	if (input == KeyCodes::ESCAPE_KEY)
+	switch (_currentState)
 	{
-		Mediator::fireEvent(QuitGameEvent());
-	}
-	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
-	{
-		input = _getch();
-
-		switch (input)
-		{
-		case KeyCodes::LEFT_ARROW:
-			_playerManager->getSelectedPlayer()->selectCard(-1);
-			break;
-		case KeyCodes::RIGHT_ARROW:
-			_playerManager->getSelectedPlayer()->selectCard(1);
-			break;
-		case KeyCodes::UP_ARROW:
-			// TODO select draw pile
-			break;
-		case KeyCodes::DOWN_ARROW:
-			// TODO select player hand
-			break;
-		}
+	case GameStates::NORMAL:
+		handleInputNormalState();
+		break;
+	case GameStates::DISPLAY_NEW_CARDS:
+		break;
+	case GameStates::FORCED_DRAW:
+		break;
+	case GameStates::FORCED_SKIP:
+		break;
+	case GameStates::SELECT_PLAYER:
+		break;
+	case GameStates::SELECT_COLOR:
+		break;
 	}
 }
 
@@ -69,6 +68,8 @@ void GameState::startGame()
 	discardFirstCard();
 
 	_playerManager->updatePlayerState(0, _discardPile.back());
+
+	_currentState = GameStates::NORMAL;
 }
 
 void GameState::clearPiles()
@@ -114,10 +115,105 @@ void GameState::drawDiscardedPile(Window& window, int& nextRow)
 	std::string cardsDiscarded = "CARDS DISCARDED : " + std::to_string(_discardPile.size());
 	std::cout << cardsDiscarded;
 
+	_discardPile.back()->draw(nextRow, static_cast<int>(cardsDiscarded.length()) + 1, window);
+}
+
+void GameState::drawDrawPile(Window& window, int& nextRow)
+{
 	window.setCursorPosition(nextRow + 3, 35);
 	std::cout << "CARDS ON DRAW PILE : " << _drawPile.size();
 
-	_discardPile.back()->draw(nextRow, static_cast<int>(cardsDiscarded.length()) + 1, window);
 
-	nextRow += 6; // TODO height of a card
+}
+
+void GameState::drawNormalState(Window& window)
+{
+	int nextRow = _playerManager->drawPlayersHeader(window, _turnDirection);
+
+	drawDiscardedPile(window, nextRow);
+
+	drawDrawPile(window, nextRow);
+
+	nextRow += 6;
+
+	_playerManager->drawPlayerCards(window, nextRow);
+}
+
+void GameState::handleInputNormalState()
+{
+	int input = _getch();
+	if (input == KeyCodes::ESCAPE_KEY)
+	{
+		Mediator::fireEvent(QuitGameEvent());
+	}
+	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
+	{
+		input = _getch();
+
+		switch (input)
+		{
+		case KeyCodes::LEFT_ARROW:
+			_playerManager->getSelectedPlayer()->selectCard(-1);
+			break;
+		case KeyCodes::RIGHT_ARROW:
+			_playerManager->getSelectedPlayer()->selectCard(1);
+			break;
+		case KeyCodes::UP_ARROW:
+			// TODO select draw pile
+			break;
+		case KeyCodes::DOWN_ARROW:
+			// TODO select player hand
+			break;
+		}
+	}
+}
+
+void GameState::drawDisplayNewCardsState(Window& window)
+{
+
+}
+
+void GameState::handleInputDisplayNewCardsState()
+{
+
+}
+
+void GameState::drawForcedDrawState(Window& window)
+{
+
+}
+
+void GameState::handleInputForcedDrawState()
+{
+
+}
+
+void GameState::drawForcedSkipState(Window& window)
+{
+
+}
+
+void GameState::handleInputForcedSkipState()
+{
+
+}
+
+void GameState::drawSelectPlayerState(Window& window)
+{
+
+}
+
+void GameState::handleInputSelectPlayerState()
+{
+
+}
+
+void GameState::drawSelectColorState(Window& window)
+{
+
+}
+
+void GameState::handleInputSelectColorState()
+{
+
 }

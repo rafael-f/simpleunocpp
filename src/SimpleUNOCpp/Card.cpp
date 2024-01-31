@@ -77,10 +77,10 @@ void Card::draw(const int& row, const int& column, const Window& window)
 		std::cout << " ";
 	}
 
-	std::string x = _behavior->getStringToDraw();
+	std::string x = _behavior->getSymbolToDraw();
 
 	// Draw both card borders and card text
-	std::cout << KeyCodes::VERTICAL_LINE_DOUBLE << _behavior->getStringToDraw();
+	std::cout << KeyCodes::VERTICAL_LINE_DOUBLE << _behavior->getSymbolToDraw();
 	for (int i = 0; i < CARD_LENGTH - 5; ++i) // TODO 5 is 2 from borders and 3 from card string
 	{
 		std::cout << " ";
@@ -112,10 +112,8 @@ void Card::draw(const int& row, const int& column, const Window& window)
 	std::cout << KeyCodes::VERTICAL_LINE_DOUBLE;
 
 	// draw middle empty line
-	for (int i = 0; i < CARD_LENGTH - 2; ++i)
-	{
-		std::cout << " ";
-	}
+	std::string cardName = Window::fillWithSpaces(_behavior->getNameToDraw(), CARD_LENGTH - 2);
+	std::cout << cardName;
 
 	// draw card border
 	std::cout << KeyCodes::VERTICAL_LINE_DOUBLE;
@@ -145,7 +143,7 @@ void Card::draw(const int& row, const int& column, const Window& window)
 	{
 		std::cout << " ";
 	}
-	std::cout << _behavior->getStringToDraw() << KeyCodes::VERTICAL_LINE_DOUBLE;
+	std::cout << _behavior->getSymbolToDraw() << KeyCodes::VERTICAL_LINE_DOUBLE;
 	if (_isSelected)
 	{
 		window.setConsoleColor(borderColor);

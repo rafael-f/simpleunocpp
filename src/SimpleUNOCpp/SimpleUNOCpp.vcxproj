@@ -131,6 +131,8 @@
     <ClCompile Include="CardsLoader.cpp" />
     <ClCompile Include="DrawDiscardedCardBehavior.cpp" />
     <ClCompile Include="DrawDiscardedCardEvent.cpp" />
+    <ClCompile Include="DrawDisplayCardBehavior.cpp" />
+    <ClCompile Include="DrawDisplayCardEvent.cpp" />
     <ClCompile Include="DrawMoreCardBehavior.cpp" />
     <ClCompile Include="DrawMoreCardEvent.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -162,7 +164,10 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="CardsLoader.h" />
     <ClInclude Include="DrawDiscardedCardEvent.h" />
+    <ClInclude Include="DrawDisplayCardBehavior.h" />
+    <ClInclude Include="DrawDisplayCardEvent.h" />
     <ClInclude Include="DrawMoreCardEvent.h" />
+    <ClInclude Include="GameStates.h" />
     <ClInclude Include="GoToNextStateEvent.h" />
     <ClInclude Include="DrawDiscardedCardBehavior.h" />
     <ClInclude Include="DrawMoreCardBehavior.h" />
