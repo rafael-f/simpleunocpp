@@ -133,8 +133,11 @@ void Player::drawCards(Window& window, int& row) const
 void Player::setSelectedCard(const int& index)
 {
 	_cardsOnHand[_selectedCardIndex]->setSelected(false);
-	_selectedCardIndex = index;
-	_cardsOnHand[_selectedCardIndex]->setSelected(true);
+	if (index != -1) // TODO use a bool instead?
+	{
+		_selectedCardIndex = index;
+		_cardsOnHand[_selectedCardIndex]->setSelected(true);
+	}
 }
 
 void Player::selectCard(const int& offset)

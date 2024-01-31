@@ -17,6 +17,8 @@ public:
 
 	void setSelected(bool selected);
 
+	bool getSelected();
+
 	Colors getColor() const;
 
 	bool checkCanBePlayed(const std::shared_ptr<Card> otherCard);

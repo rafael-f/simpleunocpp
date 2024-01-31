@@ -194,6 +194,11 @@ void Card::setSelected(bool selected)
 	_isSelected = selected;
 }
 
+bool Card::getSelected()
+{
+	return _isSelected;
+}
+
 Colors Card::getColor() const
 {
 	return _color;

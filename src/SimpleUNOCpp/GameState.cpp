@@ -157,16 +157,30 @@ void GameState::handleInputNormalState()
 		switch (input)
 		{
 		case KeyCodes::LEFT_ARROW:
-			_playerManager->getSelectedPlayer()->selectCard(-1);
+			if (!_drawCard->getSelected())
+			{
+				_playerManager->getSelectedPlayer()->selectCard(-1);
+			}
 			break;
 		case KeyCodes::RIGHT_ARROW:
-			_playerManager->getSelectedPlayer()->selectCard(1);
+			if (!_drawCard->getSelected())
+			{
+				_playerManager->getSelectedPlayer()->selectCard(1);
+			}
 			break;
 		case KeyCodes::UP_ARROW:
-			// TODO select draw pile
+			if (!_drawCard->getSelected())
+			{
+				_playerManager->getSelectedPlayer()->setSelectedCard(-1);
+				_drawCard->setSelected(true);
+			}
 			break;
 		case KeyCodes::DOWN_ARROW:
-			// TODO select player hand
+			if (_drawCard->getSelected())
+			{
+				_playerManager->getSelectedPlayer()->setSelectedCard(0);
+				_drawCard->setSelected(false);
+			}
 			break;
 		}
 	}
