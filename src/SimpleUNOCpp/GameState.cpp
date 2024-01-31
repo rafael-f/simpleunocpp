@@ -223,6 +223,7 @@ void GameState::handleInputNormalState()
 			{
 				_drawPile = std::move(_discardPile);
 				VectorHelper::shuffleVector(_drawPile);
+				discardFirstCard();
 			}
 		}
 		else

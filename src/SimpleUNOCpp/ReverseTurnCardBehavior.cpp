@@ -11,7 +11,6 @@ ReverseTurnCardBehavior::ReverseTurnCardBehavior()
 
 void ReverseTurnCardBehavior::execute()
 {
-	// TODO reverses playing turn, next player can play
 	Mediator::fireEvent(ReverseTurnCardEvent());
 }
 
