@@ -109,6 +109,9 @@ void GameState::drawDiscardedPile(Window& window, int& nextRow)
 	std::string cardsDiscarded = "CARDS DISCARDED : " + std::to_string(_discardPile.size());
 	std::cout << cardsDiscarded;
 
+	window.setCursorPosition(nextRow + 3, 35);
+	std::cout << "CARDS ON DRAW PILE : " << _drawPile.size();
+
 	_discardPile.back()->draw(nextRow, static_cast<int>(cardsDiscarded.length()) + 1, window);
 
 	nextRow += 6; // TODO height of a card

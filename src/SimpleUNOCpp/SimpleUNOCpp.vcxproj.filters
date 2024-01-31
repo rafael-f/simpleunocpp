@@ -72,16 +72,16 @@
       <Filter>Cards\BehaviorImplementations</Filter>
     </ClCompile>
     <ClCompile Include="DrawDiscardedCardEvent.cpp">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClCompile>
     <ClCompile Include="DrawMoreCardEvent.cpp">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClCompile>
     <ClCompile Include="SkipTurnCardEvent.h">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClCompile>
     <ClCompile Include="WildDrawCardEvent.cpp">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +124,7 @@
     <Filter Include="Cards\BehaviorImplementations">
       <UniqueIdentifier>{e0c1fc15-67f5-498a-b385-92e1857e1a99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Cards\CardEvents">
+    <Filter Include="Cards\BehaviorEvents">
       <UniqueIdentifier>{bf3cc5a4-a0e2-43d3-b0c1-9f0fdc267514}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -229,22 +229,22 @@
       <Filter>DataLoaders</Filter>
     </ClInclude>
     <ClInclude Include="NormalCardEvent.h">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClInclude>
     <ClInclude Include="DrawDiscardedCardEvent.h">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClInclude>
     <ClInclude Include="DrawMoreCardEvent.h">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClInclude>
     <ClInclude Include="ReverseTurnCardEvent.h">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClInclude>
     <ClInclude Include="SwapHandCardEvent.h">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClInclude>
     <ClInclude Include="WildDrawCardEvent.h">
-      <Filter>Cards\CardEvents</Filter>
+      <Filter>Cards\BehaviorEvents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

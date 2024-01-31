@@ -114,7 +114,7 @@ void Player::setSelected(const bool& selected)
 void Player::drawCards(Window& window, int& row) const
 {
 	window.setCursorPosition(row, 0);
-	std::cout << "PLAYER HAND:";
+	std::cout << _name << " HAND:";
 	++row;
 
 	int column = 0;
