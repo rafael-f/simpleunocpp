@@ -9,7 +9,6 @@
 
 void GameState::draw(Window& window)
 {
-	window.showPrompt(false);
 
 	int nextRow = _playerManager->drawPlayersHeader(window, _turnDirection);
 
