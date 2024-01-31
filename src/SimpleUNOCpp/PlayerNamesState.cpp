@@ -7,6 +7,7 @@
 #include "PlayerManagerTransitionData.h"
 #include "PlayerSelectedAmountTransitionData.h"
 #include "QuitGameEvent.h"
+#include "ShowPromptEvent.h"
 
 void PlayerNamesState::draw(Window& window)
 {
@@ -113,6 +114,10 @@ void PlayerNamesState::setData(std::shared_ptr<TransitionData> transitionData)
 
 void PlayerNamesState::transitionToGame()
 {
+	ShowPromptEvent showPromptEvent;
+	showPromptEvent.showPrompt = false;
+	Mediator::fireEvent(showPromptEvent);
+
 	GoToNextStateEvent goToNextStateEvent;
 	goToNextStateEvent.transitionData = std::make_shared<PlayerManagerTransitionData>(_playerManager);
 	Mediator::fireEvent(goToNextStateEvent);
