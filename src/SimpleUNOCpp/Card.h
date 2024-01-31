@@ -27,6 +27,8 @@ public:
 
 	std::shared_ptr<CardBehavior> getBehavior();
 
+	bool getAcceptOnlySameType() const;
+
 private:
 	std::shared_ptr<CardBehavior> _behavior;
 
@@ -41,4 +43,6 @@ private:
 	std::string symbol;
 
 	static const int CARD_LENGTH = 8;
+
+	bool _acceptOnlySameType = false;
 };

@@ -12,6 +12,7 @@
 
 GameState::GameState()
 {
+	// TODO move these somewhere else?
 	Mediator::registerListener<ReverseTurnCardEvent>([this](const ReverseTurnCardEvent&)
 		{
 			handleReverseTurnEvent();
@@ -25,6 +26,11 @@ GameState::GameState()
 	Mediator::registerListener<DrawDiscardedCardEvent>([this](const DrawDiscardedCardEvent& eventData)
 		{
 			handleDrawDiscardedCardEvent(eventData);
+		});
+
+	Mediator::registerListener<DrawMoreCardEvent>([this](const DrawMoreCardEvent& eventData)
+		{
+			handleDrawMoreCardEvent(eventData);
 		});
 }
 
@@ -58,6 +64,7 @@ void GameState::handleInput()
 	switch (_currentState)
 	{
 	case GameStates::NORMAL:
+	case GameStates::FORCED_DRAW:
 		handleInputNormalState();
 		break;
 	case GameStates::DISPLAY_NEW_CARDS:
@@ -117,7 +124,7 @@ void GameState::clearPiles()
 	}
 }
 
-#include "DrawDiscardedCardBehavior.h"
+#include "DrawMoreCardBehavior.h"
 
 void GameState::initializePlayersHands()
 {
@@ -130,10 +137,10 @@ void GameState::initializePlayersHands()
 		}
 	}
 
-	// TODO remove
+	// TODO remove cheat
 	for (int i = 0; i < _drawPile.size(); ++i)
 	{
-		if (std::shared_ptr<DrawDiscardedCardBehavior> behavior = std::dynamic_pointer_cast<DrawDiscardedCardBehavior>(_drawPile[i]->getBehavior()))
+		if (std::shared_ptr<DrawMoreCardBehavior> behavior = std::dynamic_pointer_cast<DrawMoreCardBehavior>(_drawPile[i]->getBehavior()))
 		{
 			_playerManager->getPlayers()[0]->addCard(_drawPile[i]);
 			_drawPile.erase(_drawPile.begin() + i);
@@ -398,4 +405,20 @@ void GameState::handleDrawDiscardedCardEvent(const DrawDiscardedCardEvent& event
 	_currentState = GameStates::FORCED_DRAW_DISCARD;
 	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
 	drawCard->setAmount(eventData.getAmount());
+}
+
+void GameState::handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData)
+{
+	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+	
+	if (_currentState == GameStates::NORMAL)
+	{
+		drawCard->setAmount(eventData.getAmount());
+	}
+	else
+	{
+		drawCard->setAmount(drawCard->getAmount() + eventData.getAmount());
+	}
+
+	_currentState = GameStates::FORCED_DRAW;
 }

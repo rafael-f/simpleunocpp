@@ -15,17 +15,27 @@ std::string Player::getName() const
 
 void Player::updateCardStates(std::shared_ptr<Card> cardOnTop) const
 {
-	Colors topColor = cardOnTop->getColor();
-	for (std::shared_ptr<Card> card : _cardsOnHand)
+	if (cardOnTop->getAcceptOnlySameType())
 	{
-		Colors cardColor = card->getColor();
-		bool canBePlayed = cardColor == topColor || cardColor == Colors::WHITE || topColor == Colors::WHITE; // TODO if top discard is white can others be used on top of it?
-		if (!canBePlayed)
+		for (std::shared_ptr<Card> card : _cardsOnHand)
 		{
-			canBePlayed = card->checkCanBePlayed(cardOnTop);
+			card->setCanBePlayed(cardOnTop->checkCanBePlayed(card));
 		}
+	}
+	else
+	{
+		Colors topColor = cardOnTop->getColor();
+		for (std::shared_ptr<Card> card : _cardsOnHand)
+		{
+			Colors cardColor = card->getColor();
+			bool canBePlayed = cardColor == topColor || cardColor == Colors::WHITE || topColor == Colors::WHITE; // TODO if top discard is white can others be used on top of it?
+			if (!canBePlayed)
+			{
+				canBePlayed = card->checkCanBePlayed(cardOnTop);
+			}
 
-		card->setCanBePlayed(canBePlayed);
+			card->setCanBePlayed(canBePlayed);
+		}
 	}
 }
 

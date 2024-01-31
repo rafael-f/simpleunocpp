@@ -8,7 +8,6 @@ DrawMoreCardBehavior::DrawMoreCardBehavior(const int& drawMoreAmount) : _drawMor
 
 void DrawMoreCardBehavior::execute()
 {
-    // TODO forces next player to draw + amount cards, next player can't play
     Mediator::fireEvent(DrawMoreCardEvent(_drawMoreAmount));
 }
 

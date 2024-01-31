@@ -6,6 +6,7 @@
 #include "GameStates.h"
 #include "DrawDisplayCardEvent.h"
 #include "DrawDiscardedCardEvent.h"
+#include "DrawMoreCardEvent.h"
 
 // State the game is when in playing mode.
 class GameState : public State
@@ -76,4 +77,6 @@ private:
 	bool endTurn = false;
 
 	void handleDrawDiscardedCardEvent(const DrawDiscardedCardEvent& eventData);
+
+	void handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData);
 };
