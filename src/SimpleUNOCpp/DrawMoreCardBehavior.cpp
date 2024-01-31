@@ -1,4 +1,5 @@
 #include "DrawMoreCardBehavior.h"
+#include "DrawMoreCardEvent.h"
 
 DrawMoreCardBehavior::DrawMoreCardBehavior(const int& drawMoreAmount) : _drawMoreAmount(drawMoreAmount)
 {
@@ -7,7 +8,8 @@ DrawMoreCardBehavior::DrawMoreCardBehavior(const int& drawMoreAmount) : _drawMor
 
 void DrawMoreCardBehavior::execute()
 {
-
+    // TODO forces next player to draw + amount cards, next player can't play
+    Mediator::fireEvent(DrawMoreCardEvent(_drawMoreAmount));
 }
 
 std::string& DrawMoreCardBehavior::getStringToDraw()

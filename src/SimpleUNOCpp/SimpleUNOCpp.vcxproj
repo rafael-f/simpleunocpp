@@ -129,9 +129,10 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardsLoader.cpp" />
-    <ClCompile Include="DrawDiscardedAction.cpp" />
     <ClCompile Include="DrawDiscardedCardBehavior.cpp" />
+    <ClCompile Include="DrawDiscardedCardEvent.cpp" />
     <ClCompile Include="DrawMoreCardBehavior.cpp" />
+    <ClCompile Include="DrawMoreCardEvent.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -148,9 +149,11 @@
     <ClCompile Include="ReverseTurnCardBehavior.cpp" />
     <ClCompile Include="RulesLoader.cpp" />
     <ClCompile Include="SkipTurnCardBehavior.cpp" />
+    <ClCompile Include="SkipTurnCardEvent.h" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="SwapHandCardBehavior.cpp" />
     <ClCompile Include="WildDrawCardBehavior.cpp" />
+    <ClCompile Include="WildDrawCardEvent.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,7 +161,8 @@
     <ClInclude Include="CardBehavior.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="CardsLoader.h" />
-    <ClInclude Include="DrawDiscardedAction.h" />
+    <ClInclude Include="DrawDiscardedCardEvent.h" />
+    <ClInclude Include="DrawMoreCardEvent.h" />
     <ClInclude Include="GoToNextStateEvent.h" />
     <ClInclude Include="DrawDiscardedCardBehavior.h" />
     <ClInclude Include="DrawMoreCardBehavior.h" />
@@ -170,6 +174,7 @@
     <ClInclude Include="Mediator.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="NormalCardBehavior.h" />
+    <ClInclude Include="NormalCardEvent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PlayerManagerTransitionData.h" />
@@ -178,16 +183,18 @@
     <ClInclude Include="PlayersOption.h" />
     <ClInclude Include="QuitGameEvent.h" />
     <ClInclude Include="ReverseTurnCardBehavior.h" />
+    <ClInclude Include="ReverseTurnCardEvent.h" />
     <ClInclude Include="RulesLoader.h" />
     <ClInclude Include="ShowPromptEvent.h" />
     <ClInclude Include="SkipTurnCardBehavior.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="SwapHandCardBehavior.h" />
+    <ClInclude Include="SwapHandCardEvent.h" />
     <ClInclude Include="TransitionData.h" />
-    <ClInclude Include="TurnAction.h" />
     <ClInclude Include="VectorHelper.h" />
     <ClInclude Include="WildDrawCardBehavior.h" />
+    <ClInclude Include="WildDrawCardEvent.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

@@ -75,7 +75,7 @@ int PlayerManager::drawPlayersHeader(Window& window, const int& turnDirection) c
 		}
 	}
 
-	return row + 4;
+	return row + 3;
 }
 
 void PlayerManager::drawArrow(Window& window, const char& arrow, const int& row, int& column) const

@@ -1,4 +1,5 @@
 #include "DrawDiscardedCardBehavior.h"
+#include "DrawDiscardedCardEvent.h"
 
 DrawDiscardedCardBehavior::DrawDiscardedCardBehavior(const int& amount) : _amount(amount)
 {
@@ -7,7 +8,10 @@ DrawDiscardedCardBehavior::DrawDiscardedCardBehavior(const int& amount) : _amoun
 
 void DrawDiscardedCardBehavior::execute()
 {
-	// TODO
+	// TODO forces next next player to draw 2 cards from discard pile
+	// if not enough cards on discard then draw from the draw pile
+	// if discard pile is empty discard one from the draw pile automatically
+	Mediator::fireEvent(DrawDiscardedCardEvent(_amount));
 }
 
 std::string& DrawDiscardedCardBehavior::getStringToDraw()
@@ -17,5 +21,10 @@ std::string& DrawDiscardedCardBehavior::getStringToDraw()
 
 bool DrawDiscardedCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
 {
-	return true; // This can always be played (color check happens on card level).
+	if (std::shared_ptr<DrawDiscardedCardBehavior> otherCard = std::dynamic_pointer_cast<DrawDiscardedCardBehavior>(otherBehavior))
+	{
+		return true;
+	}
+
+	return false;
 }

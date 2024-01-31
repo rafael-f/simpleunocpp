@@ -113,6 +113,10 @@ void Player::setSelected(const bool& selected)
 
 void Player::drawCards(Window& window, int& row) const
 {
+	window.setCursorPosition(row, 0);
+	std::cout << "PLAYER HAND:";
+	++row;
+
 	int column = 0;
 	for (auto card : _cardsOnHand)
 	{

@@ -18,17 +18,8 @@ void Card::draw(const int& row, const int& column, const Window& window)
 {
 	window.setCursorPosition(row, column);
 	
-	Colors borderColor;
-
-	if (_canBePlayed)
-	{
-		borderColor = Colors::GREEN;
-	}
-	else
-	{
-		borderColor = Colors::RED;
-	}
-
+	Colors borderColor = Colors::WHITE;
+	
 	// Draw selection border
 	if (_isSelected)
 	{

@@ -71,8 +71,17 @@
     <ClCompile Include="WildDrawCardBehavior.cpp">
       <Filter>Cards\BehaviorImplementations</Filter>
     </ClCompile>
-    <ClCompile Include="DrawDiscardedAction.cpp">
-      <Filter>Game\TurnAction</Filter>
+    <ClCompile Include="DrawDiscardedCardEvent.cpp">
+      <Filter>Cards\CardEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawMoreCardEvent.cpp">
+      <Filter>Cards\CardEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="SkipTurnCardEvent.h">
+      <Filter>Cards\CardEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="WildDrawCardEvent.cpp">
+      <Filter>Cards\CardEvents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,8 +124,8 @@
     <Filter Include="Cards\BehaviorImplementations">
       <UniqueIdentifier>{e0c1fc15-67f5-498a-b385-92e1857e1a99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\TurnAction">
-      <UniqueIdentifier>{67aa8d3b-57ca-421a-b813-5884447c6b1b}</UniqueIdentifier>
+    <Filter Include="Cards\CardEvents">
+      <UniqueIdentifier>{bf3cc5a4-a0e2-43d3-b0c1-9f0fdc267514}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,11 +228,23 @@
     <ClInclude Include="VectorHelper.h">
       <Filter>DataLoaders</Filter>
     </ClInclude>
-    <ClInclude Include="TurnAction.h">
-      <Filter>Game\TurnAction</Filter>
+    <ClInclude Include="NormalCardEvent.h">
+      <Filter>Cards\CardEvents</Filter>
     </ClInclude>
-    <ClInclude Include="DrawDiscardedAction.h">
-      <Filter>Game\TurnAction</Filter>
+    <ClInclude Include="DrawDiscardedCardEvent.h">
+      <Filter>Cards\CardEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawMoreCardEvent.h">
+      <Filter>Cards\CardEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="ReverseTurnCardEvent.h">
+      <Filter>Cards\CardEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapHandCardEvent.h">
+      <Filter>Cards\CardEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="WildDrawCardEvent.h">
+      <Filter>Cards\CardEvents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

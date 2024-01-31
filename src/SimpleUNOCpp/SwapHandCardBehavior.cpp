@@ -1,5 +1,6 @@
 #include "SwapHandCardBehavior.h"
 #include "KeyCodes.h"
+#include "SwapHandCardEvent.h"
 
 SwapHandCardBehavior::SwapHandCardBehavior()
 {
@@ -8,7 +9,8 @@ SwapHandCardBehavior::SwapHandCardBehavior()
 
 void SwapHandCardBehavior::execute()
 {
-	
+	// player selectes another player to change hands
+	Mediator::fireEvent(SwapHandCardEvent());
 }
 
 std::string& SwapHandCardBehavior::getStringToDraw()
@@ -18,5 +20,5 @@ std::string& SwapHandCardBehavior::getStringToDraw()
 
 bool SwapHandCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior)
 {
-	return true; // Can always be played (color check happens on card level).
+	return true; // Can always be played.
 }

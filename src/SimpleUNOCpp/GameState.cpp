@@ -15,6 +15,8 @@ void GameState::draw(Window& window)
 
 	drawDiscardedPile(window, nextRow);
 
+	// draw state.. play normal? draw 2? etc...
+
 	_playerManager->drawPlayerCards(window, nextRow);
 }
 
@@ -23,8 +25,7 @@ void GameState::handleInput()
 	int input = _getch();
 	if (input == KeyCodes::ESCAPE_KEY)
 	{
-		QuitGameEvent quitGameEvent;
-		Mediator::fireEvent(quitGameEvent);
+		Mediator::fireEvent(QuitGameEvent());
 	}
 	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
 	{

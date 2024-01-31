@@ -1,5 +1,6 @@
 #include "SkipTurnCardBehavior.h"
 #include "KeyCodes.h"
+#include "SkipTurnCardEvent.h"
 
 SkipTurnCardBehavior::SkipTurnCardBehavior()
 {
@@ -8,7 +9,8 @@ SkipTurnCardBehavior::SkipTurnCardBehavior()
 
 void SkipTurnCardBehavior::execute()
 {
-
+	// TODO skip next player turn
+	Mediator::fireEvent(SkipTurnCardEvent());
 }
 
 std::string& SkipTurnCardBehavior::getStringToDraw()

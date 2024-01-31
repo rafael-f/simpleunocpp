@@ -1,4 +1,5 @@
 #include "NormalCardBehavior.h"
+#include "NormalCardEvent.h"
 
 NormalCardBehavior::NormalCardBehavior(int value) : _value(value)
 {
@@ -7,7 +8,7 @@ NormalCardBehavior::NormalCardBehavior(int value) : _value(value)
 
 void NormalCardBehavior::execute()
 {
-
+    Mediator::fireEvent(NormalCardEvent());
 }
 
 std::string& NormalCardBehavior::getStringToDraw()
@@ -19,10 +20,7 @@ bool NormalCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherBeh
 {
     if (std::shared_ptr<NormalCardBehavior> otherCard = std::dynamic_pointer_cast<NormalCardBehavior>(otherBehavior))
     {
-        if (_value == otherCard->getValue())
-        {
-            return true;
-        }
+        return _value == otherCard->getValue();
     }
 
     return false;

@@ -1,5 +1,6 @@
 #include "ReverseTurnCardBehavior.h"
 #include "KeyCodes.h"
+#include "ReverseTurnCardEvent.h"
 
 ReverseTurnCardBehavior::ReverseTurnCardBehavior()
 {
@@ -8,7 +9,8 @@ ReverseTurnCardBehavior::ReverseTurnCardBehavior()
 
 void ReverseTurnCardBehavior::execute()
 {
-
+	// TODO reverses playing turn, next player can play
+	Mediator::fireEvent(ReverseTurnCardEvent());
 }
 
 std::string& ReverseTurnCardBehavior::getStringToDraw()
