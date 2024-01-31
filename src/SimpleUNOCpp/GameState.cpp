@@ -6,6 +6,7 @@
 #include "Mediator.h"
 #include "PlayerManagerTransitionData.h"
 #include "QuitGameEvent.h"
+#include "DrawDisplayCardBehavior.h"
 
 void GameState::draw(Window& window)
 {
@@ -51,6 +52,8 @@ void GameState::setData(std::shared_ptr<TransitionData> transitionData)
 {
 	std::shared_ptr<PlayerManagerTransitionData> data = std::dynamic_pointer_cast<PlayerManagerTransitionData>(transitionData);
 	_playerManager = data->playerManager;
+
+	_drawCard = std::make_unique<Card>(Colors::WHITE, std::make_shared<DrawDisplayCardBehavior>());
 
 	startGame();
 }
@@ -121,9 +124,10 @@ void GameState::drawDiscardedPile(Window& window, int& nextRow)
 void GameState::drawDrawPile(Window& window, int& nextRow)
 {
 	window.setCursorPosition(nextRow + 3, 35);
-	std::cout << "CARDS ON DRAW PILE : " << _drawPile.size();
+	std::string drawCounter = "CARDS ON DRAW PILE : " + std::to_string(_drawPile.size());
+	std::cout << drawCounter;
 
-
+	_drawCard->draw(nextRow, static_cast<int>(drawCounter.length()) + 36, window);
 }
 
 void GameState::drawNormalState(Window& window)
