@@ -1,11 +1,24 @@
 #include "Card.h"
 #include "KeyCodes.h"
 #include <iostream>
+#include "WildDrawCardBehavior.h"
+#include "SwapHandCardBehavior.h"
 
 Card::Card(const Colors& color, std::shared_ptr<CardBehavior> behavior) :
 	_color(color), _behavior(behavior)
 {
 	_drawLength = 5; // TODO, remove?
+
+	// TODO both ifs below need to be removed and added as behavior methods
+	if (std::shared_ptr<WildDrawCardBehavior> t1 = std::dynamic_pointer_cast<WildDrawCardBehavior>(behavior))
+	{
+		_goToNextPlayer = false;
+	}
+
+	if (std::shared_ptr<SwapHandCardBehavior> t2 = std::dynamic_pointer_cast<SwapHandCardBehavior>(behavior))
+	{
+		_goToNextPlayer = false;
+	}
 }
 
 void Card::setCanBePlayed(const bool& canBePlayed)
@@ -227,4 +240,9 @@ bool Card::getAcceptOnlySameType() const
 void Card::setAcceptOnlySameType(const bool& set)
 {
 	_acceptOnlySameType = set;
+}
+
+bool Card::goToNextPlayer() const
+{
+	return _goToNextPlayer;
 }

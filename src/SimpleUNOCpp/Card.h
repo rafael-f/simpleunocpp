@@ -31,6 +31,8 @@ public:
 
 	void setAcceptOnlySameType(const bool& set);
 
+	bool goToNextPlayer() const;
+
 private:
 	std::shared_ptr<CardBehavior> _behavior;
 
@@ -47,4 +49,6 @@ private:
 	static const int CARD_LENGTH = 8;
 
 	bool _acceptOnlySameType = false;
+
+	bool _goToNextPlayer = true;
 };

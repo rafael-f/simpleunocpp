@@ -11,7 +11,6 @@ SwapHandCardBehavior::SwapHandCardBehavior()
 
 void SwapHandCardBehavior::execute()
 {
-	// player selectes another player to change hands
 	Mediator::fireEvent(SwapHandCardEvent());
 }
 

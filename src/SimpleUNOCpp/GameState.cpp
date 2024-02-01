@@ -10,6 +10,8 @@
 #include "VectorHelper.h"
 #include "ReverseTurnCardEvent.h"
 #include "SkipTurnCardEvent.h"
+#include "SwapHandCardEvent.h"
+#include <algorithm>
 
 GameState::GameState()
 {
@@ -38,6 +40,11 @@ GameState::GameState()
 		{
 			_currentState = GameStates::FORCED_SKIP;
 		});
+
+	Mediator::registerListener<SwapHandCardEvent>([this](const SwapHandCardEvent&)
+		{
+			handleSwapHandCardEvent();
+		});
 }
 
 void GameState::draw(Window& window)
@@ -49,16 +56,19 @@ void GameState::draw(Window& window)
 	//case GameStates::DISPLAY_NEW_CARDS:
 	//	break;
 	case GameStates::FORCED_DRAW_DISCARD:
-		_currentMessage = "PRESS ENTER TO DRAW 2 CARDS FROM DISCARD PILE";
+		_currentMessage = " PRESS ENTER TO DRAW 2 CARDS FROM DISCARD PILE";
 		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
 		_drawCard->setSelected(true);
 		//drawForcedDrawDiscardedState(window);
 		break;
 	case GameStates::FORCED_SKIP:
-		_currentMessage = "PRESS ENTER TO SKIP TURN";
+		_currentMessage = " PRESS ENTER TO SKIP TURN";
+		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
+		_drawCard->setSelected(false);
 		break;
 	case GameStates::SELECT_PLAYER:
-		break;
+		drawSelectPlayerState(window);
+		return;
 	case GameStates::SELECT_COLOR:
 		break;
 	default:
@@ -85,6 +95,7 @@ void GameState::handleInput()
 		handleInputForcedSkipState();
 		break;
 	case GameStates::SELECT_PLAYER:
+		handleInputSelectPlayerState();
 		break;
 	case GameStates::SELECT_COLOR:
 		break;
@@ -134,7 +145,7 @@ void GameState::clearPiles()
 	}
 }
 
-#include "SkipTurnCardBehavior.h"
+#include "SwapHandCardBehavior.h"
 
 void GameState::initializePlayersHands()
 {
@@ -150,7 +161,7 @@ void GameState::initializePlayersHands()
 	// TODO remove cheat
 	for (int i = 0; i < _drawPile.size(); ++i)
 	{
-		if (std::shared_ptr<SkipTurnCardBehavior> behavior = std::dynamic_pointer_cast<SkipTurnCardBehavior>(_drawPile[i]->getBehavior()))
+		if (std::shared_ptr<SwapHandCardBehavior> behavior = std::dynamic_pointer_cast<SwapHandCardBehavior>(_drawPile[i]->getBehavior()))
 		{
 			_playerManager->getPlayers()[0]->addCard(_drawPile[i]);
 			_drawPile.erase(_drawPile.begin() + i);
@@ -295,7 +306,11 @@ void GameState::handleInputNormalState()
 					_playerManager->getSelectedPlayer()->removeSelectedCard();
 					// TODO if player has 0 cards on hand and said UNO he won
 					_discardPile.push_back(selectedCard);
-					_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+
+					if (selectedCard->goToNextPlayer())
+					{
+						_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+					}
 				}
 				else
 				{
@@ -367,12 +382,66 @@ void GameState::handleInputForcedSkipState()
 
 void GameState::drawSelectPlayerState(Window& window)
 {
+	window.setCursorPosition(0, 0);
+	std::cout << "SELECT A PLAYER TO SWAP HAND WITH:";
 
+	int row = 2;
+	int column = 0;
+	int maxLength = window.getConsoleLineLength();
+
+	for (std::shared_ptr<Player> player : _availableSwapHandPlayers)
+	{
+		column += player->draw(window, row, column);
+		if (column + 15 >= maxLength)
+		{
+			row += 4;
+			column = 0;
+		}
+	}
 }
 
 void GameState::handleInputSelectPlayerState()
 {
+	int input = _getch();
 
+	if (input == KeyCodes::ESCAPE_KEY)
+	{
+		Mediator::fireEvent(QuitGameEvent());
+	}
+	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
+	{
+		input = _getch();
+
+		switch (input)
+		{
+		case KeyCodes::LEFT_ARROW: // TODO make a method
+			_availableSwapHandPlayers[_swapHandSelectedIndex]->setSelected(false);
+			--_swapHandSelectedIndex;
+			if (_swapHandSelectedIndex < 0)
+			{
+				_swapHandSelectedIndex = static_cast<int>(_availableSwapHandPlayers.size()) - 1;
+			}
+			_availableSwapHandPlayers[_swapHandSelectedIndex]->setSelected(true);
+			break;
+		case KeyCodes::RIGHT_ARROW:
+			_availableSwapHandPlayers[_swapHandSelectedIndex]->setSelected(false);
+			++_swapHandSelectedIndex;
+			if (_swapHandSelectedIndex >= _availableSwapHandPlayers.size())
+			{
+				_swapHandSelectedIndex = 0;
+			}
+			_availableSwapHandPlayers[_swapHandSelectedIndex]->setSelected(true);
+			break;
+		}
+	}
+	else if (input == KeyCodes::ENTER_KEY)
+	{
+		_availableSwapHandPlayers[_swapHandSelectedIndex]->setSelected(false);
+		_playerManager->getSelectedPlayer()->getCards().swap(_availableSwapHandPlayers[_swapHandSelectedIndex]->getCards());
+		_currentState = GameStates::NORMAL;
+
+		_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+	}
 }
 
 void GameState::drawSelectColorState(Window& window)
@@ -442,4 +511,24 @@ void GameState::handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData)
 	_currentState = GameStates::FORCED_DRAW;
 
 	_playerManager->getSelectedPlayer()->getSelectedCard()->setAcceptOnlySameType(true);
+}
+
+void GameState::handleSwapHandCardEvent()
+{
+	_currentState = GameStates::SELECT_PLAYER;
+
+	_availableSwapHandPlayers.clear();
+
+	for (std::shared_ptr<Player> player : _playerManager->getPlayers())
+	{
+		if (player->getName() == _playerManager->getSelectedPlayer()->getName())
+		{
+			continue;
+		}
+
+		_availableSwapHandPlayers.push_back(player);
+	}
+
+	_availableSwapHandPlayers[0]->setSelected(true);
+	_swapHandSelectedIndex = 0;
 }

@@ -185,3 +185,8 @@ void Player::setSaidUNO(const bool& saidUNO)
 {
 	_saidUNO = saidUNO;
 }
+
+std::vector<std::shared_ptr<Card>>& Player::getCards()
+{
+	return _cardsOnHand;
+}

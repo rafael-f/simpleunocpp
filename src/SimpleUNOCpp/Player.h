@@ -33,6 +33,8 @@ public:
 
 	void setSaidUNO(const bool& saidUNO);
 
+	std::vector<std::shared_ptr<Card>>& getCards();
+
 private:
 	std::string _name;
 

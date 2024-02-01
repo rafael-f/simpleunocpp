@@ -79,4 +79,10 @@ private:
 	void handleDrawDiscardedCardEvent(const DrawDiscardedCardEvent& eventData);
 
 	void handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData);
+
+	int _swapHandSelectedIndex;
+
+	void handleSwapHandCardEvent();
+
+	std::vector<std::shared_ptr<Player>> _availableSwapHandPlayers;
 };
