@@ -1,18 +1,11 @@
 #include "Card.h"
 #include "KeyCodes.h"
 #include <iostream>
-#include "DrawMoreCardBehavior.h"
 
 Card::Card(const Colors& color, std::shared_ptr<CardBehavior> behavior) :
 	_color(color), _behavior(behavior)
 {
 	_drawLength = 5; // TODO, remove?
-
-	// TODO move this to the behavior and remove the include above
-	if (std::shared_ptr<DrawMoreCardBehavior> behaviorasd = std::dynamic_pointer_cast<DrawMoreCardBehavior>(behavior))
-	{
-		_acceptOnlySameType = true;
-	}
 }
 
 void Card::setCanBePlayed(const bool& canBePlayed)
@@ -229,4 +222,9 @@ bool Card::checkCanBePlayed(const std::shared_ptr<Card> otherCard)
 bool Card::getAcceptOnlySameType() const
 {
 	return _acceptOnlySameType;
+}
+
+void Card::setAcceptOnlySameType(const bool& set)
+{
+	_acceptOnlySameType = set;
 }

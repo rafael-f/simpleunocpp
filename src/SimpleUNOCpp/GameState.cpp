@@ -9,6 +9,7 @@
 #include "DrawDisplayCardBehavior.h"
 #include "VectorHelper.h"
 #include "ReverseTurnCardEvent.h"
+#include "SkipTurnCardEvent.h"
 
 GameState::GameState()
 {
@@ -32,16 +33,21 @@ GameState::GameState()
 		{
 			handleDrawMoreCardEvent(eventData);
 		});
+
+	Mediator::registerListener<SkipTurnCardEvent>([this](const SkipTurnCardEvent&)
+		{
+			_currentState = GameStates::FORCED_SKIP;
+		});
 }
 
 void GameState::draw(Window& window)
 {
 	switch (_currentState)
 	{
-	case GameStates::NORMAL:
-		break;
-	case GameStates::DISPLAY_NEW_CARDS:
-		break;
+	//case GameStates::NORMAL:
+	//	break;
+	//case GameStates::DISPLAY_NEW_CARDS:
+	//	break;
 	case GameStates::FORCED_DRAW_DISCARD:
 		_currentMessage = "PRESS ENTER TO DRAW 2 CARDS FROM DISCARD PILE";
 		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
@@ -49,10 +55,13 @@ void GameState::draw(Window& window)
 		//drawForcedDrawDiscardedState(window);
 		break;
 	case GameStates::FORCED_SKIP:
+		_currentMessage = "PRESS ENTER TO SKIP TURN";
 		break;
 	case GameStates::SELECT_PLAYER:
 		break;
 	case GameStates::SELECT_COLOR:
+		break;
+	default:
 		break;
 	}
 	
@@ -73,6 +82,7 @@ void GameState::handleInput()
 		handleInputForcedDrawDiscardedState();
 		break;
 	case GameStates::FORCED_SKIP:
+		handleInputForcedSkipState();
 		break;
 	case GameStates::SELECT_PLAYER:
 		break;
@@ -124,7 +134,7 @@ void GameState::clearPiles()
 	}
 }
 
-#include "DrawMoreCardBehavior.h"
+#include "SkipTurnCardBehavior.h"
 
 void GameState::initializePlayersHands()
 {
@@ -140,7 +150,7 @@ void GameState::initializePlayersHands()
 	// TODO remove cheat
 	for (int i = 0; i < _drawPile.size(); ++i)
 	{
-		if (std::shared_ptr<DrawMoreCardBehavior> behavior = std::dynamic_pointer_cast<DrawMoreCardBehavior>(_drawPile[i]->getBehavior()))
+		if (std::shared_ptr<SkipTurnCardBehavior> behavior = std::dynamic_pointer_cast<SkipTurnCardBehavior>(_drawPile[i]->getBehavior()))
 		{
 			_playerManager->getPlayers()[0]->addCard(_drawPile[i]);
 			_drawPile.erase(_drawPile.begin() + i);
@@ -335,17 +345,24 @@ void GameState::handleInputForcedDrawDiscardedState()
 		endTurn = true;
 		_currentState = GameStates::NORMAL;
 		_currentMessage = "";
+		drawCard->setAmount(1);
 	}
 }
 
 void GameState::drawForcedSkipState(Window& window)
 {
-
+	
 }
 
 void GameState::handleInputForcedSkipState()
 {
+	int input = _getch();
 
+	if (input == KeyCodes::ENTER_KEY)
+	{
+		_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+		_currentState = GameStates::NORMAL;
+	}
 }
 
 void GameState::drawSelectPlayerState(Window& window)
@@ -375,6 +392,8 @@ void GameState::handleReverseTurnEvent()
 
 void GameState::handleDrawCardEvent(const DrawDisplayCardEvent& eventData)
 {
+	_discardPile.back()->setAcceptOnlySameType(false);
+
 	for (int i = 0; i < eventData.getAmount(); ++i)
 	{
 		std::shared_ptr<Card> drawedCard = _drawPile.back();
@@ -421,4 +440,6 @@ void GameState::handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData)
 	}
 
 	_currentState = GameStates::FORCED_DRAW;
+
+	_playerManager->getSelectedPlayer()->getSelectedCard()->setAcceptOnlySameType(true);
 }

@@ -29,6 +29,8 @@ public:
 
 	bool getAcceptOnlySameType() const;
 
+	void setAcceptOnlySameType(const bool& set);
+
 private:
 	std::shared_ptr<CardBehavior> _behavior;
 
