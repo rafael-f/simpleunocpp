@@ -37,4 +37,6 @@ public:
 
 	static const char SWAP_LEFT = static_cast<char>(220);
 	static const char SWAP_RIGHT = static_cast<char>(223);
+
+	static const char FULL_BLOCK = static_cast<char>(219);
 };

@@ -7,6 +7,8 @@
 #include "DrawDisplayCardEvent.h"
 #include "DrawDiscardedCardEvent.h"
 #include "DrawMoreCardEvent.h"
+#include "WildDrawCardEvent.h"
+#include "ColorPickItem.h"
 
 // State the game is when in playing mode.
 class GameState : public State
@@ -66,6 +68,9 @@ private:
 	void drawSelectColorState(Window& window);
 	void handleInputSelectColorState();
 
+	void drawForcedDrawWildState(Window& window);
+	void handleInputForcedDrawWildState();
+
 	std::unique_ptr<Card> _drawCard;
 
 	std::string _currentMessage;
@@ -85,4 +90,12 @@ private:
 	void handleSwapHandCardEvent();
 
 	std::vector<std::shared_ptr<Player>> _availableSwapHandPlayers;
+
+	void handleWildDrawCardEvent(const WildDrawCardEvent& eventData);
+
+	std::vector<std::shared_ptr<ColorPickItem>> _colorsToPick;
+
+	int _selectedColorIndex = 0;
+
+	Colors _forcedColor = Colors::WHITE;
 };

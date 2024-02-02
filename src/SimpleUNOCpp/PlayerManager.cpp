@@ -42,6 +42,15 @@ void PlayerManager::updatePlayerState(const int& playerIndex, std::shared_ptr<Ca
 	_players[_selectedPlayerIndex]->setSelectedCard(0);
 }
 
+void PlayerManager::updatePlayerState(const int& playerIndex, const Colors& color)
+{
+	_players[_selectedPlayerIndex]->setSelected(false);
+	_selectedPlayerIndex = playerIndex;
+	_players[_selectedPlayerIndex]->setSelected(true);
+	_players[_selectedPlayerIndex]->updateCardStates(color);
+	_players[_selectedPlayerIndex]->setSelectedCard(0);
+}
+
 int PlayerManager::drawPlayersHeader(Window& window, const int& turnDirection) const
 {
 	std::cout << "PLAYERS:" << std::endl;
@@ -113,4 +122,24 @@ void PlayerManager::selectNextPlayer(const int& offset, std::shared_ptr<Card> ca
 	_players[_selectedPlayerIndex]->setSelected(true);
 
 	updatePlayerState(_selectedPlayerIndex, cardOnTop);
+}
+
+void PlayerManager::selectNextPlayer(const int& offset, const Colors& color)
+{
+	_players[_selectedPlayerIndex]->setSelected(false);
+
+	_selectedPlayerIndex += offset;
+
+	if (_selectedPlayerIndex < 0)
+	{
+		_selectedPlayerIndex = static_cast<int>(_players.size()) - 1;
+	}
+	else if (_selectedPlayerIndex >= _players.size())
+	{
+		_selectedPlayerIndex = 0;
+	}
+
+	_players[_selectedPlayerIndex]->setSelected(true);
+
+	updatePlayerState(_selectedPlayerIndex, color);
 }

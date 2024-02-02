@@ -6,7 +6,7 @@ class WildDrawCardEvent : public Event
 public:
 	explicit WildDrawCardEvent(const int& amount);
 
-	int& getAmount();
+	int getAmount() const;
 
 private:
 	int _amount;

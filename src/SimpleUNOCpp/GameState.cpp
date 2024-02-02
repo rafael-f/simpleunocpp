@@ -45,6 +45,17 @@ GameState::GameState()
 		{
 			handleSwapHandCardEvent();
 		});
+
+	Mediator::registerListener<WildDrawCardEvent>([this](const WildDrawCardEvent& eventData)
+		{
+			handleWildDrawCardEvent(eventData);
+		});
+
+	for (int c = static_cast<int>(Colors::RED); c < static_cast<int>(Colors::WHITE); ++c)
+	{
+		Colors color = static_cast<Colors>(c);
+		_colorsToPick.emplace_back(std::make_shared<ColorPickItem>(color));
+	}
 }
 
 void GameState::draw(Window& window)
@@ -56,7 +67,7 @@ void GameState::draw(Window& window)
 	//case GameStates::DISPLAY_NEW_CARDS:
 	//	break;
 	case GameStates::FORCED_DRAW_DISCARD:
-		_currentMessage = " PRESS ENTER TO DRAW 2 CARDS FROM DISCARD PILE";
+		_currentMessage = " PRESS ENTER TO DRAW 2 CARDS FROM DISCARD PILE"; // TODO replace 2 with amount
 		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
 		_drawCard->setSelected(true);
 		//drawForcedDrawDiscardedState(window);
@@ -70,6 +81,12 @@ void GameState::draw(Window& window)
 		drawSelectPlayerState(window);
 		return;
 	case GameStates::SELECT_COLOR:
+		drawSelectColorState(window);
+		return;
+	case GameStates::FORCED_DRAW_WILD:
+		_currentMessage = " PRESS ENTER TO DRAW 4 CARDS"; // TODO replace 4 with amount
+		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
+		_drawCard->setSelected(true);
 		break;
 	default:
 		break;
@@ -98,6 +115,10 @@ void GameState::handleInput()
 		handleInputSelectPlayerState();
 		break;
 	case GameStates::SELECT_COLOR:
+		handleInputSelectColorState();
+		break;
+	case GameStates::FORCED_DRAW_WILD:
+		handleInputForcedDrawWildState();
 		break;
 	}
 }
@@ -145,7 +166,7 @@ void GameState::clearPiles()
 	}
 }
 
-#include "SwapHandCardBehavior.h"
+#include "WildDrawCardBehavior.h" // TODO remove cheat
 
 void GameState::initializePlayersHands()
 {
@@ -161,7 +182,7 @@ void GameState::initializePlayersHands()
 	// TODO remove cheat
 	for (int i = 0; i < _drawPile.size(); ++i)
 	{
-		if (std::shared_ptr<SwapHandCardBehavior> behavior = std::dynamic_pointer_cast<SwapHandCardBehavior>(_drawPile[i]->getBehavior()))
+		if (std::shared_ptr<WildDrawCardBehavior> behavior = std::dynamic_pointer_cast<WildDrawCardBehavior>(_drawPile[i]->getBehavior()))
 		{
 			_playerManager->getPlayers()[0]->addCard(_drawPile[i]);
 			_drawPile.erase(_drawPile.begin() + i);
@@ -223,7 +244,16 @@ void GameState::drawNormalState(Window& window)
 	}
 	else
 	{
-		std::cout << " USE A CARD OR DRAW ANOTHER CARD.";
+		if (_forcedColor == Colors::WHITE)
+		{
+			std::cout << " USE A CARD OR DRAW ANOTHER CARD.";
+		}
+		else
+		{
+			window.setConsoleColor(_forcedColor);
+			std::cout << " USE A CARD OR DRAW ANOTHER CARD."; // TODO print name
+			window.setConsoleColor(Colors::WHITE);
+		}
 	}
 
 	++nextRow;
@@ -302,6 +332,11 @@ void GameState::handleInputNormalState()
 				std::shared_ptr<Card> selectedCard = _playerManager->getSelectedPlayer()->getSelectedCard();
 				if (selectedCard->getCanBePlayed())
 				{
+					if (_forcedColor != Colors::WHITE)
+					{
+						_forcedColor = Colors::WHITE;
+					}
+
 					selectedCard->getBehavior()->execute();
 					_playerManager->getSelectedPlayer()->removeSelectedCard();
 					// TODO if player has 0 cards on hand and said UNO he won
@@ -446,12 +481,62 @@ void GameState::handleInputSelectPlayerState()
 
 void GameState::drawSelectColorState(Window& window)
 {
+	int row = 0;
+	int column = 0;
 
+	window.setCursorPosition(row, column);
+	std::cout << "SELECT A COLOR FOR NEXT CARD:";
+
+	row += 2;
+	
+	for (std::shared_ptr<ColorPickItem> colorToPick : _colorsToPick)
+	{
+		column += colorToPick->draw(window, row, column);
+	}
 }
 
 void GameState::handleInputSelectColorState()
 {
+	int input = _getch();
 
+	if (input == KeyCodes::ESCAPE_KEY)
+	{
+		Mediator::fireEvent(QuitGameEvent());
+	}
+	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
+	{
+		input = _getch();
+
+		switch (input)
+		{
+		case KeyCodes::LEFT_ARROW: // TODO make a method
+			_colorsToPick[_selectedColorIndex]->setSelected(false);
+			--_selectedColorIndex;
+			if (_selectedColorIndex < 0)
+			{
+				_selectedColorIndex = static_cast<int>(_colorsToPick.size()) - 1;
+			}
+			_colorsToPick[_selectedColorIndex]->setSelected(true);
+			break;
+		case KeyCodes::RIGHT_ARROW:
+			_colorsToPick[_selectedColorIndex]->setSelected(false);
+			++_selectedColorIndex;
+			if (_selectedColorIndex >= _colorsToPick.size())
+			{
+				_selectedColorIndex = 0;
+			}
+			_colorsToPick[_selectedColorIndex]->setSelected(true);
+			break;
+		}
+	}
+	else if (input == KeyCodes::ENTER_KEY)
+	{
+		_currentState = GameStates::FORCED_DRAW_WILD;
+		_forcedColor = _colorsToPick[_selectedColorIndex]->getSelectedColor();
+		_colorsToPick[_selectedColorIndex]->setSelected(false);
+		_selectedColorIndex = 0;
+		_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+	}
 }
 
 void GameState::handleReverseTurnEvent()
@@ -531,4 +616,56 @@ void GameState::handleSwapHandCardEvent()
 
 	_availableSwapHandPlayers[0]->setSelected(true);
 	_swapHandSelectedIndex = 0;
+}
+
+void GameState::handleWildDrawCardEvent(const WildDrawCardEvent& eventData)
+{
+	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+
+	if (_currentState == GameStates::NORMAL)
+	{
+		drawCard->setAmount(eventData.getAmount());
+	}
+	else
+	{
+		drawCard->setAmount(drawCard->getAmount() + eventData.getAmount());
+	}
+
+	_currentState = GameStates::SELECT_COLOR;
+	_selectedColorIndex = 0;
+	_colorsToPick[0]->setSelected(true);
+}
+
+void GameState::drawForcedDrawWildState(Window& window)
+{
+
+}
+
+void GameState::handleInputForcedDrawWildState()
+{
+	int input = _getch();
+
+	if (endTurn)
+	{
+		if (input == KeyCodes::ENTER_KEY)
+		{
+			_playerManager->selectNextPlayer(_turnDirection, _forcedColor);
+			_drawCard->setSelected(false);
+			endTurn = false;
+			_currentState = GameStates::NORMAL;
+			_currentMessage = "";
+
+			std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+			drawCard->setAmount(1);
+		}
+	}
+	else
+	{
+		if (input == KeyCodes::ENTER_KEY)
+		{
+			_drawCard->getBehavior()->execute();
+
+			endTurn = true;
+		}
+	}
 }

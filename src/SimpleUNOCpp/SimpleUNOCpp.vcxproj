@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardsLoader.cpp" />
+    <ClCompile Include="ColorPickItem.cpp" />
     <ClCompile Include="DrawDiscardedCardBehavior.cpp" />
     <ClCompile Include="DrawDiscardedCardEvent.cpp" />
     <ClCompile Include="DrawDisplayCardBehavior.cpp" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardBehavior.h" />
+    <ClInclude Include="ColorPickItem.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="CardsLoader.h" />
     <ClInclude Include="DrawDiscardedCardEvent.h" />
