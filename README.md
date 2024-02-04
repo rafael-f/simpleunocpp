@@ -19,40 +19,41 @@ classDiagram
         -load()
     }
 
-	GameManager *-- Window
+    GameManager *-- Window
     GameManager *-- StateManager
 
     class Window {
         +isOpen() bool
         +clear()
-		+setCursorPosition()
-		+setConsoleColor()
+	+setCursorPosition()
+	+setConsoleColor()
     }
 
     class StateManager {
         +draw(Window)
-		+setState()
-		+handleInput()
+	+setState()
+	+handleInput()
     }
 	
-	StateManager o-- State
+    StateManager o-- State
 
     class State {
         <<Interface>>
         +draw(Window)
-		+handleInput()
+	+handleInput()
     }
 
-	State <|-- MenuState
+    State <|-- MenuState
     State <|-- PlayerSelectState
-	State <|-- PlayerNamesState
-	State <|-- GameState
+    State <|-- PlayerNamesState
+    State <|-- GameState
     State <|-- GameOverState
 	
     class GameState {
     }
 
     GameState *-- PlayerManager
+    GameState *-- CardsLoader
 
     class CardsLoader {
         +load()
