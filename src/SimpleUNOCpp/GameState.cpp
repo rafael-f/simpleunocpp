@@ -12,6 +12,8 @@
 #include "SkipTurnCardEvent.h"
 #include "SwapHandCardEvent.h"
 #include <algorithm>
+#include "GoToNextStateEvent.h"
+#include "GameOverTransitionData.h"
 
 GameState::GameState()
 {
@@ -88,6 +90,10 @@ void GameState::draw(Window& window)
 		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
 		_drawCard->setSelected(true);
 		break;
+	case GameStates::FORCED_DRAW_PUNISH:
+		_currentMessage = "YOU DIDN'T SAY UNO, DRAW 2 CARDS";
+		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
+		_drawCard->setSelected(true);
 	default:
 		break;
 	}
@@ -119,6 +125,9 @@ void GameState::handleInput()
 		break;
 	case GameStates::FORCED_DRAW_WILD:
 		handleInputForcedDrawWildState();
+		break;
+	case GameStates::FORCED_DRAW_PUNISH:
+		handleInputForcedDrawPunishState();
 		break;
 	}
 }
@@ -166,7 +175,7 @@ void GameState::clearPiles()
 	}
 }
 
-#include "WildDrawCardBehavior.h" // TODO remove cheat
+//#include "DrawMoreCardBehavior.h" // TODO remove cheat
 
 void GameState::initializePlayersHands()
 {
@@ -180,14 +189,14 @@ void GameState::initializePlayersHands()
 	}
 
 	// TODO remove cheat
-	for (int i = 0; i < _drawPile.size(); ++i)
+	/*for (int i = 0; i < _drawPile.size(); ++i)
 	{
-		if (std::shared_ptr<WildDrawCardBehavior> behavior = std::dynamic_pointer_cast<WildDrawCardBehavior>(_drawPile[i]->getBehavior()))
+		if (std::shared_ptr<DrawMoreCardBehavior> behavior = std::dynamic_pointer_cast<DrawMoreCardBehavior>(_drawPile[i]->getBehavior()))
 		{
 			_playerManager->getPlayers()[0]->addCard(_drawPile[i]);
 			_drawPile.erase(_drawPile.begin() + i);
 		}
-	}
+	}*/
 }
 
 void GameState::discardFirstCard()
@@ -272,7 +281,7 @@ void GameState::handleInputNormalState()
 {
 	int input = _getch();
 
-	if(endTurn)
+	if (endTurn)
 	{
 		if (input == KeyCodes::ENTER_KEY)
 		{
@@ -286,6 +295,13 @@ void GameState::handleInputNormalState()
 		if (input == KeyCodes::ESCAPE_KEY)
 		{
 			Mediator::fireEvent(QuitGameEvent());
+		}
+		else if (input == KeyCodes::SPACE)
+		{
+			if(_playerManager->getSelectedPlayer()->getCards().size() == 2 || _playerManager->getSelectedPlayer()->getCanSayUNO())
+			{
+				_playerManager->getSelectedPlayer()->setSaidUNO(true);
+			}
 		}
 		else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
 		{
@@ -326,6 +342,10 @@ void GameState::handleInputNormalState()
 			if (_drawCard->getSelected())
 			{
 				_drawCard->getBehavior()->execute();
+				if (_currentState == GameStates::FORCED_DRAW)
+				{
+					_currentState = GameStates::NORMAL;
+				}
 			}
 			else
 			{
@@ -337,14 +357,35 @@ void GameState::handleInputNormalState()
 						_forcedColor = Colors::WHITE;
 					}
 
-					selectedCard->getBehavior()->execute();
-					_playerManager->getSelectedPlayer()->removeSelectedCard();
-					// TODO if player has 0 cards on hand and said UNO he won
-					_discardPile.push_back(selectedCard);
-
-					if (selectedCard->goToNextPlayer())
+					if (_playerManager->getSelectedPlayer()->getCards().size() == 1)
 					{
-						_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+						_playerManager->getSelectedPlayer()->removeSelectedCard();
+						_discardPile.push_back(selectedCard);
+
+						if (_playerManager->getSelectedPlayer()->getSaidUNO())
+						{
+							GoToNextStateEvent endEvent;
+							endEvent.transitionData = std::make_shared<GameOverTransitionData>(_playerManager->getSelectedPlayer()->getName());
+							Mediator::fireEvent(endEvent);
+						}
+						else
+						{
+							_currentState = GameStates::FORCED_DRAW_PUNISH;
+							std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+							drawCard->setAmount(NUMBER_OF_CARDS_TO_PUNISH);
+						}
+					}
+					else
+					{
+						selectedCard->getBehavior()->execute();
+
+						_playerManager->getSelectedPlayer()->removeSelectedCard();
+						_discardPile.push_back(selectedCard);
+
+						if (selectedCard->goToNextPlayer())
+						{
+							_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+						}
 					}
 				}
 				else
@@ -475,6 +516,18 @@ void GameState::handleInputSelectPlayerState()
 		_playerManager->getSelectedPlayer()->getCards().swap(_availableSwapHandPlayers[_swapHandSelectedIndex]->getCards());
 		_currentState = GameStates::NORMAL;
 
+		// TODO rule... if the player swapped hand with another that had 1 card in hand he's supposed to be
+		// able to UNO with 1 card?
+		if (_playerManager->getSelectedPlayer()->getCards().size() == 1)
+		{
+			_playerManager->getSelectedPlayer()->setCanSayUNO(true);
+		}
+
+		if (_availableSwapHandPlayers[_swapHandSelectedIndex]->getCards().size() == 1)
+		{
+			_availableSwapHandPlayers[_swapHandSelectedIndex]->setCanSayUNO(true);
+		}
+
 		_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
 	}
 }
@@ -584,7 +637,7 @@ void GameState::handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData)
 {
 	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
 	
-	if (_currentState == GameStates::NORMAL)
+	if (_currentState != GameStates::FORCED_DRAW)
 	{
 		drawCard->setAmount(eventData.getAmount());
 	}
@@ -665,6 +718,41 @@ void GameState::handleInputForcedDrawWildState()
 		{
 			_drawCard->getBehavior()->execute();
 
+			endTurn = true;
+		}
+	}
+}
+
+void GameState::handleInputForcedDrawPunishState()
+{
+	int input = _getch();
+
+	if (endTurn)
+	{
+		if (input == KeyCodes::ENTER_KEY)
+		{
+			std::shared_ptr<Card> usedCard = _discardPile.back();
+			usedCard->getBehavior()->execute();
+
+			if (usedCard->goToNextPlayer())
+			{
+				_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+			}
+
+			_drawCard->setSelected(false);
+			endTurn = false;
+			_currentState = GameStates::NORMAL;
+			_currentMessage = "";
+
+			std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+			drawCard->setAmount(1);
+		}
+	}
+	else
+	{
+		if (input == KeyCodes::ENTER_KEY)
+		{
+			_drawCard->getBehavior()->execute();
 			endTurn = true;
 		}
 	}

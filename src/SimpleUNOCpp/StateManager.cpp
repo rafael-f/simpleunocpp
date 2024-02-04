@@ -6,6 +6,7 @@
 #include "PlayerSelectState.h"
 #include "PlayerNamesState.h"
 #include "TransitionData.h"
+#include "GoToFirstStateEvent.h"
 
 StateManager::StateManager()
 {
@@ -14,6 +15,11 @@ StateManager::StateManager()
 	Mediator::registerListener<GoToNextStateEvent>([this](const GoToNextStateEvent& eventData)
 	{
 		handleGoToNextStateEvent(eventData);
+	});
+
+	Mediator::registerListener<GoToFirstStateEvent>([this](const GoToFirstStateEvent& eventData)
+	{
+		handleGoToFirstStateEvent();
 	});
 }
 
@@ -55,4 +61,9 @@ void StateManager::handleGoToNextStateEvent(const GoToNextStateEvent& goToNextSt
 	}
 
 	setState(nextState, goToNextStateEvent.transitionData);
+}
+
+void StateManager::handleGoToFirstStateEvent()
+{
+	setState(0, nullptr);
 }

@@ -79,12 +79,12 @@ int PlayerManager::drawPlayersHeader(Window& window, const int& turnDirection) c
 
 		if (column + 15 >= maxLength)
 		{
-			row += 4;
+			row += 5;
 			column = 0;
 		}
 	}
 
-	return row + 3;
+	return row + 4;
 }
 
 void PlayerManager::drawArrow(Window& window, const char& arrow, const int& row, int& column) const

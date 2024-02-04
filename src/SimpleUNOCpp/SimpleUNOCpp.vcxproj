@@ -138,6 +138,7 @@
     <ClCompile Include="DrawMoreCardEvent.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameOverState.cpp" />
+    <ClCompile Include="GameOverTransitionData.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mediator.cpp" />
@@ -169,7 +170,9 @@
     <ClInclude Include="DrawDisplayCardBehavior.h" />
     <ClInclude Include="DrawDisplayCardEvent.h" />
     <ClInclude Include="DrawMoreCardEvent.h" />
+    <ClInclude Include="GameOverTransitionData.h" />
     <ClInclude Include="GameStates.h" />
+    <ClInclude Include="GoToFirstStateEvent.h" />
     <ClInclude Include="GoToNextStateEvent.h" />
     <ClInclude Include="DrawDiscardedCardBehavior.h" />
     <ClInclude Include="DrawMoreCardBehavior.h" />

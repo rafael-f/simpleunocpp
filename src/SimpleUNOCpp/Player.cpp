@@ -51,6 +51,8 @@ void Player::updateCardStates(const Colors& color) const
 void Player::addCard(std::shared_ptr<Card> card)
 {
 	_cardsOnHand.push_back(card);
+	_saidUNO = false;
+	_canSayUNO = false;
 }
 
 void Player::removeSelectedCard()
@@ -58,7 +60,7 @@ void Player::removeSelectedCard()
 	_cardsOnHand[_selectedCardIndex]->setSelected(false);
 	_cardsOnHand.erase(_cardsOnHand.begin() + _selectedCardIndex);
 	_selectedCardIndex = 0;
-	if (_cardsOnHand.size() > 0)
+	if (!_cardsOnHand.empty())
 	{
 		_cardsOnHand[_selectedCardIndex]->setSelected(true);
 	}
@@ -112,6 +114,39 @@ int Player::draw(Window& window, const int& row, const int& column) const
 
 	if (_isSelected)
 	{
+		std::cout << KeyCodes::VERTICAL_LINE; // TODO save the LINE in a char instead
+		if (_saidUNO)
+		{
+			window.setConsoleColor(Colors::GREEN);
+			std::cout << Window::fillWithSpaces("UNO", maxSize);
+			window.setConsoleColor(Colors::WHITE);
+		}
+		else
+		{
+			std::cout << Window::fillWithSpaces(" ", maxSize);
+		}
+		std::cout << KeyCodes::VERTICAL_LINE << std::endl;
+	}
+	else
+	{
+		std::cout << " ";
+		if (_saidUNO)
+		{
+			window.setConsoleColor(Colors::GREEN);
+			std::cout << Window::fillWithSpaces("UNO", maxSize);
+			window.setConsoleColor(Colors::WHITE);
+		}
+		else
+		{
+			std::cout << Window::fillWithSpaces(" ", maxSize);
+		}
+		std::cout << " " << std::endl;
+	}
+
+	window.setCursorPosition(row + 4, column);
+
+	if (_isSelected)
+	{
 		std::cout << KeyCodes::BOTTOM_LEFT_CORNER;
 		for (int i = 0; i < maxSize; ++i)
 		{
@@ -153,7 +188,11 @@ void Player::drawCards(Window& window, int& row) const
 
 void Player::setSelectedCard(const int& index)
 {
-	_cardsOnHand[_selectedCardIndex]->setSelected(false);
+	if (_selectedCardIndex <= _cardsOnHand.size() && !_cardsOnHand.empty())
+	{
+		_cardsOnHand[_selectedCardIndex]->setSelected(false);
+	}
+
 	if (index != -1) // TODO use a bool instead?
 	{
 		_selectedCardIndex = index;
@@ -186,7 +225,22 @@ void Player::setSaidUNO(const bool& saidUNO)
 	_saidUNO = saidUNO;
 }
 
+bool Player::getSaidUNO() const
+{
+	return _saidUNO;
+}
+
 std::vector<std::shared_ptr<Card>>& Player::getCards()
 {
 	return _cardsOnHand;
+}
+
+void Player::setCanSayUNO(const bool& canSay)
+{
+	_canSayUNO = canSay;
+}
+
+bool Player::getCanSayUNO() const
+{
+	return _canSayUNO;
 }

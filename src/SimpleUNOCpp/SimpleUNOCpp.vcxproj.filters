@@ -92,6 +92,9 @@
     <ClCompile Include="ColorPickItem.cpp">
       <Filter>Game\SelectColor</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverTransitionData.cpp">
+      <Filter>GameOver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -269,6 +272,12 @@
     </ClInclude>
     <ClInclude Include="ColorPickItem.h">
       <Filter>Game\SelectColor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverTransitionData.h">
+      <Filter>GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="GoToFirstStateEvent.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

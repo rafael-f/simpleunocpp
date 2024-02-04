@@ -23,7 +23,9 @@ public:
 	void setData(std::shared_ptr<TransitionData> transitionData) override;
 
 private:
-	static const int NUMBER_OF_START_CARDS_PER_PLAYER = 7;
+	static const int NUMBER_OF_START_CARDS_PER_PLAYER = 2;
+
+	static const int NUMBER_OF_CARDS_TO_PUNISH = 2;
 
 	std::shared_ptr<PlayerManager> _playerManager;
 
@@ -71,6 +73,9 @@ private:
 	void drawForcedDrawWildState(Window& window);
 	void handleInputForcedDrawWildState();
 
+	void drawForcedDrawPunishState(Window& window);
+	void handleInputForcedDrawPunishState();
+
 	std::unique_ptr<Card> _drawCard;
 
 	std::string _currentMessage;
@@ -85,7 +90,7 @@ private:
 
 	void handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData);
 
-	int _swapHandSelectedIndex;
+	int _swapHandSelectedIndex = 0;
 
 	void handleSwapHandCardEvent();
 

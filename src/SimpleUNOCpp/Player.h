@@ -33,7 +33,13 @@ public:
 
 	void setSaidUNO(const bool& saidUNO);
 
+	bool getSaidUNO() const;
+
 	std::vector<std::shared_ptr<Card>>& getCards();
+
+	void setCanSayUNO(const bool& canSay);
+
+	bool getCanSayUNO() const;
 
 private:
 	std::string _name;
@@ -47,4 +53,6 @@ private:
 	int _selectedCardIndex = 0;
 
 	bool _saidUNO = false;
+
+	bool _canSayUNO = false;
 };
