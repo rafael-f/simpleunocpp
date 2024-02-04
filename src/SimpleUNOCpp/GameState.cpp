@@ -282,10 +282,17 @@ void GameState::handleInputNormalState()
 
 void GameState::handleEndTurnInput(const int& input)
 {
-	
 	if (input == KeyCodes::ENTER_KEY)
 	{
-		_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+		if (_forcedColor == Colors::WHITE)
+		{
+			_playerManager->selectNextPlayer(_turnDirection, _discardPile.back());
+		}
+		else
+		{
+			_playerManager->selectNextPlayer(_turnDirection, _forcedColor);
+		}
+
 		_drawCard->setSelected(false);
 		endTurn = false;
 	}

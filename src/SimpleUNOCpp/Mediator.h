@@ -35,6 +35,8 @@ public:
         }
     }
 
+    static void clearListeners();
+
 private:
     static std::unordered_map<std::string, std::vector<std::function<void(const Event&)>>> eventListeners;
 
