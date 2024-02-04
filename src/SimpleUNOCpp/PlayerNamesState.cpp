@@ -1,12 +1,13 @@
-#include "PlayerNamesState.h"
 #include <conio.h>
-#include "Mediator.h"
-#include "QuitGameEvent.h"
 #include <iostream>
-#include "PlayerSelectedAmountTransitionData.h"
-#include "KeyCodes.h"
-#include "PlayerManagerTransitionData.h"
+#include "PlayerNamesState.h"
 #include "GoToNextStateEvent.h"
+#include "KeyCodes.h"
+#include "Mediator.h"
+#include "PlayerManagerTransitionData.h"
+#include "PlayerSelectedAmountTransitionData.h"
+#include "QuitGameEvent.h"
+#include "ShowPromptEvent.h"
 
 void PlayerNamesState::draw(Window& window)
 {
@@ -72,7 +73,7 @@ void PlayerNamesState::handleEnterKey()
 {
 	if (_currentEditingName.length() > 0)
 	{
-		for (auto player : _playerManager->getplayers())
+		for (auto player : _playerManager->getPlayers())
 		{
 			if (player->getName() == _currentEditingName)
 			{
@@ -113,6 +114,10 @@ void PlayerNamesState::setData(std::shared_ptr<TransitionData> transitionData)
 
 void PlayerNamesState::transitionToGame()
 {
+	ShowPromptEvent showPromptEvent;
+	showPromptEvent.showPrompt = false;
+	Mediator::fireEvent(showPromptEvent);
+
 	GoToNextStateEvent goToNextStateEvent;
 	goToNextStateEvent.transitionData = std::make_shared<PlayerManagerTransitionData>(_playerManager);
 	Mediator::fireEvent(goToNextStateEvent);

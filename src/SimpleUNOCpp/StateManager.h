@@ -24,4 +24,6 @@ private:
 	int _currentState;
 
 	void handleGoToNextStateEvent(const GoToNextStateEvent& goToNextStateEvent);
+
+	void handleGoToFirstStateEvent();
 };

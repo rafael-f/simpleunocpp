@@ -1,6 +1,9 @@
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <Windows.h>
 #include "Window.h"
 #include "Mediator.h"
-#include <Windows.h>
 
 Window::Window()
 {
@@ -71,4 +74,50 @@ void Window::setCursorPosition(const int& row, const int& column) const
 	cursorPos.Y = static_cast<short>(row);
 
 	SetConsoleCursorPosition(hConsole, cursorPos);
+}
+
+void Window::setConsoleColor(Colors color) const
+{
+	int colorValue;
+
+	switch (color)
+	{
+	case Colors::RED:
+		colorValue = FOREGROUND_RED;
+		break;
+	case Colors::BLUE:
+		colorValue = FOREGROUND_BLUE;
+		break;
+	case Colors::YELLOW:
+		colorValue = FOREGROUND_RED | FOREGROUND_GREEN;
+		break;
+	case Colors::GREEN:
+		colorValue = FOREGROUND_GREEN;
+		break;
+	default:
+		colorValue = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+		break;
+	}
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), static_cast<WORD>(colorValue));
+}
+
+std::string Window::fillWithSpaces(const std::string& input, std::size_t minWidth)
+{
+	std::ostringstream oss;
+	std::size_t padding = (minWidth - input.size()) / 2;
+	oss << std::setw(padding + input.size()) << std::right << input;
+	while (oss.str().size() < minWidth)
+	{
+		oss << " ";
+	}
+
+	return oss.str();
+}
+
+int Window::getConsoleLineLength() const
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	return csbi.srWindow.Right - csbi.srWindow.Left + 1;
 }

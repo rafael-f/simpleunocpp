@@ -8,6 +8,7 @@
 class State
 {
 public:
+	// TODO does it make sense to always pass window? can this be improved?
 	virtual void draw(Window& window) = 0;
 
 	virtual void handleInput() = 0;

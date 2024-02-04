@@ -1,11 +1,10 @@
 #pragma once
 #include "CardBehavior.h"
 
-// A normal card, doesn't have any special effects.
-class NormalCardBehavior : public CardBehavior
+class WildDrawCardBehavior : public CardBehavior
 {
 public:
-	explicit NormalCardBehavior(int value);
+	explicit WildDrawCardBehavior(const int& drawAmount);
 
 	void execute() override;
 
@@ -13,12 +12,10 @@ public:
 
 	bool checkCanBePlayed(std::shared_ptr<CardBehavior> otherBehavior) override;
 
-	int getValue() const;
-
 	std::string getNameToDraw() override;
 
 private:
-	int _value;
+	int _drawAmount;
 
 	std::string _symbolToDraw;
 };
