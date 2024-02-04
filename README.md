@@ -7,59 +7,55 @@ title: UNO CPP
 ---
 classDiagram
 
+	class Mediator {
+		<<Singleton>>
+		+registerListener()
+		+fireEvent()
+	}
+
     class GameManager {
         +start()        
         -run()
         -load()
     }
 
+	GameManager *-- Window
+    GameManager *-- StateManager
+
     class Window {
         +isOpen() bool
-        +display()
         +clear()
-    }
-
-    class InputManager {
-        +handleInput()
+		+setCursorPosition()
+		+setConsoleColor()
     }
 
     class StateManager {
         +draw(Window)
+		+setState()
+		+handleInput()
     }
+	
+	StateManager o-- State
 
     class State {
         <<Interface>>
         +draw(Window)
+		+handleInput()
     }
 
-    class MenuState {
-    }
-
+	State <|-- MenuState
+    State <|-- PlayerSelectState
+	State <|-- PlayerNamesState
+	State <|-- GameState
+    State <|-- GameOverState
+	
     class GameState {
     }
 
-    class GameOverState {
-    }
-
-    class GameDataLoader {
-        +load()
-    }
-
-    class RulesLoader {
-        +load()
-    }
+    GameState *-- PlayerManager
 
     class CardsLoader {
         +load()
-    }
-
-    class Panel {
-        +draw(Window)
-    }
-
-    class GameObject {
-        <<Interface>>
-        +draw(Window)
     }
 
     class Card {
@@ -69,11 +65,10 @@ classDiagram
         +string name
     }
 
+    Player o-- Card
+
     class PlayerManager {
         +addPlayer(Player)
-    }
-
-    class TurnManager {
     }
 
     class CardBehavior {
@@ -110,28 +105,5 @@ classDiagram
     CardBehavior <|-- DrawDiscardedCardBehavior
 
     PlayerManager o-- Player
-
-    GameObject *-- Card
-
-    GameState o-- GameObject
-
-    State o-- Panel
-
-    GameDataLoader *-- RulesLoader
-    GameDataLoader *-- CardsLoader
-
-    GameManager *-- InputManager
-    GameManager *-- Window
-    GameManager *-- StateManager
-    GameManager *-- GameDataLoader
-    GameManager *-- PlayerManager
-
-    StateManager o-- State
-
-    State <|-- MenuState
-    State <|-- GameState
-    State <|-- GameOverState
-
-    GameState *-- TurnManager
 
 ```
