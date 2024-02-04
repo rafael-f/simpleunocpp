@@ -9,7 +9,7 @@
 void GameOverState::draw(Window& window)
 {
 	std::cout << "Winner is " << _winnerName << std::endl;
-	std::cout << "Press ENTER to restart.";
+	std::cout << "Press ENTER to restart or ESC to quit.";
 }
 
 void GameOverState::handleInput()
@@ -19,6 +19,10 @@ void GameOverState::handleInput()
 	if (input == KeyCodes::ENTER_KEY)
 	{
 		Mediator::fireEvent(GoToFirstStateEvent());
+	}
+	else if (input == KeyCodes::ESCAPE_KEY)
+	{
+		Mediator::fireEvent(QuitGameEvent());
 	}
 }
 

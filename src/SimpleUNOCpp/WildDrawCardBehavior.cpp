@@ -25,3 +25,8 @@ std::string WildDrawCardBehavior::getNameToDraw()
 {
 	return "";
 }
+
+bool WildDrawCardBehavior::getGoToNextPlayer()
+{
+	return false;
+}

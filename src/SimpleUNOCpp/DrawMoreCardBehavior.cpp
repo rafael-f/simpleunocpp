@@ -30,3 +30,8 @@ std::string DrawMoreCardBehavior::getNameToDraw()
 {
     return "";
 }
+
+bool DrawMoreCardBehavior::getGoToNextPlayer()
+{
+    return true;
+}

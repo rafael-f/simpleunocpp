@@ -2,10 +2,10 @@
 #include "CardBehavior.h"
 
 // Card used on top of the draw pile to allow the player to draw cards.
-class DrawDisplayCardBehavior : public CardBehavior
+class DrawPileCardBehavior : public CardBehavior
 {
 public:
-	DrawDisplayCardBehavior();
+	DrawPileCardBehavior();
 
 	void execute() override;
 
@@ -18,6 +18,8 @@ public:
 	std::string getNameToDraw() override;
 
 	int getAmount() const;
+
+	bool getGoToNextPlayer() override;
 
 private:
 	static const std::string DRAW_NAME;

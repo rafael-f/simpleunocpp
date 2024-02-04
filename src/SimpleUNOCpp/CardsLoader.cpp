@@ -8,7 +8,7 @@
 #include "VectorHelper.h"
 #include "WildDrawCardBehavior.h"
 
-// TODO this should be using factory(s)...
+// TODO this should be using factory(s)... and loading data from files...
 void CardsLoader::createCards(std::vector<std::shared_ptr<Card>>& _cardsHolder)
 {
 	// Most cards follow the rule of existing for all 4 colors, we'll create all of them in a loop.

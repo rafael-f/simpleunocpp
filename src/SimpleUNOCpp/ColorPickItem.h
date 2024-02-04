@@ -7,7 +7,7 @@ class ColorPickItem
 public:
 	explicit ColorPickItem(const Colors& color);
 
-	int draw(Window& window, const int& row, const int& column) const;
+	int draw(const Window& window, const int& row, const int& column) const;
 
 	void setSelected(const bool& selected);
 

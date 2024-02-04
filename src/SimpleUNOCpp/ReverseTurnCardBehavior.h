@@ -15,6 +15,8 @@ public:
 
 	std::string getNameToDraw() override;
 
+	bool getGoToNextPlayer() override;
+
 private:
 	std::string _symbolToDraw;
 

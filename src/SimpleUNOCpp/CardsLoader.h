@@ -10,7 +10,7 @@ public:
 	static void createCards(std::vector<std::shared_ptr<Card>>& _cardsHolder);
 
 private:
-	static const int NUMBER_OF_NORMAL_CARDS = 2; // todo read all these values from data?
+	static const int NUMBER_OF_NORMAL_CARDS = 2; // todo read all these values from files
 	static const int NORMAL_CARDS_START = 0;
 	static const int NORMAL_CARDS_END = 9;
 

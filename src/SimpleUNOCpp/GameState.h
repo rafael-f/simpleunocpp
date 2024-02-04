@@ -4,7 +4,7 @@
 #include "PlayerManager.h"
 #include "State.h"
 #include "GameStates.h"
-#include "DrawDisplayCardEvent.h"
+#include "DrawPileCardEvent.h"
 #include "DrawDiscardedCardEvent.h"
 #include "DrawMoreCardEvent.h"
 #include "WildDrawCardEvent.h"
@@ -23,7 +23,7 @@ public:
 	void setData(std::shared_ptr<TransitionData> transitionData) override;
 
 private:
-	static const int NUMBER_OF_START_CARDS_PER_PLAYER = 2;
+	static const int NUMBER_OF_START_CARDS_PER_PLAYER = 7;
 
 	static const int NUMBER_OF_CARDS_TO_PUNISH = 2;
 
@@ -41,9 +41,9 @@ private:
 
 	void addCardToDiscardPile(std::shared_ptr<Card> card);
 
-	void drawDiscardedPile(Window& window, int& nextRow);
+	void drawDiscardedPile(const Window& window, const int& nextRow);
 
-	void drawDrawPile(Window& window, int& nextRow);
+	void drawDrawPile(const Window& window, const int& nextRow);
 
 	void clearPiles();
 
@@ -55,25 +55,18 @@ private:
 	void drawNormalState(Window& window);
 	void handleInputNormalState();
 
-	void drawDisplayNewCardsState(Window& window);
-	void handleInputDisplayNewCardsState();
-
-	void drawForcedDrawDiscardedState(Window& window);
 	void handleInputForcedDrawDiscardedState();
 
-	void drawForcedSkipState(Window& window);
 	void handleInputForcedSkipState();
 
-	void drawSelectPlayerState(Window& window);
+	void drawSelectPlayerState(Window& window) const;
 	void handleInputSelectPlayerState();
 
-	void drawSelectColorState(Window& window);
+	void drawSelectColorState(const Window& window) const;
 	void handleInputSelectColorState();
 
-	void drawForcedDrawWildState(Window& window);
 	void handleInputForcedDrawWildState();
 
-	void drawForcedDrawPunishState(Window& window);
 	void handleInputForcedDrawPunishState();
 
 	std::unique_ptr<Card> _drawCard;
@@ -82,7 +75,7 @@ private:
 
 	void handleReverseTurnEvent();
 
-	void handleDrawCardEvent(const DrawDisplayCardEvent& eventData);
+	void handleDrawCardEvent(const DrawPileCardEvent& eventData);
 
 	bool endTurn = false;
 

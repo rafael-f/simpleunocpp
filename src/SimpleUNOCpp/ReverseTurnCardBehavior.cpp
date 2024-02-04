@@ -33,3 +33,8 @@ std::string ReverseTurnCardBehavior::getNameToDraw()
 {
 	return NAME_TO_DRAW;
 }
+
+bool ReverseTurnCardBehavior::getGoToNextPlayer()
+{
+	return true;
+}

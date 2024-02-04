@@ -5,20 +5,8 @@
 #include "SwapHandCardBehavior.h"
 
 Card::Card(const Colors& color, std::shared_ptr<CardBehavior> behavior) :
-	_color(color), _behavior(behavior)
+	_behavior(behavior), _color(color)
 {
-	_drawLength = 5; // TODO, remove?
-
-	// TODO both ifs below need to be removed and added as behavior methods
-	if (std::shared_ptr<WildDrawCardBehavior> t1 = std::dynamic_pointer_cast<WildDrawCardBehavior>(behavior))
-	{
-		_goToNextPlayer = false;
-	}
-
-	if (std::shared_ptr<SwapHandCardBehavior> t2 = std::dynamic_pointer_cast<SwapHandCardBehavior>(behavior))
-	{
-		_goToNextPlayer = false;
-	}
 }
 
 void Card::setCanBePlayed(const bool& canBePlayed)
@@ -26,12 +14,12 @@ void Card::setCanBePlayed(const bool& canBePlayed)
 	_canBePlayed = canBePlayed;
 }
 
-bool Card::getCanBePlayed()
+bool Card::getCanBePlayed() const
 {
 	return _canBePlayed;
 }
 
-// TODO how to improve this salad? probably easier to make a template in a txt file?
+// TODO improve this? probably easier to make a template in a txt file?
 void Card::draw(const int& row, const int& column, const Window& window)
 {
 	window.setCursorPosition(row, column);
@@ -212,7 +200,7 @@ void Card::setSelected(bool selected)
 	_isSelected = selected;
 }
 
-bool Card::getSelected()
+bool Card::getSelected() const
 {
 	return _isSelected;
 }
@@ -244,5 +232,5 @@ void Card::setAcceptOnlySameType(const bool& set)
 
 bool Card::goToNextPlayer() const
 {
-	return _goToNextPlayer;
+	return _behavior->getGoToNextPlayer();
 }

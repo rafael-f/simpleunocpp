@@ -6,7 +6,7 @@
 #include "Mediator.h"
 #include "PlayerManagerTransitionData.h"
 #include "QuitGameEvent.h"
-#include "DrawDisplayCardBehavior.h"
+#include "DrawPileCardBehavior.h"
 #include "VectorHelper.h"
 #include "ReverseTurnCardEvent.h"
 #include "SkipTurnCardEvent.h"
@@ -23,7 +23,7 @@ GameState::GameState()
 			handleReverseTurnEvent();
 		});
 
-	Mediator::registerListener<DrawDisplayCardEvent>([this](const DrawDisplayCardEvent& eventData)
+	Mediator::registerListener<DrawPileCardEvent>([this](const DrawPileCardEvent& eventData)
 		{
 			handleDrawCardEvent(eventData);
 		});
@@ -64,15 +64,11 @@ void GameState::draw(Window& window)
 {
 	switch (_currentState)
 	{
-	//case GameStates::NORMAL:
-	//	break;
-	//case GameStates::DISPLAY_NEW_CARDS:
-	//	break;
 	case GameStates::FORCED_DRAW_DISCARD:
+
 		_currentMessage = " PRESS ENTER TO DRAW 2 CARDS FROM DISCARD PILE"; // TODO replace 2 with amount
 		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
 		_drawCard->setSelected(true);
-		//drawForcedDrawDiscardedState(window);
 		break;
 	case GameStates::FORCED_SKIP:
 		_currentMessage = " PRESS ENTER TO SKIP TURN";
@@ -94,6 +90,7 @@ void GameState::draw(Window& window)
 		_currentMessage = "YOU DIDN'T SAY UNO, DRAW 2 CARDS";
 		_playerManager->getSelectedPlayer()->setSelectedCard(-1);
 		_drawCard->setSelected(true);
+		break;
 	default:
 		break;
 	}
@@ -137,7 +134,7 @@ void GameState::setData(std::shared_ptr<TransitionData> transitionData)
 	std::shared_ptr<PlayerManagerTransitionData> data = std::dynamic_pointer_cast<PlayerManagerTransitionData>(transitionData);
 	_playerManager = data->playerManager;
 
-	_drawCard = std::make_unique<Card>(Colors::WHITE, std::make_shared<DrawDisplayCardBehavior>());
+	_drawCard = std::make_unique<Card>(Colors::WHITE, std::make_shared<DrawPileCardBehavior>());
 	_drawCard->setCanBePlayed(true);
 
 	startGame();
@@ -175,8 +172,6 @@ void GameState::clearPiles()
 	}
 }
 
-//#include "DrawMoreCardBehavior.h" // TODO remove cheat
-
 void GameState::initializePlayersHands()
 {
 	for (std::shared_ptr<Player> player : _playerManager->getPlayers())
@@ -187,16 +182,6 @@ void GameState::initializePlayersHands()
 			_drawPile.pop_back();
 		}
 	}
-
-	// TODO remove cheat
-	/*for (int i = 0; i < _drawPile.size(); ++i)
-	{
-		if (std::shared_ptr<DrawMoreCardBehavior> behavior = std::dynamic_pointer_cast<DrawMoreCardBehavior>(_drawPile[i]->getBehavior()))
-		{
-			_playerManager->getPlayers()[0]->addCard(_drawPile[i]);
-			_drawPile.erase(_drawPile.begin() + i);
-		}
-	}*/
 }
 
 void GameState::discardFirstCard()
@@ -205,13 +190,12 @@ void GameState::discardFirstCard()
 	_drawPile.pop_back();
 }
 
-// TODO, is it better to make cards unique_ptrs instead and move them between the vectors?
 void GameState::addCardToDiscardPile(std::shared_ptr<Card> card)
 {
 	_discardPile.push_back(card); // TODO ?????
 }
 
-void GameState::drawDiscardedPile(Window& window, int& nextRow)
+void GameState::drawDiscardedPile(const Window& window, const int& nextRow)
 {
 	window.setCursorPosition(nextRow + 3, 0);
 	std::string cardsDiscarded = "CARDS DISCARDED : " + std::to_string(_discardPile.size());
@@ -220,7 +204,7 @@ void GameState::drawDiscardedPile(Window& window, int& nextRow)
 	_discardPile.back()->draw(nextRow, static_cast<int>(cardsDiscarded.length()) + 1, window);
 }
 
-void GameState::drawDrawPile(Window& window, int& nextRow)
+void GameState::drawDrawPile(const Window& window, const int& nextRow)
 {
 	window.setCursorPosition(nextRow + 3, 35);
 	std::string drawCounter = "CARDS ON DRAW PILE : " + std::to_string(_drawPile.size());
@@ -260,7 +244,7 @@ void GameState::drawNormalState(Window& window)
 		else
 		{
 			window.setConsoleColor(_forcedColor);
-			std::cout << " USE A CARD OR DRAW ANOTHER CARD."; // TODO print name
+			std::cout << " USE A CARD OR DRAW ANOTHER CARD."; // TODO print color name
 			window.setConsoleColor(Colors::WHITE);
 		}
 	}
@@ -371,7 +355,7 @@ void GameState::handleInputNormalState()
 						else
 						{
 							_currentState = GameStates::FORCED_DRAW_PUNISH;
-							std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+							std::shared_ptr<DrawPileCardBehavior> drawCard = std::dynamic_pointer_cast<DrawPileCardBehavior>(_drawCard->getBehavior());
 							drawCard->setAmount(NUMBER_OF_CARDS_TO_PUNISH);
 						}
 					}
@@ -397,21 +381,6 @@ void GameState::handleInputNormalState()
 	}
 }
 
-void GameState::drawDisplayNewCardsState(Window& window)
-{
-
-}
-
-void GameState::handleInputDisplayNewCardsState()
-{
-
-}
-
-void GameState::drawForcedDrawDiscardedState(Window& window)
-{
-
-}
-
 void GameState::handleInputForcedDrawDiscardedState()
 {
 	int input = _getch();
@@ -419,18 +388,18 @@ void GameState::handleInputForcedDrawDiscardedState()
 	if (input == KeyCodes::ENTER_KEY)
 	{
 		// TODO maybe save this behavior reference
-		std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+		std::shared_ptr<DrawPileCardBehavior> drawCard = std::dynamic_pointer_cast<DrawPileCardBehavior>(_drawCard->getBehavior());
 		for (int i = 0; i < drawCard->getAmount(); ++i)
 		{
-			std::shared_ptr<Card> drawedCard = VectorHelper::getAndRemoveRandomElement(_discardPile, 1); // TODO typo on drawed???
-			if (drawedCard == nullptr)
+			std::shared_ptr<Card> drewCard = VectorHelper::getAndRemoveRandomElement(_discardPile, 1);
+			if (drewCard == nullptr)
 			{
 				// TODO if draw pile also empty, handle it
-				drawedCard = _drawPile.back();
+				drewCard = _drawPile.back();
 				_drawPile.pop_back();
 			}
 	
-			_playerManager->getSelectedPlayer()->addCard(drawedCard);
+			_playerManager->getSelectedPlayer()->addCard(drewCard);
 		}
 
 		endTurn = true;
@@ -438,11 +407,6 @@ void GameState::handleInputForcedDrawDiscardedState()
 		_currentMessage = "";
 		drawCard->setAmount(1);
 	}
-}
-
-void GameState::drawForcedSkipState(Window& window)
-{
-	
 }
 
 void GameState::handleInputForcedSkipState()
@@ -456,7 +420,7 @@ void GameState::handleInputForcedSkipState()
 	}
 }
 
-void GameState::drawSelectPlayerState(Window& window)
+void GameState::drawSelectPlayerState(Window& window) const
 {
 	window.setCursorPosition(0, 0);
 	std::cout << "SELECT A PLAYER TO SWAP HAND WITH:";
@@ -532,7 +496,7 @@ void GameState::handleInputSelectPlayerState()
 	}
 }
 
-void GameState::drawSelectColorState(Window& window)
+void GameState::drawSelectColorState(const Window& window) const
 {
 	int row = 0;
 	int column = 0;
@@ -597,7 +561,7 @@ void GameState::handleReverseTurnEvent()
 	_turnDirection = -_turnDirection;
 }
 
-void GameState::handleDrawCardEvent(const DrawDisplayCardEvent& eventData)
+void GameState::handleDrawCardEvent(const DrawPileCardEvent& eventData)
 {
 	_discardPile.back()->setAcceptOnlySameType(false);
 
@@ -629,13 +593,13 @@ void GameState::handleDrawCardEvent(const DrawDisplayCardEvent& eventData)
 void GameState::handleDrawDiscardedCardEvent(const DrawDiscardedCardEvent& eventData)
 {
 	_currentState = GameStates::FORCED_DRAW_DISCARD;
-	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+	std::shared_ptr<DrawPileCardBehavior> drawCard = std::dynamic_pointer_cast<DrawPileCardBehavior>(_drawCard->getBehavior());
 	drawCard->setAmount(eventData.getAmount());
 }
 
 void GameState::handleDrawMoreCardEvent(const DrawMoreCardEvent& eventData)
 {
-	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+	std::shared_ptr<DrawPileCardBehavior> drawCard = std::dynamic_pointer_cast<DrawPileCardBehavior>(_drawCard->getBehavior());
 	
 	if (_currentState != GameStates::FORCED_DRAW)
 	{
@@ -673,7 +637,7 @@ void GameState::handleSwapHandCardEvent()
 
 void GameState::handleWildDrawCardEvent(const WildDrawCardEvent& eventData)
 {
-	std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+	std::shared_ptr<DrawPileCardBehavior> drawCard = std::dynamic_pointer_cast<DrawPileCardBehavior>(_drawCard->getBehavior());
 
 	if (_currentState == GameStates::NORMAL)
 	{
@@ -687,11 +651,6 @@ void GameState::handleWildDrawCardEvent(const WildDrawCardEvent& eventData)
 	_currentState = GameStates::SELECT_COLOR;
 	_selectedColorIndex = 0;
 	_colorsToPick[0]->setSelected(true);
-}
-
-void GameState::drawForcedDrawWildState(Window& window)
-{
-
 }
 
 void GameState::handleInputForcedDrawWildState()
@@ -708,7 +667,7 @@ void GameState::handleInputForcedDrawWildState()
 			_currentState = GameStates::NORMAL;
 			_currentMessage = "";
 
-			std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+			std::shared_ptr<DrawPileCardBehavior> drawCard = std::dynamic_pointer_cast<DrawPileCardBehavior>(_drawCard->getBehavior());
 			drawCard->setAmount(1);
 		}
 	}
@@ -744,7 +703,7 @@ void GameState::handleInputForcedDrawPunishState()
 			_currentState = GameStates::NORMAL;
 			_currentMessage = "";
 
-			std::shared_ptr<DrawDisplayCardBehavior> drawCard = std::dynamic_pointer_cast<DrawDisplayCardBehavior>(_drawCard->getBehavior());
+			std::shared_ptr<DrawPileCardBehavior> drawCard = std::dynamic_pointer_cast<DrawPileCardBehavior>(_drawCard->getBehavior());
 			drawCard->setAmount(1);
 		}
 	}

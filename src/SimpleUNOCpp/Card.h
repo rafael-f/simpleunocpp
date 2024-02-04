@@ -13,13 +13,13 @@ public:
 
 	void setCanBePlayed(const bool& canBePlayed);
 
-	bool getCanBePlayed();
+	bool getCanBePlayed() const;
 
 	void draw(const int& row, const int& column, const Window& window);
 
 	void setSelected(bool selected);
 
-	bool getSelected();
+	bool getSelected() const;
 
 	Colors getColor() const;
 
@@ -40,15 +40,13 @@ private:
 
 	bool _isSelected = false;
 
-	bool _canBePlayed;
+	bool _canBePlayed = false;
 
-	int _drawLength;
+	int _drawLength = 5;
 
 	std::string symbol;
 
 	static const int CARD_LENGTH = 8;
 
 	bool _acceptOnlySameType = false;
-
-	bool _goToNextPlayer = true;
 };

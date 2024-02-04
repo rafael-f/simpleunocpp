@@ -28,3 +28,8 @@ std::string SwapHandCardBehavior::getNameToDraw()
 {
 	return NAME_TO_DRAW;
 }
+
+bool SwapHandCardBehavior::getGoToNextPlayer()
+{
+	return false;
+}

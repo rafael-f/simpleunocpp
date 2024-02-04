@@ -19,11 +19,11 @@ public:
 
 	void removeSelectedCard();
 
-	int draw(Window& window, const int& row, const int& column) const;
+	int draw(const Window& window, const int& row, const int& column) const;
 
 	void setSelected(const bool& selected);
 
-	void drawCards(Window& window, int& row) const;
+	void drawCards(const Window& window, int& row) const;
 
 	void setSelectedCard(const int& index);
 
