@@ -6,12 +6,11 @@ const std::string SkipTurnCardBehavior::NAME_TO_DRAW = "SKIP";
 
 SkipTurnCardBehavior::SkipTurnCardBehavior()
 {
-	_symbolToDraw = " " + std::string(1, KeyCodes::SKIP_TURN) + " "; // TODO is this bad?
+	_symbolToDraw = " " + std::string(1, KeyCodes::SKIP_TURN) + " ";
 }
 
 void SkipTurnCardBehavior::execute()
 {
-	// TODO skip next player turn
 	Mediator::fireEvent(SkipTurnCardEvent());
 }
 
@@ -33,4 +32,9 @@ bool SkipTurnCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> otherB
 std::string SkipTurnCardBehavior::getNameToDraw()
 {
 	return NAME_TO_DRAW;
+}
+
+bool SkipTurnCardBehavior::getGoToNextPlayer()
+{
+	return true;
 }

@@ -25,9 +25,9 @@ public:
 
 	int drawPlayersHeader(Window& window, const int& turnDirection) const;
 
-	void drawArrow(Window& window, const char& arrow, const int& row, int& column) const;
+	void drawArrow(const Window& window, const char& arrow, const int& row, int& column) const;
 
-	void drawPlayerCards(Window& window, int& row) const;
+	void drawPlayerCards(const Window& window, int& row) const;
 
 	void selectNextPlayer(const int& offset, std::shared_ptr<Card> cardOnTop);
 

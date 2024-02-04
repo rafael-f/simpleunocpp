@@ -5,7 +5,7 @@
 ColorPickItem::ColorPickItem(const Colors& color) : _color(color)
 {}
 
-int ColorPickItem::draw(Window& window, const int& row, const int& column) const
+int ColorPickItem::draw(const Window& window, const int& row, const int& column) const
 {
 	const int pickerSizeColumns = 6;
 	const int pickerSizeRows = 3;

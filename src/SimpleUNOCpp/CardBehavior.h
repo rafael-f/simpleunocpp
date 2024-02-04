@@ -16,4 +16,6 @@ public:
 	virtual bool checkCanBePlayed(std::shared_ptr<CardBehavior> other) = 0;
 
 	virtual std::string getNameToDraw() = 0;
+
+	virtual bool getGoToNextPlayer() = 0;
 };

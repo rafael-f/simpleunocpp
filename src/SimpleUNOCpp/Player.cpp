@@ -28,7 +28,8 @@ void Player::updateCardStates(std::shared_ptr<Card> cardOnTop) const
 		for (std::shared_ptr<Card> card : _cardsOnHand)
 		{
 			Colors cardColor = card->getColor();
-			bool canBePlayed = cardColor == topColor || cardColor == Colors::WHITE || topColor == Colors::WHITE; // TODO if top discard is white can others be used on top of it?
+			// TODO rule: if top discard is white can others be used on top of it?
+			bool canBePlayed = cardColor == topColor || cardColor == Colors::WHITE || topColor == Colors::WHITE;
 			if (!canBePlayed)
 			{
 				canBePlayed = card->checkCanBePlayed(cardOnTop);
@@ -66,7 +67,7 @@ void Player::removeSelectedCard()
 	}
 }
 
-int Player::draw(Window& window, const int& row, const int& column) const
+int Player::draw(const Window& window, const int& row, const int& column) const
 {
 	window.setCursorPosition(row, column);
 
@@ -167,7 +168,7 @@ void Player::setSelected(const bool& selected)
 	_isSelected = selected;
 }
 
-void Player::drawCards(Window& window, int& row) const
+void Player::drawCards(const Window& window, int& row) const
 {
 	window.setCursorPosition(row, 0);
 	std::cout << _name << " HAND:";

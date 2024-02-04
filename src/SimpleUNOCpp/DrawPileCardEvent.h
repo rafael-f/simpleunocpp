@@ -1,10 +1,10 @@
 #pragma once
 #include "Event.h"
 
-class DrawDisplayCardEvent : public Event
+class DrawPileCardEvent : public Event
 {
 public:
-	explicit DrawDisplayCardEvent(const int& amount);
+	explicit DrawPileCardEvent(const int& amount);
 	
 	int getAmount() const;
 

@@ -132,8 +132,8 @@
     <ClCompile Include="ColorPickItem.cpp" />
     <ClCompile Include="DrawDiscardedCardBehavior.cpp" />
     <ClCompile Include="DrawDiscardedCardEvent.cpp" />
-    <ClCompile Include="DrawDisplayCardBehavior.cpp" />
-    <ClCompile Include="DrawDisplayCardEvent.cpp" />
+    <ClCompile Include="DrawPileCardBehavior.cpp" />
+    <ClCompile Include="DrawPileCardEvent.cpp" />
     <ClCompile Include="DrawMoreCardBehavior.cpp" />
     <ClCompile Include="DrawMoreCardEvent.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -151,7 +151,6 @@
     <ClCompile Include="PlayerSelectState.cpp" />
     <ClCompile Include="PlayersOption.cpp" />
     <ClCompile Include="ReverseTurnCardBehavior.cpp" />
-    <ClCompile Include="RulesLoader.cpp" />
     <ClCompile Include="SkipTurnCardBehavior.cpp" />
     <ClCompile Include="SkipTurnCardEvent.h" />
     <ClCompile Include="StateManager.cpp" />
@@ -167,8 +166,8 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="CardsLoader.h" />
     <ClInclude Include="DrawDiscardedCardEvent.h" />
-    <ClInclude Include="DrawDisplayCardBehavior.h" />
-    <ClInclude Include="DrawDisplayCardEvent.h" />
+    <ClInclude Include="DrawPileCardBehavior.h" />
+    <ClInclude Include="DrawPileCardEvent.h" />
     <ClInclude Include="DrawMoreCardEvent.h" />
     <ClInclude Include="GameOverTransitionData.h" />
     <ClInclude Include="GameStates.h" />
@@ -184,7 +183,6 @@
     <ClInclude Include="Mediator.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="NormalCardBehavior.h" />
-    <ClInclude Include="NormalCardEvent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PlayerManagerTransitionData.h" />
@@ -194,7 +192,6 @@
     <ClInclude Include="QuitGameEvent.h" />
     <ClInclude Include="ReverseTurnCardBehavior.h" />
     <ClInclude Include="ReverseTurnCardEvent.h" />
-    <ClInclude Include="RulesLoader.h" />
     <ClInclude Include="ShowPromptEvent.h" />
     <ClInclude Include="SkipTurnCardBehavior.h" />
     <ClInclude Include="State.h" />

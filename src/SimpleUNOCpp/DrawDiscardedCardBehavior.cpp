@@ -8,15 +8,12 @@ DrawDiscardedCardBehavior::DrawDiscardedCardBehavior(const int& amount) : _amoun
 
 void DrawDiscardedCardBehavior::execute()
 {
-	// TODO forces next next player to draw 2 cards from discard pile
-	// if not enough cards on discard then draw from the draw pile
-	// if discard pile is empty discard one from the draw pile automatically
 	Mediator::fireEvent(DrawDiscardedCardEvent(_amount));
 }
 
 std::string& DrawDiscardedCardBehavior::getSymbolToDraw()
 {
-	return _symbolToDraw; // TODO all behaviors return this string, maybe make CardBehavior abstract?
+	return _symbolToDraw;
 }
 
 std::string DrawDiscardedCardBehavior::getNameToDraw()
@@ -32,4 +29,9 @@ bool DrawDiscardedCardBehavior::checkCanBePlayed(std::shared_ptr<CardBehavior> o
 	}
 
 	return false;
+}
+
+bool DrawDiscardedCardBehavior::getGoToNextPlayer()
+{
+	return true;
 }

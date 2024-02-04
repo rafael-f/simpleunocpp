@@ -17,6 +17,8 @@ public:
 
 	std::string getNameToDraw() override;
 
+	bool getGoToNextPlayer() override;
+
 private:
 	int _value;
 

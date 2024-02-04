@@ -1,5 +1,4 @@
 #include "NormalCardBehavior.h"
-#include "NormalCardEvent.h"
 
 NormalCardBehavior::NormalCardBehavior(int value) : _value(value)
 {
@@ -8,7 +7,7 @@ NormalCardBehavior::NormalCardBehavior(int value) : _value(value)
 
 void NormalCardBehavior::execute()
 {
-    Mediator::fireEvent(NormalCardEvent()); // TODO remove?
+    // Normal cards do nothing.
 }
 
 std::string& NormalCardBehavior::getSymbolToDraw()
@@ -34,4 +33,9 @@ int NormalCardBehavior::getValue() const
 std::string NormalCardBehavior::getNameToDraw()
 {
     return "";
+}
+
+bool NormalCardBehavior::getGoToNextPlayer()
+{
+    return true;
 }
