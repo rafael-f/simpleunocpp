@@ -55,11 +55,20 @@ private:
 	void drawNormalState(Window& window);
 	void handleInputNormalState();
 
+	void handleEndTurnInput(const int& input);
+	void handleNormalTurnInput(const int& input);
+	void handleSayUNOInput() const;
+	void handleArrowInput();
+	void handleDrawCardInput();
+	void tryToUseSelectedCard();
+	void useLastPlayerCard(std::shared_ptr<Card> selectedCard);
+	void useSelectedCard(std::shared_ptr<Card> selectedCard);
+
 	void handleInputForcedDrawDiscardedState();
 
 	void handleInputForcedSkipState();
 
-	void drawSelectPlayerState(Window& window) const;
+	void drawSelectPlayerState(const Window& window) const;
 	void handleInputSelectPlayerState();
 
 	void drawSelectColorState(const Window& window) const;
