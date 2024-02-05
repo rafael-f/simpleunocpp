@@ -11,7 +11,7 @@ SwapHandCardBehavior::SwapHandCardBehavior()
 
 void SwapHandCardBehavior::execute()
 {
-	Mediator::fireEvent(SwapHandCardEvent());
+	EventBus::fireEvent(SwapHandCardEvent());
 }
 
 std::string& SwapHandCardBehavior::getSymbolToDraw()

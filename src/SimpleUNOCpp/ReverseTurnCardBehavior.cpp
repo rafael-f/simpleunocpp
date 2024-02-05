@@ -11,7 +11,7 @@ ReverseTurnCardBehavior::ReverseTurnCardBehavior()
 
 void ReverseTurnCardBehavior::execute()
 {
-	Mediator::fireEvent(ReverseTurnCardEvent());
+	EventBus::fireEvent(ReverseTurnCardEvent());
 }
 
 std::string& ReverseTurnCardBehavior::getSymbolToDraw()

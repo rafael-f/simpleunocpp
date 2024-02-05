@@ -3,7 +3,7 @@
 #include "PlayerNamesState.h"
 #include "GoToNextStateEvent.h"
 #include "KeyCodes.h"
-#include "Mediator.h"
+#include "EventBus.h"
 #include "PlayerManagerTransitionData.h"
 #include "PlayerSelectedAmountTransitionData.h"
 #include "QuitGameEvent.h"
@@ -47,7 +47,7 @@ void PlayerNamesState::handleInput()
 	if (input == KeyCodes::ESCAPE_KEY)
 	{
 		QuitGameEvent quitGameEvent;
-		Mediator::fireEvent(quitGameEvent);
+		EventBus::fireEvent(quitGameEvent);
 	}
 	else if (input == KeyCodes::ENTER_KEY)
 	{
@@ -116,9 +116,9 @@ void PlayerNamesState::transitionToGame()
 {
 	ShowPromptEvent showPromptEvent;
 	showPromptEvent.showPrompt = false;
-	Mediator::fireEvent(showPromptEvent);
+	EventBus::fireEvent(showPromptEvent);
 
 	GoToNextStateEvent goToNextStateEvent;
 	goToNextStateEvent.transitionData = std::make_shared<PlayerManagerTransitionData>(_playerManager);
-	Mediator::fireEvent(goToNextStateEvent);
+	EventBus::fireEvent(goToNextStateEvent);
 }

@@ -8,7 +8,7 @@ WildDrawCardBehavior::WildDrawCardBehavior(const int& drawAmount) : _drawAmount(
 
 void WildDrawCardBehavior::execute()
 {
-	Mediator::fireEvent(WildDrawCardEvent(_drawAmount));
+	EventBus::fireEvent(WildDrawCardEvent(_drawAmount));
 }
 
 std::string& WildDrawCardBehavior::getSymbolToDraw()

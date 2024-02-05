@@ -145,7 +145,7 @@
     <ClCompile Include="GameOverTransitionData.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mediator.cpp" />
+    <ClCompile Include="EventBus.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="NormalCardBehavior.cpp" />
     <ClCompile Include="NormalState.cpp" />
@@ -188,7 +188,7 @@
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="KeyCodes.h" />
-    <ClInclude Include="Mediator.h" />
+    <ClInclude Include="EventBus.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="NormalCardBehavior.h" />
     <ClInclude Include="Player.h" />

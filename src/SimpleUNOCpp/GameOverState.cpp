@@ -3,7 +3,7 @@
 #include <iostream>
 #include <conio.h>
 #include "KeyCodes.h"
-#include "Mediator.h"
+#include "EventBus.h"
 #include "GoToFirstStateEvent.h"
 
 void GameOverState::draw(Window& window)
@@ -18,11 +18,11 @@ void GameOverState::handleInput()
 
 	if (input == KeyCodes::ENTER_KEY)
 	{
-		Mediator::fireEvent(GoToFirstStateEvent());
+		EventBus::fireEvent(GoToFirstStateEvent());
 	}
 	else if (input == KeyCodes::ESCAPE_KEY)
 	{
-		Mediator::fireEvent(QuitGameEvent());
+		EventBus::fireEvent(QuitGameEvent());
 	}
 }
 

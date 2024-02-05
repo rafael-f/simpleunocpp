@@ -11,7 +11,7 @@ SkipTurnCardBehavior::SkipTurnCardBehavior()
 
 void SkipTurnCardBehavior::execute()
 {
-	Mediator::fireEvent(SkipTurnCardEvent());
+	EventBus::fireEvent(SkipTurnCardEvent());
 }
 
 std::string& SkipTurnCardBehavior::getSymbolToDraw()

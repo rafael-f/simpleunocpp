@@ -2,7 +2,7 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include "GameOverState.h"
-#include "Mediator.h"
+#include "EventBus.h"
 #include "PlayerSelectState.h"
 #include "PlayerNamesState.h"
 #include "TransitionData.h"
@@ -12,12 +12,12 @@ StateManager::StateManager()
 {
 	initializeStates();
 
-	Mediator::registerListener<GoToNextStateEvent>([this](const GoToNextStateEvent& eventData)
+	EventBus::registerListener<GoToNextStateEvent>([this](const GoToNextStateEvent& eventData)
 	{
 		handleGoToNextStateEvent(eventData);
 	});
 
-	Mediator::registerListener<GoToFirstStateEvent>([this](const GoToFirstStateEvent& eventData)
+	EventBus::registerListener<GoToFirstStateEvent>([this](const GoToFirstStateEvent& eventData)
 	{
 		handleGoToFirstStateEvent();
 	});

@@ -3,16 +3,16 @@
 #include <sstream>
 #include <Windows.h>
 #include "Window.h"
-#include "Mediator.h"
+#include "EventBus.h"
 
 Window::Window()
 {
-	Mediator::registerListener<QuitGameEvent>([this](const QuitGameEvent& eventData)
+	EventBus::registerListener<QuitGameEvent>([this](const QuitGameEvent& eventData)
 		{
 			handleQuitGameEvent(eventData);
 		});
 
-	Mediator::registerListener<ShowPromptEvent>([this](const ShowPromptEvent& eventData)
+	EventBus::registerListener<ShowPromptEvent>([this](const ShowPromptEvent& eventData)
 		{
 			handleShowPromptEvent(eventData);
 		});

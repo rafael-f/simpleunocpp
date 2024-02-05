@@ -4,8 +4,8 @@
 #include <unordered_map>
 #include "Event.h"
 
-// Mediator to allow objects to communicate without direct dependency of each other.
-class Mediator
+// EventBus to allow objects to communicate without direct dependency of each other.
+class EventBus
 {
 public:
     // Register a listener for a specific event type
@@ -40,5 +40,5 @@ public:
 private:
     static std::unordered_map<std::string, std::vector<std::function<void(const Event&)>>> eventListeners;
 
-    Mediator() = default;
+    EventBus() = default;
 };

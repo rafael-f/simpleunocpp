@@ -8,7 +8,7 @@ DrawMoreCardBehavior::DrawMoreCardBehavior(const int& drawMoreAmount) : _drawMor
 
 void DrawMoreCardBehavior::execute()
 {
-    Mediator::fireEvent(DrawMoreCardEvent(_drawMoreAmount));
+    EventBus::fireEvent(DrawMoreCardEvent(_drawMoreAmount));
 }
 
 std::string& DrawMoreCardBehavior::getSymbolToDraw()

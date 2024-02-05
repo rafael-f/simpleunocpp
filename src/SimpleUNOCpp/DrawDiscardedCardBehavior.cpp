@@ -8,7 +8,7 @@ DrawDiscardedCardBehavior::DrawDiscardedCardBehavior(const int& amount) : _amoun
 
 void DrawDiscardedCardBehavior::execute()
 {
-	Mediator::fireEvent(DrawDiscardedCardEvent(_amount));
+	EventBus::fireEvent(DrawDiscardedCardEvent(_amount));
 }
 
 std::string& DrawDiscardedCardBehavior::getSymbolToDraw()

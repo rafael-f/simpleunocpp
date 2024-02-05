@@ -31,7 +31,7 @@ void GameState::handleInputSelectPlayerState()
 
 	if (input == KeyCodes::ESCAPE_KEY)
 	{
-		Mediator::fireEvent(QuitGameEvent());
+		EventBus::fireEvent(QuitGameEvent());
 	}
 	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
-#include "Mediator.h" // Used by all card behaviors
+#include "EventBus.h" // Used by all card behaviors
 
 // Card Behavior interface, to be implemented by each card type.
 class CardBehavior

@@ -10,7 +10,7 @@ DrawPileCardBehavior::DrawPileCardBehavior()
 
 void DrawPileCardBehavior::execute()
 {
-    Mediator::fireEvent(DrawPileCardEvent(_amount));
+    EventBus::fireEvent(DrawPileCardEvent(_amount));
     setAmount(1);
 }
 

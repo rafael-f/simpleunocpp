@@ -1,7 +1,7 @@
 #include "PlayerSelectState.h"
 #include <iostream>
 #include "QuitGameEvent.h"
-#include "Mediator.h"
+#include "EventBus.h"
 #include <conio.h>
 #include "GoToNextStateEvent.h"
 #include "KeyCodes.h"
@@ -40,7 +40,7 @@ void PlayerSelectState::handleInput()
 	if (input == KeyCodes::ESCAPE_KEY)
 	{
 		QuitGameEvent quitGameEvent;
-		Mediator::fireEvent(quitGameEvent);
+		EventBus::fireEvent(quitGameEvent);
 	}
 	else if (input == KeyCodes::ENTER_KEY)
 	{
@@ -48,7 +48,7 @@ void PlayerSelectState::handleInput()
 
 		GoToNextStateEvent goToNextState;
 		goToNextState.transitionData = std::make_unique<PlayerSelectedAmountTransitionData>(playersAmount);
-		Mediator::fireEvent(goToNextState);
+		EventBus::fireEvent(goToNextState);
 	}
 	else if (input == KeyCodes::ARROW_1 || input == KeyCodes::ARROW_2)
 	{

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include "MenuState.h"
-#include "Mediator.h"
+#include "EventBus.h"
 #include "GoToNextStateEvent.h"
 #include "KeyCodes.h"
 
@@ -28,7 +28,7 @@ void MenuState::handleInput()
 	if (input == KeyCodes::ENTER_KEY)
 	{
 		GoToNextStateEvent changeStateEvent;
-		Mediator::fireEvent(changeStateEvent);
+		EventBus::fireEvent(changeStateEvent);
 	}
 }
 

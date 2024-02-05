@@ -1,7 +1,7 @@
 #include <iostream>
 #include "GameState.h"
 #include "CardsLoader.h"
-#include "Mediator.h"
+#include "EventBus.h"
 #include "PlayerManagerTransitionData.h"
 #include "DrawPileCardBehavior.h"
 #include "ReverseTurnCardEvent.h"
@@ -11,37 +11,37 @@
 GameState::GameState()
 {
 	// TODO move these somewhere else?
-	Mediator::registerListener<ReverseTurnCardEvent>([this](const ReverseTurnCardEvent&)
+	EventBus::registerListener<ReverseTurnCardEvent>([this](const ReverseTurnCardEvent&)
 		{
 			handleReverseTurnEvent();
 		});
 
-	Mediator::registerListener<DrawPileCardEvent>([this](const DrawPileCardEvent& eventData)
+	EventBus::registerListener<DrawPileCardEvent>([this](const DrawPileCardEvent& eventData)
 		{
 			handleDrawCardEvent(eventData);
 		});
 
-	Mediator::registerListener<DrawDiscardedCardEvent>([this](const DrawDiscardedCardEvent& eventData)
+	EventBus::registerListener<DrawDiscardedCardEvent>([this](const DrawDiscardedCardEvent& eventData)
 		{
 			handleDrawDiscardedCardEvent(eventData);
 		});
 
-	Mediator::registerListener<DrawMoreCardEvent>([this](const DrawMoreCardEvent& eventData)
+	EventBus::registerListener<DrawMoreCardEvent>([this](const DrawMoreCardEvent& eventData)
 		{
 			handleDrawMoreCardEvent(eventData);
 		});
 
-	Mediator::registerListener<SkipTurnCardEvent>([this](const SkipTurnCardEvent&)
+	EventBus::registerListener<SkipTurnCardEvent>([this](const SkipTurnCardEvent&)
 		{
 			_currentState = GameStates::FORCED_SKIP;
 		});
 
-	Mediator::registerListener<SwapHandCardEvent>([this](const SwapHandCardEvent&)
+	EventBus::registerListener<SwapHandCardEvent>([this](const SwapHandCardEvent&)
 		{
 			handleSwapHandCardEvent();
 		});
 
-	Mediator::registerListener<WildDrawCardEvent>([this](const WildDrawCardEvent& eventData)
+	EventBus::registerListener<WildDrawCardEvent>([this](const WildDrawCardEvent& eventData)
 		{
 			handleWildDrawCardEvent(eventData);
 		});

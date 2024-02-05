@@ -59,7 +59,7 @@ void GameState::handleInputNormalState()
 
 	if (input == KeyCodes::ESCAPE_KEY)
 	{
-		Mediator::fireEvent(QuitGameEvent());
+		EventBus::fireEvent(QuitGameEvent());
 		return;
 	}
 
@@ -161,7 +161,7 @@ void GameState::useLastPlayerCard(std::shared_ptr<Card> selectedCard)
 	{
 		GoToNextStateEvent endEvent;
 		endEvent.transitionData = std::make_shared<GameOverTransitionData>(_playerManager->getSelectedPlayer()->getName());
-		Mediator::fireEvent(endEvent);
+		EventBus::fireEvent(endEvent);
 	}
 	else
 	{

@@ -29,8 +29,8 @@
     <ClCompile Include="Card.cpp">
       <Filter>Cards</Filter>
     </ClCompile>
-    <ClCompile Include="Mediator.cpp">
-      <Filter>Mediator</Filter>
+    <ClCompile Include="EventBus.cpp">
+      <Filter>EventBus</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSelectState.cpp">
       <Filter>PlayerSelect</Filter>
@@ -139,9 +139,6 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{f2bdc219-1bdb-4b03-ac85-868bf1c84084}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Mediator">
-      <UniqueIdentifier>{2bb01f44-41e1-40f6-abf1-1254a7bc6eff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PlayerSelect">
       <UniqueIdentifier>{a801a350-a99c-4487-bdca-831137aee0f1}</UniqueIdentifier>
     </Filter>
@@ -165,6 +162,9 @@
     </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{5ba88ace-80a5-41cb-a8f3-0791774ffa57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventBus">
+      <UniqueIdentifier>{2bb01f44-41e1-40f6-abf1-1254a7bc6eff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -201,14 +201,14 @@
     <ClInclude Include="CardBehavior.h">
       <Filter>Cards</Filter>
     </ClInclude>
-    <ClInclude Include="Mediator.h">
-      <Filter>Mediator</Filter>
+    <ClInclude Include="EventBus.h">
+      <Filter>EventBus</Filter>
     </ClInclude>
     <ClInclude Include="GoToNextStateEvent.h">
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
-      <Filter>Mediator</Filter>
+      <Filter>EventBus</Filter>
     </ClInclude>
     <ClInclude Include="QuitGameEvent.h">
       <Filter>Window</Filter>
