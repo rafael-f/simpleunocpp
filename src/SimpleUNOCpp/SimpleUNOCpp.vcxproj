@@ -130,12 +130,16 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardsLoader.cpp" />
     <ClCompile Include="ColorPickItem.cpp" />
+    <ClCompile Include="DrawCardState.cpp" />
     <ClCompile Include="DrawDiscardedCardBehavior.cpp" />
     <ClCompile Include="DrawDiscardedCardEvent.cpp" />
+    <ClCompile Include="DrawMoreCardState.cpp" />
     <ClCompile Include="DrawPileCardBehavior.cpp" />
     <ClCompile Include="DrawPileCardEvent.cpp" />
     <ClCompile Include="DrawMoreCardBehavior.cpp" />
     <ClCompile Include="DrawMoreCardEvent.cpp" />
+    <ClCompile Include="ForcedDrawDiscardedState.cpp" />
+    <ClCompile Include="ForcedSkipState.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameOverTransitionData.cpp" />
@@ -144,6 +148,7 @@
     <ClCompile Include="Mediator.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="NormalCardBehavior.cpp" />
+    <ClCompile Include="NormalState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PlayerNamesState.cpp" />
@@ -151,6 +156,9 @@
     <ClCompile Include="PlayerSelectState.cpp" />
     <ClCompile Include="PlayersOption.cpp" />
     <ClCompile Include="ReverseTurnCardBehavior.cpp" />
+    <ClCompile Include="ReverseTurnState.cpp" />
+    <ClCompile Include="WildDrawState.cpp" />
+    <ClCompile Include="SwapHandState.cpp" />
     <ClCompile Include="SkipTurnCardBehavior.cpp" />
     <ClCompile Include="SkipTurnCardEvent.h" />
     <ClCompile Include="StateManager.cpp" />

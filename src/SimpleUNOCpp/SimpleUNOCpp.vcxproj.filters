@@ -92,6 +92,30 @@
     <ClCompile Include="GameOverTransitionData.cpp">
       <Filter>GameOver</Filter>
     </ClCompile>
+    <ClCompile Include="NormalState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ForcedDrawDiscardedState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ForcedSkipState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapHandState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="WildDrawState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ReverseTurnState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawCardState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawMoreCardState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -138,6 +162,9 @@
     </Filter>
     <Filter Include="Game\SelectColor">
       <UniqueIdentifier>{86a373c9-3f0f-43c1-a69b-0c5e15ef59d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States">
+      <UniqueIdentifier>{5ba88ace-80a5-41cb-a8f3-0791774ffa57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

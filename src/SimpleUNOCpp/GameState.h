@@ -39,7 +39,7 @@ private:
 
 	void discardFirstCard();
 
-	void addCardToDiscardPile(std::shared_ptr<Card> card);
+	void addCardToDiscardPile(const std::shared_ptr<Card>& card);
 
 	void drawDiscardedPile(const Window& window, const int& nextRow);
 
