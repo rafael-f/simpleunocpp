@@ -99,11 +99,13 @@ classDiagram
     Card *-- CardBehavior
 
     CardBehavior <|-- NormalCardBehavior
+    CardBehavior <|-- DrawPileCardBehavior
     CardBehavior <|-- SkipTurnCardBehavior
     CardBehavior <|-- DrawMoreCardBehavior
     CardBehavior <|-- ReverseTurnCardBehavior
     CardBehavior <|-- SwapHandCardBehavior
     CardBehavior <|-- DrawDiscardedCardBehavior
+    CardBehavior <|-- WildDrawCardBehavior
 
     PlayerManager o-- Player
 
