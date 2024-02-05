@@ -7,7 +7,7 @@ title: UNO CPP
 ---
 classDiagram
 
-	class Mediator {
+	class EventBus {
 		<<Singleton>>
 		+registerListener()
 		+fireEvent()
